@@ -13,8 +13,7 @@ public class Menu : MonoBehaviour
     // Start is called before the first frame update
     [Header("控制音量的Slider")]
     public Slider ControlVolumSlider;
-    [Header("AudioListener")]
-    public AudioListener AudioListenerObj;
+    
     // Start is called before the first frame update
 
     void Start()
@@ -45,6 +44,7 @@ public class Menu : MonoBehaviour
     }
     public void SetMusicVolum()
     {
+        Debug.Log(ControlVolumSlider.value);
         //整體聲音的音量=聲音控制Slider的數值(值介於0-1之間)
         AudioListener.volume = ControlVolumSlider.value;
     }

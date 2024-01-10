@@ -3226,7 +3226,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1898231425}
   - component: {fileID: 1898231424}
-  - component: {fileID: 1898231426}
   m_Layer: 0
   m_Name: GM
   m_TagString: Untagged
@@ -3249,7 +3248,6 @@ MonoBehaviour:
   MenuPage: {fileID: 1325776612}
   SettingPage: {fileID: 393719098}
   ControlVolumSlider: {fileID: 761038803}
-  AudioListenerObj: {fileID: 0}
 --- !u!4 &1898231425
 Transform:
   m_ObjectHideFlags: 0
@@ -3264,22 +3262,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1898231426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1898231423}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 409ae3b1218ba214dae7115666df0799, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MenuPage: {fileID: 0}
-  SettingPage: {fileID: 0}
-  ControlVolumSlider: {fileID: 0}
-  AudioListenerObj: {fileID: 0}
 --- !u!1 &1924033094
 GameObject:
   m_ObjectHideFlags: 0
