@@ -16,6 +16,8 @@ public class Menu : MonoBehaviour
     [Header("AudioListener")]
     public AudioListener AudioListenerObj;
     // Start is called before the first frame update
+    [Header("選擇角色")]
+    public GameObject RolePage;
 
     void Start()
     {
@@ -28,7 +30,7 @@ public class Menu : MonoBehaviour
     }
     public void ToGame()
     {
-        //切換場警
+        //切換場景
         Application.LoadLevel("Game");
     }
     public void Quit()
@@ -47,5 +49,12 @@ public class Menu : MonoBehaviour
     {
         //整體聲音的音量=聲音控制Slider的數值(值介於0-1之間)
         AudioListener.volume = ControlVolumSlider.value;
+    }
+    public void SetRole(bool Set)
+    {
+        //控制首頁頁面關閉
+        MenuPage.SetActive(Set);
+        //控制選擇角色頁面關閉
+        RolePage.SetActive(!Set);
     }
 }
