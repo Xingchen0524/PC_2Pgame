@@ -14,9 +14,14 @@ public class Menu : MonoBehaviour
     [Header("控制音量的Slider")]
     public Slider ControlVolumSlider;
     
-    // Start is called before the first frame update
+    //----------------------------------
     [Header("選擇角色")]
     public GameObject RolePage;
+   // [Header("姐姐的關卡")]
+   //public GameObject RolePage;
+   //[Header("妹妹的關卡")]
+   // public GameObject RolePage;
+
 
     void Start()
     {
@@ -57,4 +62,5 @@ public class Menu : MonoBehaviour
         //控制選擇角色頁面關閉
         RolePage.SetActive(!Set);
     }
+
 }

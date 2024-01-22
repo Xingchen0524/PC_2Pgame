@@ -2569,7 +2569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1394507762
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3900,7 +3900,6 @@ MonoBehaviour:
   MenuPage: {fileID: 1325776612}
   SettingPage: {fileID: 393719098}
   ControlVolumSlider: {fileID: 761038803}
-  AudioListenerObj: {fileID: 0}
   RolePage: {fileID: 1394507761}
 --- !u!4 &1898231425
 Transform:
