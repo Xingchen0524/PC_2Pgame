@@ -1,26 +1,28 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-//¨Ï¥ÎUnityEngine;
+//ä½¿ç”¨UnityEngine;
 
 public class Menu : MonoBehaviour
 {
-    [Header("­º­¶")]
+    [Header("é¦–é ")]
     public GameObject MenuPage;
-    [Header("³]©w")]
+    [Header("è¨­å®š")]
     public GameObject SettingPage;
     // Start is called before the first frame update
-    [Header("±±¨î­µ¶qªºSlider")]
+    [Header("æ§åˆ¶éŸ³é‡çš„Slider")]
     public Slider ControlVolumSlider;
-    
+    [Header("èª¿æ•´éŠæˆ²è§£æåº¦")]
+    public Dropdown GameSizeDropdown;
+
     //----------------------------------
-    [Header("¿ï¾Ü¨¤¦â")]
+    [Header("é¸æ“‡è§’è‰²")]
     public GameObject RolePage;
-   // [Header("©j©jªºÃö¥d")]
-   //public GameObject RolePage;
-   //[Header("©f©fªºÃö¥d")]
-   // public GameObject RolePage;
+    // [Header("GameBs")]
+    //public GameObject RolePage;
+    //[Header("GameLs")]
+    // public GameObject RolePage;
 
 
     void Start()
@@ -34,33 +36,49 @@ public class Menu : MonoBehaviour
     }
     public void ToGame()
     {
-        //¤Á´«³õ´º
+        //åˆ‡æ›å ´æ™¯
         Application.LoadLevel("Game");
     }
     public void Quit()
     {
-        //Ãö³¬¹CÀ¸
+        //é—œé–‰éŠæˆ²
         Application.Quit();
     }
     public void SetSetting(bool Set)
     {
-        //±±¨î­º­¶­¶­±Ãö³¬
+        //æ§åˆ¶é¦–é é é¢é—œé–‰
         MenuPage.SetActive(Set);
-        //±±¨î³]©w­¶­±Ãö³¬
+        //æ§åˆ¶è¨­å®šé é¢é—œé–‰
         SettingPage.SetActive(!Set);
     }
     public void SetMusicVolum()
     {
         Debug.Log(ControlVolumSlider.value);
-        //¾ãÅéÁn­µªº­µ¶q=Án­µ±±¨îSliderªº¼Æ­È(­È¤¶©ó0-1¤§¶¡)
+        //æ•´é«”è²éŸ³çš„éŸ³é‡=è²éŸ³æ§åˆ¶Sliderçš„æ•¸å€¼(å€¼ä»‹æ–¼0-1ä¹‹é–“)
         AudioListener.volume = ControlVolumSlider.value;
+        //å°‡è²éŸ³çš„éŸ³é‡å‚¨å­˜åœ¨SaveDataè…³æœ¬ä¸­çš„SaveVolumeè®Šæ•¸å…§
+        SaveData.SaveVolume = AudioListener.volume;
     }
     public void SetRole(bool Set)
     {
-        //±±¨î­º­¶­¶­±Ãö³¬
+        //æ§åˆ¶é¦–é é é¢é—œé–‰
         MenuPage.SetActive(Set);
-        //±±¨î¿ï¾Ü¨¤¦â­¶­±Ãö³¬
+        //æ§åˆ¶é¸æ“‡è§’è‰²é é¢é—œé–‰
         RolePage.SetActive(!Set);
     }
-
+    public void SetGameSize()
+    {
+        if (GameSizeDropdown.value == 0)
+        {
+            Screen.SetResolution(1920,1080,false);
+        }
+        if (GameSizeDropdown.value == 1)
+        {
+            Screen.SetResolution(1280, 720, false);
+        }
+        if (GameSizeDropdown.value == 2)
+        {
+            Screen.SetResolution(800, 480, false);
+        }
+    }
 }
