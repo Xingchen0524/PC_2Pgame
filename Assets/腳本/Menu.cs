@@ -19,9 +19,9 @@ public class Menu : MonoBehaviour
     //----------------------------------
     [Header("選擇角色")]
     public GameObject RolePage;
-    // [Header("GameBs")]
+    // [Header("GameBS")]
     //public GameObject RolePage;
-    //[Header("GameLs")]
+    //[Header("GameLS")]
     // public GameObject RolePage;
 
 
