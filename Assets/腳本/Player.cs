@@ -11,10 +11,13 @@ public class Player : MonoBehaviour
     [Header("玩家移動速度")]
     public float Speed;
     public Rigidbody2D playerRB;
+    private Animator anim;
+    private SpriteRenderer theSR;
 
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
+        theSR = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -22,6 +25,16 @@ public class Player : MonoBehaviour
     {
        //控制玩家位移
        playerRB.velocity = new Vector2(Input.GetAxis("Horizontal") * Speed,playerRB.velocity.y);
-       
+        //控制玩家移動時的動畫
+        anim.SetFloat("Speed",Mathf.Abs(playerRB.velocity.x));
+        //玩家移動翻轉x軸
+        if(playerRB.velocity.x > 0)
+        {
+            theSR.flipX = true;
+        }
+        else if(playerRB.velocity.x < 0)
+        {
+            theSR.flipX = false;
+        }
     }
 }
