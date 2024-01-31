@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [Header("玩家移動速度")]
     public float Speed;
     public Rigidbody2D playerRB;
+
     private Animator anim;
     private SpriteRenderer theSR;
 
@@ -23,7 +24,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       //控制玩家位移
+        //控制玩家位移
        playerRB.velocity = new Vector2(Input.GetAxis("Horizontal") * Speed,playerRB.velocity.y);
         //控制玩家移動時的動畫
         anim.SetFloat("Speed",Mathf.Abs(playerRB.velocity.x));
