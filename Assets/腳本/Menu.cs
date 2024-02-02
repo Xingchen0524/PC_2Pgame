@@ -15,7 +15,10 @@ public class Menu : MonoBehaviour
     public Slider ControlVolumSlider;
     [Header("調整遊戲解析度")]
     public Dropdown GameSizeDropdown;
-
+    [Header("Server")]
+    public GameObject ServerPage;
+    [Header("Client")]
+    public GameObject ClientPage;
     //----------------------------------
     [Header("選擇角色")]
     public GameObject RolePage;
@@ -79,6 +82,16 @@ public class Menu : MonoBehaviour
         if (GameSizeDropdown.value == 2)
         {
             Screen.SetResolution(800, 480, false);
+        }
+    }
+    //Bool=true為server,如果為false則開啟Client
+    public void SetServerOrClient(bool State) {
+        if (State) {
+            ServerPage.SetActive(true);
+        }
+        else
+        {
+            ClientPage.SetActive(true);
         }
     }
 }
