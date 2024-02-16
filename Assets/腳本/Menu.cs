@@ -23,10 +23,10 @@ public class Menu : MonoBehaviour
     [Header("選擇角色")]
     public GameObject RolePage;
     // [Header("GameBS")]
-    //public GameObject RolePage;
+    //public GameObject GameBS;
     //[Header("GameLS")]
-    // public GameObject RolePage;
-
+    // public GameObject GameLS;
+    
 
     void Start()
     {
@@ -54,6 +54,7 @@ public class Menu : MonoBehaviour
         //控制設定頁面關閉
         SettingPage.SetActive(!Set);
     }
+    
     public void SetMusicVolum()
     {
         Debug.Log(ControlVolumSlider.value);
