@@ -22,17 +22,17 @@ public class NewBehaviourScript : MonoBehaviour
             TipObj.SetActive(false);
         }
     }
-
     
     // Start is called before the first frame update
     void Start()
     {
         
     }
+
     [Header("女兒房間")]
-    public GameObject MenuPage;
+    public GameObject Daughterroom;
     [Header("走廊")]
-    public GameObject SettingPage;
+    public GameObject Cooridor;
 
     public void ToGame()
     {
@@ -40,18 +40,16 @@ public class NewBehaviourScript : MonoBehaviour
         Application.LoadLevel("Game");
     }
 
-    public void SetSetting(bool Set)
-    {
-        //控制首頁頁面關閉
-        MenuPage.SetActive(Set);
-        //控制設定頁面關閉
-        SettingPage.SetActive(!Set);
-    }
-
     //Update is called once per frame
     //當按下鍵盤上W會離開房間到走廊上
-    //void Update()
-    //{
-        //if (Input.GetKeyDown(KeyCode.W))
-    //}
+    void Update()
+     {
+       if (Input.GetKeyDown(KeyCode.W))
+        {
+            //控制女兒房間頁面關閉
+            //(有問題的地方)Daughterroom.SetActive(Set);
+            //控制走廊頁面關閉
+            //(有問題的地方)Cooridor.SetActive(!Set);
+        }
+    }   
 }
