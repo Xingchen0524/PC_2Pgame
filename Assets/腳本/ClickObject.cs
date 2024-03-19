@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class ClickObject : MonoBehaviour
 {
-    //滑鼠點擊物件後，放大後消失
-    public class Example : MonoBehaviour
+    [Header("被點擊物件")]
+    public GameObject ClickObjcet;
+    [Header("物件動畫")]
+    public GameObject ObjcetAn;
+
+    //滑鼠點一下
+    private void OnMouseDown()
     {
-        void OnMouseDown()
-        {
-            Debug.Log("滑鼠游標移到物件上");
-        }
+        ObjcetAn.SetActive(true);
+        ClickObjcet.SetActive(false);
     }
+   
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
+
