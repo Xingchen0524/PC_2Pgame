@@ -922,7 +922,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.06810546, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -933,7 +933,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.92, y: 0.43}
+  m_Size: {x: 1.5556796, y: 0.43}
   m_EdgeRadius: 0
 --- !u!114 &210749258
 MonoBehaviour:
@@ -1642,7 +1642,7 @@ Transform:
   m_GameObject: {fileID: 370920038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.49, y: 0.287, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.027299998, z: 0.21}
+  m_LocalScale: {x: 0.15, y: 0.02, z: 0.21}
   m_Children: []
   m_Father: {fileID: 2070616428}
   m_RootOrder: 0
@@ -5856,7 +5856,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1302273029}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.95, y: 19.36, z: -10}
+  m_LocalPosition: {x: -2.61, y: 19.36, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 883491220}
@@ -6966,7 +6966,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620146563}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.95, y: 19.36, z: 0}
+  m_LocalPosition: {x: -2.61, y: 19.36, z: 0}
   m_LocalScale: {x: 0.9381899, y: 0.9381899, z: 0.9381899}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7038,7 +7038,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -7069,7 +7069,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -7994,7 +7994,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894025660}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.24, y: -0.1, z: 0}
+  m_LocalPosition: {x: 8.1, y: -0.1, z: 0}
   m_LocalScale: {x: 0.5321586, y: 11.01, z: 1}
   m_Children:
   - {fileID: 1371479898}
@@ -8013,7 +8013,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -8227,7 +8227,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.058401346, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -8238,7 +8238,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.71999997, y: 0.65999997}
+  m_Size: {x: 1.5876237, y: 0.65999997}
   m_EdgeRadius: 0
 --- !u!114 &1942927234
 MonoBehaviour:
@@ -8379,7 +8379,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961885250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.956817, y: 21.779, z: -10}
+  m_LocalPosition: {x: -2.6030934, y: 21.811562, z: -10}
   m_LocalScale: {x: 1.3, y: 18.000616, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8953,7 +8953,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.051821947, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -8964,7 +8964,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1800001, y: 0.35}
+  m_Size: {x: 1.9961283, y: 0.35}
   m_EdgeRadius: 0
 --- !u!114 &2073341875
 MonoBehaviour:
@@ -9188,7 +9188,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -9209,7 +9209,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -9289,7 +9289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116784678}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.32, y: 19.36, z: 0}
+  m_LocalPosition: {x: -7.2399993, y: 19.36, z: 0}
   m_LocalScale: {x: 0.9381899, y: 0.9381899, z: 0.9381899}
   m_Children: []
   m_Father: {fileID: 0}
