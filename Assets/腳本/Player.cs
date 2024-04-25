@@ -17,6 +17,14 @@ public class Player : MonoBehaviour
     private SpriteRenderer theSR;
 
     public string AxisHorizontal;
+    //控制姊妹的isTrigger Bool
+    static public bool ColliderIsTrigger;
+    [Header("姊姊妹妹物件")]
+    public Transform SisterObj, ElderSisterObj;
+    [Header("兩姊妹之間的距離值")]
+    public float Dis;
+    public float D;
+
     void Start()
     {
         ScriptSpeed = Speed;
@@ -27,8 +35,22 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        D = Vector3.Distance(SisterObj.position, ElderSisterObj.position);
+        if (Vector3.Distance(SisterObj.position, ElderSisterObj.position) < Dis) {
+          ColliderIsTrigger=true;
+            GetComponent<Rigidbody2D>().gravityScale = 0;
+
+        }
+        else
+        {
+            ColliderIsTrigger = false;
+            GetComponent<Rigidbody2D>().gravityScale = 10;
+
+        }
+        GetComponent<Collider2D>().isTrigger = ColliderIsTrigger;
+
         //控制玩家位移
-       playerRB.velocity = new Vector2(Input.GetAxis(AxisHorizontal) * ScriptSpeed, playerRB.velocity.y);
+        playerRB.velocity = new Vector2(Input.GetAxis(AxisHorizontal) * ScriptSpeed, playerRB.velocity.y);
         //控制玩家移動時的動畫
         //anim.SetFloat("Speed",Mathf.Abs(playerRB.velocity.x));
         if (Input.GetAxis(AxisHorizontal) != 0)

@@ -7059,6 +7059,10 @@ MonoBehaviour:
   Speed: 10
   playerRB: {fileID: 1620146566}
   AxisHorizontal: Horizontal
+  SisterObj: {fileID: 1620146564}
+  ElderSisterObj: {fileID: 2116784683}
+  Dis: 3
+  D: 0
 --- !u!70 &1620146568
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -8379,7 +8383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961885250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6030934, y: 21.811562, z: -10}
+  m_LocalPosition: {x: -2.6030943, y: 21.811552, z: -10}
   m_LocalScale: {x: 1.3, y: 18.000616, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9230,6 +9234,10 @@ MonoBehaviour:
   Speed: 10
   playerRB: {fileID: 2116784680}
   AxisHorizontal: HorizontalSister
+  SisterObj: {fileID: 1620146564}
+  ElderSisterObj: {fileID: 2116784683}
+  Dis: 3
+  D: 0
 --- !u!212 &2116784682
 SpriteRenderer:
   m_ObjectHideFlags: 0
