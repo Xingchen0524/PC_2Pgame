@@ -26,7 +26,6 @@ public class Menu : MonoBehaviour
     //public GameObject GameBS;
     //[Header("GameLS")]
     // public GameObject GameLS;
-    
 
     void Start()
     {
