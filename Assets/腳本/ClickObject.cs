@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ClickObject : MonoBehaviour
 {
-    [Header("³QÂIÀ»ª«¥ó")]
+    [Header("è¢«é»žæ“Šç‰©ä»¶")]
     public GameObject ClickObjcet;
-    [Header("ª«¥ó°Êµe")]
+    [Header("ç²¾ç¨¿ç‰©ä»¶")]
     public GameObject ObjcetAn;
 
-    //·Æ¹«ÂI¤@¤U
+    //é»žæ“Šç‰©ä»¶
     private void OnMouseDown()
     {
         ObjcetAn.SetActive(true);
