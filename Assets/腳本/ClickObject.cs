@@ -29,16 +29,11 @@ public class ClickObject : MonoBehaviour
     }
 
 
-    //點擊物件
-    //private void OnMouseDown()
-    //{
-        //ObjcetAn.SetActive(true);
-        //ClickObjcet.SetActive(false);
-    //}
-
+   
+    //按E開啟物件
     void Update()
     {
-        if (Input.GetKeyDown("E"))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             TipObj.SetActive(false);
             ObjcetAn.SetActive(true);
@@ -46,7 +41,21 @@ public class ClickObject : MonoBehaviour
         }
     }
 
-    
+     //點擊物件開啟物件
+    //private void OnMouseDown()
+    //{
+        //ObjcetAn.SetActive(true);
+        //ClickObjcet.SetActive(false);
+    //}
+
+    //按空白鍵關閉物件
+    //void Update()
+    //{
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+           //ObjcetAn.SetActive(false);
+        //}
+    //}
     
 
    

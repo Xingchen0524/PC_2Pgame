@@ -7,7 +7,7 @@ public class GM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //¹CÀ¸³õ¸gªº­µ¶q=SaveData¤ºÀx¦sªº­µ¶q­È
+        //éŠæˆ²å ´æ™¯çš„éŸ³é‡=SaveDataå…§çºŒå­˜çš„éŸ³é‡å€¼
         AudioListener.volume = SaveData.SaveVolume;
         //Test=SaveData.SaveVolume
     }

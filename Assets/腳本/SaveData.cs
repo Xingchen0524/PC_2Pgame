@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class SaveData : MonoBehaviour
 {
-    //Àx¦s¾ãÅé¹CÀ¸ªº­µ¶q
+    //è™•å­˜æ•´é«”éŠæˆ²çš„éŸ³é‡
     public static float SaveVolume;
 }

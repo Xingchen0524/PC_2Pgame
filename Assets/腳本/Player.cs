@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [Header("ª±®a²¾°Ê³t«×")]
+    [Header("ç©å®¶ç§»å‹•é€Ÿåº¦")]
     public float Speed;
     float ScriptSpeed;
     public Rigidbody2D playerRB;
@@ -17,11 +17,11 @@ public class Player : MonoBehaviour
     private SpriteRenderer theSR;
 
     public string AxisHorizontal;
-    //±±¨î©n©fªºisTrigger Bool
+    //æ§åˆ¶å§Šå¦¹çš„isTrigger Bool
     static public bool ColliderIsTrigger;
-    [Header("©n©n©f©fª«¥ó")]
+    [Header("å§Šå§Šå¦¹å¦¹ç‰©ä»¶")]
     public Transform SisterObj, ElderSisterObj;
-    [Header("¨â©n©f¤§¶¡ªº¶ZÂ÷­È")]
+    [Header("å…©å§Šå¦¹ä¹‹é–“çš„è·é›¢")]
     public float Dis;
     public float D;
 
@@ -36,7 +36,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         D = Vector3.Distance(SisterObj.position, ElderSisterObj.position);
-        if (Vector3.Distance(SisterObj.position, ElderSisterObj.position) < Dis) {
+        if (Vector3.Distance(SisterObj.position, ElderSisterObj.position) < Dis) 
+        {
           ColliderIsTrigger=true;
             GetComponent<Rigidbody2D>().gravityScale = 0;
 
@@ -45,19 +46,19 @@ public class Player : MonoBehaviour
         {
             ColliderIsTrigger = false;
             GetComponent<Rigidbody2D>().gravityScale = 10;
-
+            
         }
         GetComponent<Collider2D>().isTrigger = ColliderIsTrigger;
 
-        //±±¨îª±®a¦ì²¾
+        //æ§åˆ¶ç©å®¶ç‚ºä¸€
         playerRB.velocity = new Vector2(Input.GetAxis(AxisHorizontal) * ScriptSpeed, playerRB.velocity.y);
-        //±±¨îª±®a²¾°Ê®Éªº°Êµe
+        //æ§åˆ¶ç©å®¶ç§»å‹•æ™‚çš„å‹•ç•«
         //anim.SetFloat("Speed",Mathf.Abs(playerRB.velocity.x));
         if (Input.GetAxis(AxisHorizontal) != 0)
         {
             ScriptSpeed = Speed;
             anim.SetBool("Walk", true);
-            //ª±®a²¾°ÊÂ½Âàx¶b
+            //ç©å®¶ç§»å‹•ç¿»è½‰Xè»¸
             if (playerRB.velocity.x > 0)
             {
                 theSR.flipX = true;

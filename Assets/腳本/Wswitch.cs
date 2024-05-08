@@ -4,18 +4,18 @@ using UnityEngine;
 using Cinemachine;
 public class Wswitch : MonoBehaviour
 {
-    [Header("W¤Á´«³õ´º")]
+    [Header("Wåˆ‡æ›å ´æ™¯")]
     public GameObject TipObj;
-    [Header("¸I¨ìÀğ¾Àªº¤H")]
+    [Header("ç¢°åˆ°ç‰†å£çš„äºº")]
     public GameObject User;
-    [Header("¤U¤@­Ó®y¼Ğ¦ì¸m")]
+    [Header("ä¸‹ä¸€å€‹åº§æ¨™ä½ç½®")]
     public Vector3 Pos;
-    [Header("³]©wCM vcamªºBounding Shape 2D")]
+    [Header("è¨­å®šCM vcamçš„Bounding Shape 2D")]
     public CinemachineConfiner Obj;
-    [Header("¤U¤@­ÓmapRange")]
+    [Header("ä¸‹ä¸€å€‹mapRange")]
     public PolygonCollider2D mapRange;
 
-    //¨¤¦â¸I¨ì¸I¼²¾¹·|¼u¥XWªº´£¥Ü®Ø
+    //è§’è‰²ç¢°åˆ°ç¢°æ’å™¨æœƒå½ˆå‡ºWçš„æç¤ºæ¡†
     private void OnCollisionEnter2D(Collision2D Hit)
     {
         if(Hit.collider.tag == "Player")
@@ -24,7 +24,7 @@ public class Wswitch : MonoBehaviour
             TipObj.SetActive(true);
         }
     }
-    //¨¤¦âÂ÷¶}¸I¼²¾¹´£¥Ü®Ø·|¦¬°_¨Ó
+    //è§’è‰²é›¢é–‹ç¢°æ’å™¨æç¤ºç­æœƒæ”¶èµ·ä¾†
     private void OnCollisionExit2D(Collision2D Hit)
     {
         if (Hit.collider.tag == "Player")
@@ -36,12 +36,12 @@ public class Wswitch : MonoBehaviour
 
     public void ToGame()
     {
-        //¤Á´«³õ´º
+        //åˆ‡æ›å ´æ™¯
         Application.LoadLevel("Game");
     }
 
     //Update is called once per frame
-    //·í«ö¤UÁä½L¤WW·|Â÷¶}©Ğ¶¡¨ì¨«´Y¤W
+    //ç•¶æŒ‰ä¸‹éµç›¤ä¸ŠWæœƒé›¢é–‹æˆ¿é–“åˆ°èµ°å»Šä¸Š
     void Update()
      {
        if (Input.GetKeyDown(KeyCode.W)&& User!=null)
