@@ -14,6 +14,7 @@ public class Wswitch : MonoBehaviour
     public CinemachineConfiner Obj;
     [Header("下一個mapRange")]
     public PolygonCollider2D mapRange;
+
     //角色碰到碰撞器會彈出W的提示框
     private void OnCollisionEnter2D(Collision2D Hit)
     {
@@ -32,13 +33,6 @@ public class Wswitch : MonoBehaviour
             TipObj.SetActive(false);
         }
     }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
 
     public void ToGame()
     {

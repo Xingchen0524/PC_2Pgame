@@ -30,16 +30,17 @@ public class ClickObject : MonoBehaviour
 
 
     //點擊物件
-    private void OnMouseDown()
-    {
-        ObjcetAn.SetActive(true);
-        ClickObjcet.SetActive(false);
-    }
+    //private void OnMouseDown()
+    //{
+        //ObjcetAn.SetActive(true);
+        //ClickObjcet.SetActive(false);
+    //}
 
     void Update()
     {
-        if (Input.GetButtonUp("E"))
+        if (Input.GetKeyDown("E"))
         {
+            TipObj.SetActive(false);
             ObjcetAn.SetActive(true);
             ClickObjcet.SetActive(false);
         }
