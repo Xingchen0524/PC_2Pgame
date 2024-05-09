@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class LineQTE : MonoBehaviour
 {
-    [Header("½uªº°Êµe")]
+    [Header("ç·šçš„å‹•ç•«")]
     public Animator Line;
-    [Header("²¾°Êªº½u")]
+    [Header("ç§»å‹•çš„ç·š")]
     public Transform MoveLine;
     bool AnimatorState;
 
-    [Header("A¥¿½T­È³Ì¤j­È")]
+    [Header("Aæ­£ç¢ºå€¼æœ€å¤§å€¼")]
     public float MaxNum_A;
-    [Header("A¥¿½T­È³Ì¤p­È")]
+    [Header("Aæ­£ç¢ºå€¼æœ€å°å€¼")]
     public float MinNum_A;
 
-    [Header("B¥¿½T­È³Ì¤j­È")]
+    [Header("Bæ­£ç¢ºå€¼æœ€å¤§å€¼")]
     public float MaxNum_B;
-    [Header("B¥¿½T­È³Ì¤p­È")]
+    [Header("Bæ­£ç¢ºå€¼æœ€å°å€¼")]
     public float MinNum_B;
 
-    [Header("C¥¿½T­È³Ì¤j­È")]
+    [Header("Cæ­£ç¢ºå€¼æœ€å¤§å€¼")]
     public float MaxNum_C;
-    [Header("C¥¿½T­È³Ì¤p­È")]
+    [Header("Cæ­£ç¢ºå€¼æœ€å°å€¼")]
     public float MinNum_C;
 
-    [Header("D¥¿½T­È³Ì¤j­È")]
+    [Header("Dæ­£ç¢ºå€¼æœ€å¤§å€¼")]
     public float MaxNum_D;
-    [Header("D¥¿½T­È³Ì¤p­È")]
+    [Header("Dæ­£ç¢ºå€¼æœ€å°å€¼")]
     public float MinNum_D;
     public float Test;
     // Start is called before the first frame update
@@ -66,7 +66,7 @@ public class LineQTE : MonoBehaviour
             }
             else
             {
-                Debug.Log("¥¢±Ñ");
+                Debug.Log("å¤±æ•—");
             }
         }
         else

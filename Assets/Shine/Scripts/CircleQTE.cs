@@ -5,13 +5,13 @@ using UnityEngine;
 public class CircleQTE : MonoBehaviour
 {
 
-    [Header("°é°é½u")]
+    [Header("åœˆåœˆç·š")]
     public Animator CircleLine;
     bool AnimatorState;
 
-    [Header("¥¿½T­È³Ì¤j­È")]
+    [Header("æ­£ç¢ºå€¼æœ€å¤§å€¼")]
     public float MaxNum;
-    [Header("¥¿½T­È³Ì¤p­È")]
+    [Header("æ­£ç¢ºå€¼æœ€å°å€¼")]
     public float MinNum;
     // Start is called before the first frame update
     void Start()
@@ -31,10 +31,10 @@ public class CircleQTE : MonoBehaviour
             CircleLine.speed = 0;
             if (CircleLine.transform.localScale.x < MaxNum && CircleLine.transform.localScale.x > MinNum)
             {
-                Debug.Log("¦¨¥\");
+                Debug.Log("æˆåŠŸ");
             }
             else {
-                Debug.Log("¥¢±Ñ");
+                Debug.Log("å¤±æ•—");
             }
         }
         else
