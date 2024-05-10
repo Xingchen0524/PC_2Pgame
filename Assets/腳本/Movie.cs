@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Video;
 
-public class MovleGM : MonoBehaviour
+public class Movie : MonoBehaviour
 {
-    [Header("æ“ºæ”¾å‰å°å½±ç‰‡ç‰©ä»¶")]
-    public VideoPlayer Movie;
-    [Header("è¨­å®šå¹¾ç§’å¾Œæ‰å¯ä»¥åµæ¸¬å½±ç‰‡æ˜¯å¦æ’¥æ”¾å®Œç•¢")]
+    [Header("²Ä¤@Ãö¼@±¡¼v¤ù")]
+    public VideoPlayer StoryMovie1;
+    [Header("³]©w´X¬í«á¤~¥i¥H°»´ú¼v¤ù¬O§_¼·©ñ§¹²¦")]
     public float SetTime;
     float NowTime;
     // Start is called before the first frame update
@@ -21,15 +20,15 @@ public class MovleGM : MonoBehaviour
     {
         //NowTime = NowTime + Time.deltaTime;
         NowTime += Time.deltaTime;
-        //å¦‚æœå½±ç‰‡æ’¥æ”¾å®Œç•¢ï¼Œä¸¦ä¸”ç›®å‰çš„è¨ˆæ™‚æ™‚é–“ï¼Œå°±å¯ä»¥åˆ‡æ›åˆ°éŠæˆ²å ´æ™¯
-        if(!Movie.isPlaying&& NowTime> SetTime)
+        //¦pªG¼v¤ù¼·©ñ§¹²¦¡A¨Ã¥B¥Ø«eªº­p®É®É¶¡¡A´N¥i¥H¤Á´«¨ì¹CÀ¸³õ´º
+        if (!StoryMovie1.isPlaying && NowTime > SetTime)
         {
             ToGame();
         }
     }
     public void ToGame()
     {
-        //åˆ‡æ›å ´æ™¯
+        //¤Á´«³õ´º
         Application.LoadLevel("GameBoth");
     }
 }
