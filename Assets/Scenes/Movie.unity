@@ -539,6 +539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a137806e5612f8f4c8b11491d374e81c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Movie: {fileID: 1500453108}
+  SetTime: 1
 --- !u!4 &1982717104
 Transform:
   m_ObjectHideFlags: 0

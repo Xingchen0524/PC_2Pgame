@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
-public class MovleGM : MonoBehaviour
+public class MovieGM : MonoBehaviour
 {
     [Header("擺放前導影片物件")]
     public VideoPlayer Movie;
