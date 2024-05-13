@@ -51,7 +51,7 @@ public class ProloguePlot : MonoBehaviour
                 NowTime = 0;
 
                 //開啟下個劇情
-                StartCoroutine(PlayVideo2());
+                //StartCoroutine(PlayVideo2());
               
 
             }
