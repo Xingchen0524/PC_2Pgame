@@ -52,17 +52,17 @@ public class ProloguePlot : MonoBehaviour
 
                 //開啟下個劇情
                 //StartCoroutine(PlayVideo2());
-              
+                DialogueObj.SetActive(true);
 
             }
-            if (!ProloguePlotMovie.isPlaying && VideoGameObject[3].active)
+          /*  if (!ProloguePlotMovie.isPlaying && VideoGameObject[3].active)
             {
                 //關閉end動畫
                 ProloguePlotMovie.gameObject.SetActive(false);
                 VideoGameObject[3].SetActive(false);
                 DialogueObj.SetActive(true);
                 NowTime = 0;
-            }
+            }*/
         }
     }
 
