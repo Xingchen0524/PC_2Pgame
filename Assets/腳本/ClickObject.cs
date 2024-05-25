@@ -16,6 +16,9 @@ public class ClickObject : MonoBehaviour
     public GameObject Dialogue;
 
     public bool isTouchObj;
+    [Header("如果有提示框")]
+    public bool isHaveTip;
+    public GameObject Tip;
     //當玩家碰到客廳物品，就會有提示
     private void OnTriggerEnter2D(Collider2D Hit)
     {
@@ -60,6 +63,12 @@ public class ClickObject : MonoBehaviour
                 ObjcetAn.SetActive(false);
                 Dialogue.SetActive(false);
                 Shady.SetActive(false);
+                //原本有這腳本的物件碰撞器就關閉
+                GetComponent<Collider2D>().enabled = false;
+                if (isHaveTip) {
+                    Tip.SetActive(true);
+                }
+
             }
         }
     }

@@ -27,7 +27,7 @@ public class ProloguePlot : MonoBehaviour
     void Update()
     {
         //NowTime = NowTime + Time.deltaTime;
-        if (VideoGameObject[0].active || VideoGameObject[2].active || VideoGameObject[3].active)
+        if (VideoGameObject[0].active || VideoGameObject[2].active)
         {
             NowTime += Time.deltaTime;
         }
