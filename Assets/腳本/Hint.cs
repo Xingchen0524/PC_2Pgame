@@ -9,6 +9,7 @@ public class Hint : MonoBehaviour
     [Header("打叉")]
     public GameObject cross;
 
+    
     private void OnMouseDown(){
         Illustrate.SetActive(false);
         cross.SetActive(false);
