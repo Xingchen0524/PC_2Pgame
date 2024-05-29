@@ -24,7 +24,7 @@ public class QTE : MonoBehaviour
     public float MaxNum_C;
     [Header("C正確值最小值")]
     public float MinNum_C;
-
+    
     
     public float Test;
     // Start is called before the first frame update
@@ -67,4 +67,5 @@ public class QTE : MonoBehaviour
             Line.speed = 1;
         }
     }
+ 
 }
