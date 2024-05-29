@@ -73,13 +73,6 @@ public class ClickObject : MonoBehaviour
         }
     }
 
-     //點擊物件開啟物件
-    //private void OnMouseDown()
-    //{
-        //ObjcetAn.SetActive(true);
-        //ClickObjcet.SetActive(false);
-    //}
-
   
 }
 

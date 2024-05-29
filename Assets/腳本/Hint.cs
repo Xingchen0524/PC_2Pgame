@@ -6,24 +6,18 @@ public class Hint : MonoBehaviour
 {
     [Header("提示或說明框")]
     public GameObject Illustrate;
-    [Header("打叉")]
-    public GameObject cross;
-
-    
-    private void OnMouseDown(){
-        Illustrate.SetActive(false);
-        cross.SetActive(false);
-    }
-
-    // Start is called before the first frame update
-    void Start()
+    [Header("文字說明")]
+    public GameObject Text;
+    [Header("透明碰撞器")]
+    public GameObject Transparent;
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+    if (other.CompareTag("Player"))
+    {
+        Illustrate.SetActive(true);
+        Text.SetActive(true);
+        Transparent.SetActive(false);
+    }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
