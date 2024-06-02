@@ -108,7 +108,7 @@ MonoBehaviour:
   - id: 1
     fields:
     - title: Title
-      value: New Conversation 1
+      value: "\u97F3\u6A02\u53F2"
       type: 0
       typeString: 
     - title: Description
@@ -311,12 +311,12 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 97.05252, y: 34.864807}
+    canvasScrollPosition: {x: 17.26529, y: 0}
     canvasZoom: 0.94000006
   - id: 2
     fields:
     - title: Title
-      value: New Conversation 2
+      value: "\u5408\u7167\u76F8\u6846"
       type: 0
       typeString: 
     - title: Description
