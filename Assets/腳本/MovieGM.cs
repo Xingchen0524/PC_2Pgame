@@ -5,7 +5,7 @@ using UnityEngine.Video;
 
 public class MovieGM : MonoBehaviour
 {
-    [Header("擺放前導影片物件")]
+    [Header("擺放影片物件")]
     public VideoPlayer Movie;
     [Header("設定幾秒後才可以偵測影片是否撥放完畢")]
     public float SetTime;
@@ -15,7 +15,13 @@ public class MovieGM : MonoBehaviour
     {
         
     }
-
+    private void OnTriggerEnter2D(Collider2D Hit)
+    {
+        if (Hit.tag == "Player")
+        {
+            Movie.Play();
+        }
+    }
     // Update is called once per frame
     void Update()
     {
