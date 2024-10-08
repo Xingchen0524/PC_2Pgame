@@ -123,7 +123,7 @@ TextureImporter:
       213: -7623698687146870313
     second: "UI\u7D20\u6750_1_39"
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -140,10 +140,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -182,6 +184,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -193,6 +197,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -205,6 +210,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -598,9 +604,27 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      "UI\u7D20\u6750_1_0": -7404756406989351417
+      "UI\u7D20\u6750_1_1": -6527926219971937032
+      "UI\u7D20\u6750_1_10": -6334404659747445293
+      "UI\u7D20\u6750_1_13": -3590076440741799654
+      "UI\u7D20\u6750_1_14": 6243856600704018822
+      "UI\u7D20\u6750_1_15": -6614929538841760998
+      "UI\u7D20\u6750_1_17": 2649996075700578829
+      "UI\u7D20\u6750_1_18": 4133257678868469090
+      "UI\u7D20\u6750_1_2": 3520274743718450785
+      "UI\u7D20\u6750_1_21": -2483965933094817801
+      "UI\u7D20\u6750_1_24": -4899877428633948417
+      "UI\u7D20\u6750_1_26": 7980460467018870090
+      "UI\u7D20\u6750_1_3": 4545713048416798709
+      "UI\u7D20\u6750_1_4": -5405328622006040048
+      "UI\u7D20\u6750_1_5": 7243365206720070441
+      "UI\u7D20\u6750_1_6": 1873654822862988818
+      "UI\u7D20\u6750_1_7": 2450688889534368488
+      "UI\u7D20\u6750_1_8": 1765575902948488519
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
