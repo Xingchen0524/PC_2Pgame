@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class LineManagerWithTurns : MonoBehaviour
 {
-    private LineRenderer lineRenderer;
-    private List<Vector3> points = new List<Vector3>();
-    private HashSet<GameObject> visitedObjects = new HashSet<GameObject>();  // 存储已经经过的空物件
-    private bool isLineDrawing = false;
-    private LayerMask clickableObjectsLayer;  // 可点击的空物件层
-    private GameObject lastObjectUnderMouse = null;
-    private GameObject startObject = null;  // 用來追蹤起始物件
+    public LineRenderer lineRenderer;
+    public List<Vector3> points = new List<Vector3>();
+    public HashSet<GameObject> visitedObjects = new HashSet<GameObject>();  // 存储已经经过的空物件
+    public bool isLineDrawing = false;
+    public LayerMask clickableObjectsLayer;  // 可点击的空物件层
+    public GameObject lastObjectUnderMouse = null;
+    public GameObject startObject = null;  // 用來追蹤起始物件
 
     public string FirstCircleName, SecondCircleName;
     public List<GameObject> pointsObj;
@@ -98,7 +98,7 @@ public class LineManagerWithTurns : MonoBehaviour
 
                 // 检测鼠标下是否有新的空物件
                 RaycastHit2D hit = Physics2D.Raycast(currentMousePosition, Vector2.zero, Mathf.Infinity, clickableObjectsLayer);
-            Debug.Log(hit.collider.name);
+           // Debug.Log(hit.collider.name);
                 if (hit.collider.tag != "Circle"&& hit.collider.tag != "Finished" || hit.collider.name == SecondCircleName)
                 {
                     if (hit.collider != null && hit.collider.gameObject != lastObjectUnderMouse && !visitedObjects.Contains(hit.collider.gameObject))
