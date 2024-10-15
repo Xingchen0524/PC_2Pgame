@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Dust
+  - Circle
+  - Finished
   layers:
   - Default
   - TransparentFX
@@ -40,7 +43,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: GB
-    uniqueID: 666260651
     locked: 0
