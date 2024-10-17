@@ -31,6 +31,7 @@ public class LineManagerWithTurns : MonoBehaviour
         lineRenderer.endWidth = 0.2f;
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         lineRenderer.positionCount = 0;
+        lineRenderer.numCornerVertices = 90;
     }
 
     void Update()
@@ -118,11 +119,12 @@ public class LineManagerWithTurns : MonoBehaviour
                                 points.Add(turnPoint);
                                 pointsObj.Add(hit.collider.gameObject);
 
-                               // lineRenderer.positionCount = points.Count;
-                               // lineRenderer.SetPosition(points.Count - 1, turnPoint);
+                            // lineRenderer.positionCount = points.Count;
+                            // lineRenderer.SetPosition(points.Count - 1, turnPoint);
+                            // pointsObj[0].GetComponent<LineRenderer>().numCornerVertices = 90; 不確定
                             pointsObj[0].GetComponent<LineRenderer>().positionCount = points.Count;
                             pointsObj[0].GetComponent<LineRenderer>().SetPosition(points.Count - 1, turnPoint);
-                        }
+                            }
                         }
 
                         // 添加新的空物件位置
