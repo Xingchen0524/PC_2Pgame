@@ -3,7 +3,14 @@ guid: cfca747e56cc0cc46b85021453b70c19
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - lineRenderer: {instanceID: 0}
+  - lastObjectUnderMouse: {instanceID: 0}
+  - startObject: {instanceID: 0}
+  - dialogBox: {instanceID: 0}
+  - videoPlayer: {instanceID: 0}
+  - dialogText: {instanceID: 0}
+  - dialogCanvasGroup: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

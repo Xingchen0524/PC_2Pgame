@@ -1,20 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.UI; // 用於顯示對話框
+using UnityEngine.Video; // 用於播放影片
 
 public class LineManagerWithTurns : MonoBehaviour
 {
     public LineRenderer lineRenderer;
     public List<Vector3> points = new List<Vector3>();
-    public HashSet<GameObject> visitedObjects = new HashSet<GameObject>();  // 存储已经经过的空物件
+    public HashSet<GameObject> visitedObjects = new HashSet<GameObject>();  // 存儲已經經過的空物件
     public bool isLineDrawing = false;
-    public LayerMask clickableObjectsLayer;  // 可点击的空物件层
+    public LayerMask clickableObjectsLayer;  // 可點擊的空物件層
     public GameObject lastObjectUnderMouse = null;
     public GameObject startObject = null;  // 用來追蹤起始物件
 
     public string FirstCircleName, SecondCircleName;
     public List<GameObject> pointsObj;
-
     public List<GameObject> BlueSavepointsObj;
     public List<GameObject> YellowSavepointsObj;
     public List<GameObject> lightBlueSavepointsObj;
@@ -23,6 +26,16 @@ public class LineManagerWithTurns : MonoBehaviour
     public List<Vector3> YellowSavePoints;
     public List<Vector3> lightBlueSavePoints;
     public List<Vector3> OrangeSavePoints;
+
+    public GameObject dialogBox; // 用於顯示對話框
+    public VideoPlayer videoPlayer; // 用於播放影片
+    public CanvasGroup dialogCanvasGroup; // 用於控制對話框的漸隱效果
+    private bool isDialogActive = false; // 判斷對話框是否正在顯示
+    private float dialogDisplayTime = 10f; // 對話框顯示時間.
+    private bool hasPlayed = false; // 用來追蹤影片是否已經播放過
+    private bool hasDrawnLine = false;
+
+
     void Start()
     {
         // 初始化 LineRenderer
@@ -32,18 +45,20 @@ public class LineManagerWithTurns : MonoBehaviour
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         lineRenderer.positionCount = 0;
         lineRenderer.numCornerVertices = 90;
+        
+
     }
 
     void Update()
     {
       
-            // 鼠标按下，选择起始物件
+            // 鼠標按下，選擇起始物件
             if (Input.GetMouseButtonDown(0))
             {
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 mousePos.z = 0;
 
-                // 检测鼠标点击的空物件
+                // 檢測鼠標點擊的空物件
                 RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, Mathf.Infinity, clickableObjectsLayer);
                 if (hit.collider.tag == "Circle")
                 {
@@ -69,10 +84,10 @@ public class LineManagerWithTurns : MonoBehaviour
                         //points.Clear(); // 清除之前的点
                         //pointsObj.Clear();
 
-                        visitedObjects.Clear(); // 清除之前经过的物件
-                        visitedObjects.Add(hit.collider.gameObject); // 记录起始物件
+                        visitedObjects.Clear(); // 清除之前經過的物件
+                        visitedObjects.Add(hit.collider.gameObject); // 記錄起始物件
 
-                        points.Add(hit.collider.transform.position); // 添加起始点
+                        points.Add(hit.collider.transform.position); // 添加起始點
                         pointsObj.Add(hit.collider.gameObject);
 
                     pointsObj[0].GetComponent<LineRenderer>().positionCount = 1;
@@ -85,32 +100,32 @@ public class LineManagerWithTurns : MonoBehaviour
 
                     if (hit.collider != null)
                     {
-                        // 點擊檢測成功
+                       // 點擊檢測成功
                        // Debug.Log("Hit: " + hit.collider.gameObject.name);
                     }
                 }
             }
 
-            // 鼠标按住时，线条跟随鼠标
+            // 鼠標按住時，線條跟隨鼠標
             if (isLineDrawing)
             {
                 Vector3 currentMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 currentMousePosition.z = 0;
 
-                // 检测鼠标下是否有新的空物件
+                // 檢測鼠標下是否有新的空物件
                 RaycastHit2D hit = Physics2D.Raycast(currentMousePosition, Vector2.zero, Mathf.Infinity, clickableObjectsLayer);
-           // Debug.Log(hit.collider.name);
+                //Debug.Log(hit.collider.name);
                 if (hit.collider.tag != "Circle"&& hit.collider.tag != "Finished" || hit.collider.name == SecondCircleName)
                 {
                     if (hit.collider != null && hit.collider.gameObject != lastObjectUnderMouse && !visitedObjects.Contains(hit.collider.gameObject))
                     {
                         lastObjectUnderMouse = hit.collider.gameObject;
 
-                        // 如果经过了新的物件，添加拐点
+                        // 如果經過了新的物件，添加拐點
                         Vector3 hitPosition = hit.collider.transform.position;
                         if (points.Count > 0)
                         {
-                            // 检查是否转弯
+                            // 檢查是否轉彎
                             Vector3 lastPoint = points[points.Count - 1];
                             if (lastPoint.x != hitPosition.x && lastPoint.y != hitPosition.y)
                             {
@@ -121,7 +136,6 @@ public class LineManagerWithTurns : MonoBehaviour
 
                             // lineRenderer.positionCount = points.Count;
                             // lineRenderer.SetPosition(points.Count - 1, turnPoint);
-                            // pointsObj[0].GetComponent<LineRenderer>().numCornerVertices = 90; 不確定
                             pointsObj[0].GetComponent<LineRenderer>().positionCount = points.Count;
                             pointsObj[0].GetComponent<LineRenderer>().SetPosition(points.Count - 1, turnPoint);
                             }
@@ -131,18 +145,18 @@ public class LineManagerWithTurns : MonoBehaviour
                         points.Add(hitPosition);
                         pointsObj.Add(hit.collider.gameObject);
 
-                        visitedObjects.Add(hit.collider.gameObject);  // 标记这个空物件已经经过
-                       // lineRenderer.positionCount = points.Count;
+                        visitedObjects.Add(hit.collider.gameObject);  // 標記這個空物件已經經過
+                      // lineRenderer.positionCount = points.Count;
                       //  lineRenderer.SetPosition(points.Count - 1, hitPosition);
                     pointsObj[0].GetComponent<LineRenderer>().positionCount = points.Count;
                     pointsObj[0].GetComponent<LineRenderer>().SetPosition(points.Count - 1, hitPosition);
                 }
                     else if (hit.collider == null)
                     {
-                        lastObjectUnderMouse = null; // 如果没有碰到新的物件，重置
+                        lastObjectUnderMouse = null; // 如果沒有碰到新的物件，重置
                     }
 
-                    // 跟踪鼠标当前位置
+                    // 跟蹤鼠標當前位置
                     if (points.Count > 0)
                     {
                     //lineRenderer.positionCount = points.Count + 1;
@@ -152,18 +166,19 @@ public class LineManagerWithTurns : MonoBehaviour
                 }
                 }
             }
-            // 鼠标放开时，停止线条绘制
+            // 鼠標放開時，停止線條繪製
             if (Input.GetMouseButtonUp(0) && isLineDrawing)
             {
-                // 检查是否连接到相同颜色的方块
+                // 檢查是否連接到相同顏色的方塊
                 RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, clickableObjectsLayer);
                 FirstCircleName = "";
                 if (hit.collider != null && CheckColorMatch(startObject, hit.collider.gameObject))
                 {
-                    // 如果成功连接，则保留线条
-                    lineRenderer.positionCount = points.Count; // 固定线条
+                    // 如果成功連接，則保留線條
+                    lineRenderer.positionCount = points.Count; // 固定線條
                     visitedObjects.Add(hit.collider.gameObject); // 添加終點物件到已訪問集合
                     Debug.Log("成功連接：" + startObject.name + " 和 " + hit.collider.gameObject.name);
+                    hasDrawnLine = true;
                     for (int i = 0; i < pointsObj.Count; i++)
                     {
                         pointsObj[i].tag = "Finished";
@@ -249,7 +264,7 @@ public class LineManagerWithTurns : MonoBehaviour
                 }
                 else
                 {
-                // 否则，重置线条
+                // 否則，重置線條
                 for (int i = 0; i < pointsObj.Count; i++) {
                     pointsObj[i].GetComponent<LineRenderer>().positionCount = 0;
                 }
@@ -263,10 +278,24 @@ public class LineManagerWithTurns : MonoBehaviour
 
                 isLineDrawing = false;
                 startObject = null; // 重置起始物件
-            visitedObjects.Clear();
+                visitedObjects.Clear();
             }
-        
-    }
+        if (hasDrawnLine) // 只有在畫過線的情況下才進行檢查
+        {
+            if (CheckLineOrder() && YellowSavePoints.Count > 0 && OrangeSavePoints.Count > 0 && lightBlueSavePoints.Count > 0 && BlueSavePoints.Count > 0)
+            {
+                PlayVideo(); // 如果順序正確且所有線條完成，播放影片
+            }
+            else if (!CheckLineOrder())
+            {
+                dialogBox.SetActive(true); // 如果順序錯誤，顯示對話框
+            }
+        }
+
+
+
+    }    
+
 
     // 設定線條顏色
     private void SetLineColorBasedOnName(GameObject obj)
@@ -322,5 +351,113 @@ public class LineManagerWithTurns : MonoBehaviour
         }
 
         return false;
+    }
+    // 檢查四條線是否按照順序完成
+    private bool CheckLineOrder()
+    {
+        // 清除任何可能影響的狀態
+        int completedLines = 0;
+
+        // 檢查每種顏色的線條
+        bool yellowCompleted = YellowSavePoints.Count > 0;
+        bool orangeCompleted = OrangeSavePoints.Count > 0;
+        bool lightBlueCompleted = lightBlueSavePoints.Count > 0;
+        bool blueCompleted = BlueSavePoints.Count > 0;
+
+        // 根據顏色判斷已完成的線條
+        if (yellowCompleted) completedLines++;
+        if (orangeCompleted) completedLines++;
+        if (lightBlueCompleted) completedLines++;
+        if (blueCompleted) completedLines++;
+
+        // 根據已完成的線條數量檢查顏色
+        switch (completedLines)
+        {
+            case 0:
+                return true; // 如果沒有線條，返回 true
+            case 1:
+                return yellowCompleted; // 如果是黃色，返回 true
+            case 2:
+                return yellowCompleted && orangeCompleted; // 如果是黃色和橘色，返回 true
+            case 3:
+                return yellowCompleted && orangeCompleted && lightBlueCompleted; // 如果是黃色、橘色和淺藍色，返回 true
+            case 4:
+                return yellowCompleted && orangeCompleted && lightBlueCompleted && blueCompleted; // 如果是所有顏色，返回 true
+        }
+
+        // 如果到這裡表示顏色不正確，顯示提示框
+        dialogBox.SetActive(true);
+        ClearLines();
+        Debug.Log("連接失敗，重置線條");
+
+        //completedLines--;
+        return false;
+    }
+    private void ClearLines()
+    {
+        for (int i = 0; i < pointsObj.Count; i++)
+        {
+            pointsObj[i].GetComponent<LineRenderer>().positionCount = 0; // 清除線條的點
+        }
+        pointsObj.Clear(); // 清除點的列表
+        points.Clear(); // 清除所有點
+        FirstCircleName = ""; // 重置起始顏色
+        SecondCircleName = ""; // 重置終止顏色
+    }
+
+    // 顯示對話框
+    private void ShowDialogBox(string message)
+    {
+        dialogBox.SetActive(true);
+        dialogDisplayTime = 10f;
+        isDialogActive = true;
+        dialogCanvasGroup.alpha = 1; // 確保對話框完全可見
+    }
+
+    // 逐漸隱藏對話框
+    private IEnumerator FadeOutDialog()
+    {
+        float fadeDuration = 2f; // 淡出時間
+        float currentTime = 0;
+
+        while (currentTime < fadeDuration)
+        {
+            currentTime += Time.deltaTime;
+            dialogCanvasGroup.alpha = Mathf.Lerp(1, 0, currentTime / fadeDuration);
+            yield return null;
+        }
+
+        dialogBox.SetActive(false); // 完全隱藏對話框
+        isDialogActive = false; // 將狀態重置
+    }
+
+    // 撥放影片
+
+    private void PlayVideo()
+    {
+        if (!hasPlayed) // 如果影片尚未播放過
+        {
+            videoPlayer.Play();
+            hasPlayed = true; // 標記為已播放
+            videoPlayer.loopPointReached += OnVideoFinished; // 註冊影片播放結束事件
+        }
+    }
+
+    private void OnVideoFinished(VideoPlayer vp)
+    {
+        // 影片播放結束後的處理
+        vp.Stop(); // 停止影片播放
+        vp.loopPointReached -= OnVideoFinished; // 取消註冊事件
+    }
+
+    private void ClearLastLine()
+    {
+        if (pointsObj.Count > 0)
+        {
+        int lastIndex = pointsObj.Count - 1;
+        pointsObj[lastIndex].GetComponent<LineRenderer>().positionCount = 0; // 清除最後一條線的點
+        pointsObj.RemoveAt(lastIndex); // 移除最後一條線
+        Debug.Log("清除最後一條線段");
+        }
     }
 }
