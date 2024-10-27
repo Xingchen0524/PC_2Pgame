@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 //使用UnityEngine;
@@ -45,6 +46,7 @@ public class Menu : MonoBehaviour
     {
         //關閉遊戲
         Application.Quit();
+        EditorApplication.isPlaying = false;
     }
     public void SetSetting(bool Set)
     {

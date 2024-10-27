@@ -7,7 +7,7 @@ using UnityEngine.UI; // 用於顯示對話框
 using UnityEngine.Video; // 用於播放影片
 using UnityEngine.SceneManagement;
 
-public class LineManagerWithTurns : MonoBehaviour
+public class LineManagerWithTurns2 : MonoBehaviour
 {
     public LineRenderer lineRenderer;
     public List<Vector3> points = new List<Vector3>();
@@ -40,8 +40,7 @@ public class LineManagerWithTurns : MonoBehaviour
     private bool isFadingOut = false;
 
     private float timer = 5f;  // 用來追蹤剩餘時間
-
-
+    // Start is called before the first frame update
     void Start()
     {
         // 初始化 LineRenderer
@@ -56,7 +55,7 @@ public class LineManagerWithTurns : MonoBehaviour
 
     void Update()
     {
-        
+
         // 鼠標按下，選擇起始物件
         if (Input.GetMouseButtonDown(0))
         {
@@ -287,7 +286,7 @@ public class LineManagerWithTurns : MonoBehaviour
             startObject = null; // 重置起始物件
             visitedObjects.Clear();
         }
-        
+
         if (hasDrawnLine) // 只有在畫過線的情況下才進行檢查
         {
             if (CheckLineOrder() && YellowSavePoints.Count > 0 && OrangeSavePoints.Count > 0 && lightBlueSavePoints.Count > 0 && BlueSavePoints.Count > 0)
@@ -297,7 +296,7 @@ public class LineManagerWithTurns : MonoBehaviour
                 dialogBox2.SetActive(false);
                 PlayVideo(); // 如果順序正確且所有線條完成，播放影片
             }
-            else if (!CheckLineOrder()&& dialogBox.activeSelf)
+            else if (!CheckLineOrder() && dialogBox.activeSelf)
             {
                 dialogBox.SetActive(false);
                 dialogBox3.SetActive(true); // 如果順序錯誤，顯示對話框
@@ -306,9 +305,9 @@ public class LineManagerWithTurns : MonoBehaviour
                 {
                     dialogBox3.SetActive(false);
                 }
-                    
+
             }
-                       
+
             if (Input.GetKeyDown(KeyCode.T))
             {
                 if (dialogBox3.activeSelf) // 確保只有當dialogBox3是活躍的時候才關閉它
@@ -337,28 +336,28 @@ public class LineManagerWithTurns : MonoBehaviour
         if (obj.name == "淺藍1" || obj.name == "淺藍2")
         {
             Color lightBlue;
-            ColorUtility.TryParseHtmlString("#4F64B3", out lightBlue);
+            ColorUtility.TryParseHtmlString("#5568B2", out lightBlue);
             lineRenderer.startColor = lightBlue;
             lineRenderer.endColor = lightBlue;
         }
         else if (obj.name == "深藍1" || obj.name == "深藍2")
         {
             Color Blue;
-            ColorUtility.TryParseHtmlString("#2F2A60", out Blue);
+            ColorUtility.TryParseHtmlString("#DC8E16", out Blue);
             lineRenderer.startColor = Blue;
             lineRenderer.endColor = Blue;
         }
         else if (obj.name == "黃色1" || obj.name == "黃色2")
         {
             Color yellow;
-            ColorUtility.TryParseHtmlString("#F3D758", out yellow);
+            ColorUtility.TryParseHtmlString("#F1D75A", out yellow);
             lineRenderer.startColor = yellow;
             lineRenderer.endColor = yellow;
         }
         else if (obj.name == "橘色1" || obj.name == "橘色2")
         {
             Color orange;
-            ColorUtility.TryParseHtmlString("#DD8E15", out orange);
+            ColorUtility.TryParseHtmlString("#E16620", out orange);
             lineRenderer.startColor = orange;
             lineRenderer.endColor = orange;
         }
@@ -441,7 +440,7 @@ public class LineManagerWithTurns : MonoBehaviour
     {
         // 影片播放結束後的處理
         vp.Stop(); // 停止影片播放
-        
+
         dialogBox.SetActive(false);
         dialogBox3.SetActive(false);
         dialogBox2.SetActive(false);
