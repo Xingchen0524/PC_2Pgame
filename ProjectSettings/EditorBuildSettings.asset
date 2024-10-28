@@ -12,9 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/NewGame1-2.unity
-    guid: f652fae86134456478eea3ceddd29a07
+    path: Assets/Scenes/NewGame1-3.unity
+    guid: 5c93039871ab27448b3dadc41faf6e3c
   - enabled: 1
-    path: Assets/Scenes/NewGame1-21.unity
+    path: Assets/Scenes/NewGame1-2.unity
     guid: 30b5661593ad3e246907b6d793b9a115
   m_configObjects: {}

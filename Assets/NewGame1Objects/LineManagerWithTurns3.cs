@@ -7,7 +7,7 @@ using UnityEngine.UI; // 用於顯示對話框
 using UnityEngine.Video; // 用於播放影片
 using UnityEngine.SceneManagement;
 
-public class LineManagerWithTurns2 : MonoBehaviour
+public class LineManagerWithTurns3 : MonoBehaviour
 {
     public LineRenderer lineRenderer;
     public List<Vector3> points = new List<Vector3>();
@@ -40,7 +40,8 @@ public class LineManagerWithTurns2 : MonoBehaviour
     private bool isFadingOut = false;
 
     private float timer = 5f;  // 用來追蹤剩餘時間
-    // Start is called before the first frame update
+
+
     void Start()
     {
         // 初始化 LineRenderer
@@ -64,7 +65,7 @@ public class LineManagerWithTurns2 : MonoBehaviour
 
             // 檢測鼠標點擊的空物件
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, Mathf.Infinity, clickableObjectsLayer);
-            //Debug.Log("Hit: " + hit.collider.gameObject.name);
+            Debug.Log("Hit: " + hit.collider.gameObject.name);
             if (hit.collider.tag == "Circle")
             {
 
@@ -205,7 +206,7 @@ public class LineManagerWithTurns2 : MonoBehaviour
                             {
                                 lightBlueSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k, lightBlueSavePoints[k]);
                             }
-                            lightBlueSavepointsObj[j].GetComponent<LineManagerWithTurns2>().enabled = false;
+                            lightBlueSavepointsObj[j].GetComponent<LineManagerWithTurns3>().enabled = false;
                         }
                         break;
                     case "深藍":
@@ -222,7 +223,7 @@ public class LineManagerWithTurns2 : MonoBehaviour
                             {
                                 BlueSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k, BlueSavePoints[k]);
                             }
-                            BlueSavepointsObj[j].GetComponent<LineManagerWithTurns2>().enabled = false;
+                            BlueSavepointsObj[j].GetComponent<LineManagerWithTurns3>().enabled = false;
                         }
                         break;
                     case "黃色":
@@ -239,7 +240,7 @@ public class LineManagerWithTurns2 : MonoBehaviour
                             {
                                 YellowSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k, YellowSavePoints[k]);
                             }
-                            YellowSavepointsObj[j].GetComponent<LineManagerWithTurns2>().enabled = false;
+                            YellowSavepointsObj[j].GetComponent<LineManagerWithTurns3>().enabled = false;
                         }
                         break;
                     case "橘色":
@@ -256,7 +257,7 @@ public class LineManagerWithTurns2 : MonoBehaviour
                             {
                                 OrangeSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k, OrangeSavePoints[k]);
                             }
-                            OrangeSavepointsObj[j].GetComponent<LineManagerWithTurns2>().enabled = false;
+                            OrangeSavepointsObj[j].GetComponent<LineManagerWithTurns3>().enabled = false;
 
 
                         }
@@ -286,6 +287,15 @@ public class LineManagerWithTurns2 : MonoBehaviour
             startObject = null; // 重置起始物件
             visitedObjects.Clear();
         }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            if (dialogBox.activeSelf) // 確保只有當dialogBox是活躍的時候才關閉它
+            {
+                Debug.Log("Dialog Box  Activated");
+                dialogBox2.SetActive(true);   // 開啟對話框2                    
+                dialogBox.SetActive(false); // 關閉對話框3                    
+            }
+        }
 
         if (hasDrawnLine) // 只有在畫過線的情況下才進行檢查
         {
@@ -296,31 +306,31 @@ public class LineManagerWithTurns2 : MonoBehaviour
                 dialogBox2.SetActive(false);
                 PlayVideo(); // 如果順序正確且所有線條完成，播放影片
             }
+            else if (!CheckLineOrder() && dialogBox2.activeSelf)
+            {
+                dialogBox2.SetActive(false);
+                dialogBox4.SetActive(true); // 如果順序錯誤，顯示對話框
+                Debug.Log("Dialog Box 4 Activated");
+                if (dialogBox4.activeSelf)
+                {
+                    dialogBox2.SetActive(false);
+                }
+            }
             else if (!CheckLineOrder() && dialogBox.activeSelf)
             {
                 dialogBox.SetActive(false);
-                dialogBox3.SetActive(true); // 如果順序錯誤，顯示對話框
-                if (dialogBox2.activeSelf)
+                dialogBox4.SetActive(true); // 如果順序錯誤，顯示對話框
+                Debug.Log("Dialog Box 4 Activated");
+                if (dialogBox4.activeSelf)
                 {
-                    dialogBox3.SetActive(false);
+                    dialogBox.SetActive(false);
                 }
-
             }
 
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                if (dialogBox3.activeSelf) // 確保只有當dialogBox3是活躍的時候才關閉它
-                {
-                    Debug.Log("Dialog Box  Activated");
-                    dialogBox2.SetActive(true);   // 開啟對話框2                    
-                    dialogBox3.SetActive(false); // 關閉對話框3                    
-                }
-
-            }
         }
         if (CheckLineOrder() && Input.GetKeyDown(KeyCode.N)) // 按下N鍵
         {
-            SceneManager.LoadScene("NewGame1-2");// 替換為你要切換的場景名稱
+            SceneManager.LoadScene("Menu");// 替換為你要切換的場景名稱
         }
 
         //if (dialogBox3.activeSelf && !isFadingOut) // 確保只觸發一次
@@ -336,31 +346,32 @@ public class LineManagerWithTurns2 : MonoBehaviour
         if (obj.name == "淺藍1" || obj.name == "淺藍2")
         {
             Color lightBlue;
-            ColorUtility.TryParseHtmlString("#5568B2", out lightBlue);
+            ColorUtility.TryParseHtmlString("#DE6118", out lightBlue);
             lineRenderer.startColor = lightBlue;
             lineRenderer.endColor = lightBlue;
         }
         else if (obj.name == "深藍1" || obj.name == "深藍2")
         {
             Color Blue;
-            ColorUtility.TryParseHtmlString("#DC8E16", out Blue);
+            ColorUtility.TryParseHtmlString("#93341A", out Blue);
             lineRenderer.startColor = Blue;
             lineRenderer.endColor = Blue;
         }
         else if (obj.name == "黃色1" || obj.name == "黃色2")
         {
             Color yellow;
-            ColorUtility.TryParseHtmlString("#F1D75A", out yellow);
+            ColorUtility.TryParseHtmlString("#F4D85A", out yellow);
             lineRenderer.startColor = yellow;
             lineRenderer.endColor = yellow;
         }
         else if (obj.name == "橘色1" || obj.name == "橘色2")
         {
             Color orange;
-            ColorUtility.TryParseHtmlString("#E16620", out orange);
+            ColorUtility.TryParseHtmlString("#DC8E16", out orange);
             lineRenderer.startColor = orange;
             lineRenderer.endColor = orange;
         }
+
     }
 
     // 檢查顏色是否匹配
@@ -411,9 +422,9 @@ public class LineManagerWithTurns2 : MonoBehaviour
             case 1:
                 return yellowCompleted; // 如果是黃色，返回 true
             case 2:
-                return yellowCompleted && blueCompleted; // 如果是黃色和橘色，返回 true
+                return yellowCompleted && orangeCompleted; // 如果是黃色和橘色，返回 true
             case 3:
-                return yellowCompleted && orangeCompleted && blueCompleted; // 如果是黃色、橘色和淺藍色，返回 true
+                return yellowCompleted && orangeCompleted && lightBlueCompleted; // 如果是黃色、橘色和淺藍色，返回 true
             case 4:
                 return yellowCompleted && orangeCompleted && lightBlueCompleted && blueCompleted; // 如果是所有顏色，返回 true
         }
@@ -430,7 +441,7 @@ public class LineManagerWithTurns2 : MonoBehaviour
             videoPlayer.Play();
             hasPlayed = true; // 標記為已播放
             dialogBox.SetActive(false);
-            dialogBox3.SetActive(false);
+            dialogBox4.SetActive(false);
             dialogBox2.SetActive(false);
             videoPlayer.loopPointReached += OnVideoFinished; // 註冊影片播放結束事件
         }
@@ -442,9 +453,9 @@ public class LineManagerWithTurns2 : MonoBehaviour
         vp.Stop(); // 停止影片播放
 
         dialogBox.SetActive(false);
-        dialogBox3.SetActive(false);
+        dialogBox4.SetActive(false);
         dialogBox2.SetActive(false);
-        dialogBox4.SetActive(true);
+        dialogBox3.SetActive(true);
         vp.loopPointReached -= OnVideoFinished; // 取消註冊事件
     }
 
