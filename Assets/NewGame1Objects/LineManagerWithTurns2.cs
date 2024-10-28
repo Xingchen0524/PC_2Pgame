@@ -64,7 +64,7 @@ public class LineManagerWithTurns2 : MonoBehaviour
 
             // 檢測鼠標點擊的空物件
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, Mathf.Infinity, clickableObjectsLayer);
-            Debug.Log("Hit: " + hit.collider.gameObject.name);
+            //Debug.Log("Hit: " + hit.collider.gameObject.name);
             if (hit.collider.tag == "Circle")
             {
 
@@ -205,7 +205,7 @@ public class LineManagerWithTurns2 : MonoBehaviour
                             {
                                 lightBlueSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k, lightBlueSavePoints[k]);
                             }
-                            lightBlueSavepointsObj[j].GetComponent<LineManagerWithTurns>().enabled = false;
+                            lightBlueSavepointsObj[j].GetComponent<LineManagerWithTurns2>().enabled = false;
                         }
                         break;
                     case "深藍":
@@ -222,7 +222,7 @@ public class LineManagerWithTurns2 : MonoBehaviour
                             {
                                 BlueSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k, BlueSavePoints[k]);
                             }
-                            BlueSavepointsObj[j].GetComponent<LineManagerWithTurns>().enabled = false;
+                            BlueSavepointsObj[j].GetComponent<LineManagerWithTurns2>().enabled = false;
                         }
                         break;
                     case "黃色":
@@ -239,7 +239,7 @@ public class LineManagerWithTurns2 : MonoBehaviour
                             {
                                 YellowSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k, YellowSavePoints[k]);
                             }
-                            YellowSavepointsObj[j].GetComponent<LineManagerWithTurns>().enabled = false;
+                            YellowSavepointsObj[j].GetComponent<LineManagerWithTurns2>().enabled = false;
                         }
                         break;
                     case "橘色":
@@ -256,7 +256,7 @@ public class LineManagerWithTurns2 : MonoBehaviour
                             {
                                 OrangeSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k, OrangeSavePoints[k]);
                             }
-                            OrangeSavepointsObj[j].GetComponent<LineManagerWithTurns>().enabled = false;
+                            OrangeSavepointsObj[j].GetComponent<LineManagerWithTurns2>().enabled = false;
 
 
                         }
