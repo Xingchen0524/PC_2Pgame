@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI; // 用於顯示對話框
 using UnityEngine.Video; // 用於播放影片
@@ -40,6 +39,9 @@ public class LineManagerWithTurns : MonoBehaviour
     private bool isFadingOut = false;
 
     private float timer = 5f;  // 用來追蹤剩餘時間
+
+    public GameObject bg;          // 名為 "bg" 的背景物件
+    public GameObject bg2;
 
 
     void Start()
@@ -447,6 +449,9 @@ public class LineManagerWithTurns : MonoBehaviour
         dialogBox2.SetActive(false);
         dialogBox4.SetActive(true);
         vp.loopPointReached -= OnVideoFinished; // 取消註冊事件
+        bg.SetActive(false);
+        bg2.SetActive(true);
+
     }
 
 

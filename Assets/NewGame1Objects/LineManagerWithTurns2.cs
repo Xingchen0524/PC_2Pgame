@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI; // 用於顯示對話框
 using UnityEngine.Video; // 用於播放影片
@@ -320,7 +319,7 @@ public class LineManagerWithTurns2 : MonoBehaviour
         }
         if (CheckLineOrder() && Input.GetKeyDown(KeyCode.N)) // 按下N鍵
         {
-            SceneManager.LoadScene("NewGame1-2");// 替換為你要切換的場景名稱
+            SceneManager.LoadScene("NewGame1-3");// 替換為你要切換的場景名稱
         }
 
         //if (dialogBox3.activeSelf && !isFadingOut) // 確保只觸發一次

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.UI;
 //使用UnityEngine;
@@ -46,7 +48,9 @@ public class Menu : MonoBehaviour
     {
         //關閉遊戲
         Application.Quit();
+        #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
+        #endif
     }
     public void SetSetting(bool Set)
     {
