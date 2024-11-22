@@ -5,6 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/StartPun.unity
+    guid: 4b3d3eaad02b01343bbe0ed1c0797c62
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/LobbyPun.unity
+    guid: 0ed3fa60873e6a740a8fc325f6c06250
+  - enabled: 1
+    path: Assets/Scenes/RoomScene.unity
+    guid: 3dd67e0076d938045b7d4dbdf8722cd6
   - enabled: 1
     path: Assets/Scenes/NewGame1.unity
     guid: b3a63b8c6ba4e144cb27e58ab05d478f
@@ -14,7 +26,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NewGame1-3.unity
     guid: 5c93039871ab27448b3dadc41faf6e3c
-  - enabled: 1
-    path: Assets/Scenes/Menu.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

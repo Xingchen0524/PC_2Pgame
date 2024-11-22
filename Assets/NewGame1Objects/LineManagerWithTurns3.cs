@@ -203,7 +203,7 @@ public class LineManagerWithTurns3 : MonoBehaviour
                             lightBlueSavepointsObj[j].GetComponent<LineRenderer>().positionCount = lightBlueSavePoints.Count;
                             for (int k = 0; k < lightBlueSavePoints.Count; k++)
                             {
-                                lightBlueSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k, lightBlueSavePoints[k]);
+                                lightBlueSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k, new Vector3(lightBlueSavePoints[k].x, lightBlueSavePoints[k].y, 3) );
                             }
                             lightBlueSavepointsObj[j].GetComponent<LineManagerWithTurns3>().enabled = false;
                         }
@@ -220,7 +220,7 @@ public class LineManagerWithTurns3 : MonoBehaviour
                             BlueSavepointsObj[j].GetComponent<LineRenderer>().positionCount = BlueSavePoints.Count;
                             for (int k = 0; k < BlueSavePoints.Count; k++)
                             {
-                                BlueSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k, BlueSavePoints[k]);
+                                BlueSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k,new Vector3(BlueSavePoints[k].x, BlueSavePoints[k].y,3));
                             }
                             BlueSavepointsObj[j].GetComponent<LineManagerWithTurns3>().enabled = false;
                         }
@@ -237,7 +237,7 @@ public class LineManagerWithTurns3 : MonoBehaviour
                             YellowSavepointsObj[j].GetComponent<LineRenderer>().positionCount = YellowSavePoints.Count;
                             for (int k = 0; k < YellowSavePoints.Count; k++)
                             {
-                                YellowSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k, YellowSavePoints[k]);
+                                YellowSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k, new Vector3(YellowSavePoints[k].x, YellowSavePoints[k].y, 3) );
                             }
                             YellowSavepointsObj[j].GetComponent<LineManagerWithTurns3>().enabled = false;
                         }
@@ -254,7 +254,7 @@ public class LineManagerWithTurns3 : MonoBehaviour
                             OrangeSavepointsObj[j].GetComponent<LineRenderer>().positionCount = OrangeSavePoints.Count;
                             for (int k = 0; k < OrangeSavePoints.Count; k++)
                             {
-                                OrangeSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k, OrangeSavePoints[k]);
+                                OrangeSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k, new Vector3(OrangeSavePoints[k].x, OrangeSavePoints[k].y, 3 ));
                             }
                             OrangeSavepointsObj[j].GetComponent<LineManagerWithTurns3>().enabled = false;
 

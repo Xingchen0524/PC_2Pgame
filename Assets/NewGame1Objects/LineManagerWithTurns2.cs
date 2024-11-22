@@ -5,8 +5,10 @@ using UnityEngine;
 using UnityEngine.UI; // 用於顯示對話框
 using UnityEngine.Video; // 用於播放影片
 using UnityEngine.SceneManagement;
+using Photon.Pun;
+using UnityEngine.Rendering;
 
-public class LineManagerWithTurns2 : MonoBehaviour
+public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
 {
     public LineRenderer lineRenderer;
     public List<Vector3> points = new List<Vector3>();
@@ -39,7 +41,9 @@ public class LineManagerWithTurns2 : MonoBehaviour
     private bool isFadingOut = false;
 
     private float timer = 5f;  // 用來追蹤剩餘時間
-    // Start is called before the first frame update
+
+    public Volume volume;  // 預設的 Volume，包含黑白效果
+
     void Start()
     {
         // 初始化 LineRenderer
@@ -50,6 +54,36 @@ public class LineManagerWithTurns2 : MonoBehaviour
         lineRenderer.positionCount = 0;
         lineRenderer.numCornerVertices = 90;
         //dialogBox.SetActive(true);  // 初始顯示對話框
+
+        //雙人畫面判定
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
+        {
+            string role = (string)PhotonNetwork.LocalPlayer.CustomProperties["Role"];
+            if (role == "妹妹")
+            {
+                EnableBlackAndWhiteEffect();
+            }
+            else
+            {
+                DisableBlackAndWhiteEffect();
+            }
+        }
+    }
+    //雙人畫面判定
+    void EnableBlackAndWhiteEffect()
+    {
+        if (volume != null)
+        {
+            volume.enabled = true;
+        }
+    }
+    //雙人畫面判定
+    void DisableBlackAndWhiteEffect()
+    {
+        if (volume != null)
+        {
+            volume.enabled = false;
+        }
     }
 
     void Update()

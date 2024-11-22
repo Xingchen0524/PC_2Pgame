@@ -5,8 +5,11 @@ using UnityEngine;
 using UnityEngine.UI; // 用於顯示對話框
 using UnityEngine.Video; // 用於播放影片
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
+using Photon.Pun;
+using UnityEngine.Rendering.Universal;
 
-public class LineManagerWithTurns : MonoBehaviour
+public class LineManagerWithTurns : MonoBehaviourPunCallbacks
 {
     public LineRenderer lineRenderer;
     public List<Vector3> points = new List<Vector3>();
@@ -43,6 +46,10 @@ public class LineManagerWithTurns : MonoBehaviour
     public GameObject bg;          // 名為 "bg" 的背景物件
     public GameObject bg2;
 
+    public Volume volume;  // 預設的 Volume，包含黑白效果
+
+
+
 
     void Start()
     {
@@ -54,7 +61,42 @@ public class LineManagerWithTurns : MonoBehaviour
         lineRenderer.positionCount = 0;
         lineRenderer.numCornerVertices = 90;
         //dialogBox.SetActive(true);  // 初始顯示對話框
+        Destroy(GameObject.Find("MusicManager"));
+
+
+        //雙人畫面判定
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
+        {
+            string role = (string)PhotonNetwork.LocalPlayer.CustomProperties["Role"];
+            if (role == "妹妹")
+            {
+                EnableBlackAndWhiteEffect();
+            }
+            else
+            {
+                DisableBlackAndWhiteEffect();
+            }
+        }
+
     }
+    //雙人畫面判定
+    void EnableBlackAndWhiteEffect()
+    {
+        if (volume != null)
+        {
+            volume.enabled = true;
+        }
+    }
+    //雙人畫面判定
+    void DisableBlackAndWhiteEffect()
+    {
+        if (volume != null)
+        {
+            volume.enabled = false;
+        }
+    }
+
+
 
     void Update()
     {

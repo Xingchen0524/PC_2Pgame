@@ -5,6 +5,7 @@ using UnityEditor;
 #endif
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 //使用UnityEngine;
 
 public class Menu : MonoBehaviour
@@ -93,7 +94,9 @@ public class Menu : MonoBehaviour
     //Bool=true為server,如果為false則開啟Client
     public void SetServerOrClient(bool State) {
         if (State) {
-            ServerPage.SetActive(true);
+           
+            SceneManager.LoadScene("LobbyPun");
+            //ServerPage.SetActive(true);
         }
         else
         {

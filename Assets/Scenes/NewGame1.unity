@@ -292,6 +292,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &12975600
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,6 +531,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &88890195
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,6 +702,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &183303378
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,6 +949,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &283776611
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,6 +1121,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &287558555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,6 +1292,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &331563779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,6 +1561,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &401116535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1673,6 +1680,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 0}
   bg2: {fileID: 0}
+  volume: {fileID: 0}
 --- !u!1 &414360921
 GameObject:
   m_ObjectHideFlags: 0
@@ -1844,6 +1852,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &420630311
 GameObject:
   m_ObjectHideFlags: 0
@@ -2165,6 +2174,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &422909201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2466,6 +2476,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474572789}
   m_CullTransparentMesh: 1
+--- !u!1 &484345764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 484345766}
+  - component: {fileID: 484345765}
+  m_Layer: 0
+  m_Name: GameScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &484345765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484345764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7acd5d581dfccb14eaa5f109f50dd77f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1075655885}
+  lineRenderer: {fileID: 0}
+--- !u!4 &484345766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484345764}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &487224282
 GameObject:
   m_ObjectHideFlags: 0
@@ -2787,6 +2843,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &541886473
 GameObject:
   m_ObjectHideFlags: 0
@@ -2957,6 +3014,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &555191938
 GameObject:
   m_ObjectHideFlags: 0
@@ -3127,6 +3185,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &569348768
 GameObject:
   m_ObjectHideFlags: 0
@@ -3456,6 +3515,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 0}
   bg2: {fileID: 0}
+  volume: {fileID: 0}
 --- !u!114 &600196644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3664,6 +3724,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &626420548
 GameObject:
   m_ObjectHideFlags: 0
@@ -3878,6 +3939,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &735170197
 GameObject:
   m_ObjectHideFlags: 0
@@ -4049,6 +4111,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &736630699
 GameObject:
   m_ObjectHideFlags: 0
@@ -4219,6 +4282,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &801243020
 GameObject:
   m_ObjectHideFlags: 0
@@ -4389,6 +4453,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &924099754
 GameObject:
   m_ObjectHideFlags: 0
@@ -4469,6 +4534,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 0}
   bg2: {fileID: 0}
+  volume: {fileID: 0}
 --- !u!114 &924099757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4677,6 +4743,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &1075033208
 GameObject:
   m_ObjectHideFlags: 0
@@ -5198,6 +5265,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &1125953784
 GameObject:
   m_ObjectHideFlags: 0
@@ -5519,6 +5587,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &1196731539
 GameObject:
   m_ObjectHideFlags: 0
@@ -5787,6 +5856,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &1320066778
 GameObject:
   m_ObjectHideFlags: 0
@@ -6249,6 +6319,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &1394510349
 GameObject:
   m_ObjectHideFlags: 0
@@ -6355,6 +6426,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 0}
   bg2: {fileID: 0}
+  volume: {fileID: 0}
 --- !u!1 &1447378681
 GameObject:
   m_ObjectHideFlags: 0
@@ -6526,6 +6598,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &1462694140
 GameObject:
   m_ObjectHideFlags: 0
@@ -6915,6 +6988,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &1591394646
 GameObject:
   m_ObjectHideFlags: 0
@@ -7086,6 +7160,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &1624628077
 GameObject:
   m_ObjectHideFlags: 0
@@ -7256,6 +7331,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &1656926193
 GameObject:
   m_ObjectHideFlags: 0
@@ -7426,6 +7502,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &1657902565
 GameObject:
   m_ObjectHideFlags: 0
@@ -7484,6 +7561,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 0}
   bg2: {fileID: 0}
+  volume: {fileID: 0}
 --- !u!114 &1657902567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8105,6 +8183,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &1841312323
 GameObject:
   m_ObjectHideFlags: 0
@@ -8275,6 +8354,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &1885714183
 GameObject:
   m_ObjectHideFlags: 0
@@ -8596,6 +8676,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1 &1919143928
 GameObject:
   m_ObjectHideFlags: 0
@@ -8767,6 +8848,97 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
+--- !u!1 &1947537691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1947537693}
+  - component: {fileID: 1947537692}
+  - component: {fileID: 1947537694}
+  m_Layer: 0
+  m_Name: Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1947537692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947537691}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 0e1d874de5024d748918134b65064a9f, type: 2}
+--- !u!4 &1947537693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947537691}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1947537694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947537691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfca747e56cc0cc46b85021453b70c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lineRenderer: {fileID: 0}
+  points: []
+  isLineDrawing: 0
+  clickableObjectsLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  lastObjectUnderMouse: {fileID: 0}
+  startObject: {fileID: 0}
+  FirstCircleName: 
+  SecondCircleName: 
+  pointsObj: []
+  BlueSavepointsObj: []
+  YellowSavepointsObj: []
+  lightBlueSavepointsObj: []
+  OrangeSavepointsObj: []
+  BlueSavePoints: []
+  YellowSavePoints: []
+  lightBlueSavePoints: []
+  OrangeSavePoints: []
+  dialogBox: {fileID: 0}
+  dialogBox2: {fileID: 0}
+  dialogBox3: {fileID: 0}
+  dialogBox4: {fileID: 0}
+  videoPlayer: {fileID: 0}
+  dialogCanvasGroup: {fileID: 0}
+  bg: {fileID: 0}
+  bg2: {fileID: 0}
+  volume: {fileID: 1947537692}
 --- !u!1 &1983085621
 GameObject:
   m_ObjectHideFlags: 0
@@ -9186,6 +9358,7 @@ MonoBehaviour:
   dialogCanvasGroup: {fileID: 0}
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
+  volume: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -9229,3 +9402,5 @@ SceneRoots:
   - {fileID: 1353133014}
   - {fileID: 1394510351}
   - {fileID: 626420550}
+  - {fileID: 484345766}
+  - {fileID: 1947537693}
