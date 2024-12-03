@@ -26,6 +26,7 @@ public class RoomManeger : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        PhotonNetwork.NetworkingClient.EventReceived += OnEventReceived;
         // 設定房間名稱並更新玩家列表
         if (PhotonNetwork.CurrentRoom == null)
         {
@@ -243,6 +244,28 @@ public class RoomManeger : MonoBehaviourPunCallbacks
     {
         vp.Stop(); // 停止影片播放
         SetRoomProperty("PlayVideo", false);
+
+        // 發送事件，告訴所有玩家場景即將切換
+        PhotonNetwork.RaiseEvent(0, null, new Photon.Realtime.RaiseEventOptions { Receivers = Photon.Realtime.ReceiverGroup.All }, new ExitGames.Client.Photon.SendOptions { Reliability = true });
+
+        // 延遲一小段時間後再進行場景切換，以確保所有玩家都收到切換信號
+        StartCoroutine(DelayedSceneChange());
+    }
+    private void OnEventReceived(ExitGames.Client.Photon.EventData photonEvent)
+    {
+        if (photonEvent.Code == 0) // 當收到場景切換的事件
+        {
+            SceneManager.LoadScene("NewGame1");
+        }
+    }
+    private IEnumerator DelayedSceneChange()
+    {
+        // 稍微延遲一下，確保所有玩家收到事件
+        yield return new WaitForSeconds(0.1f); // 你可以調整延遲時間
         SceneManager.LoadScene("NewGame1");
+    }
+    void OnDestroy()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived -= OnEventReceived;
     }
 }

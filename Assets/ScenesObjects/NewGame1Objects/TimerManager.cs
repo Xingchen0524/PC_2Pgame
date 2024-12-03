@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TimerManager : MonoBehaviour
 {
-    //public Text timerText; // 用來顯示訊息的UI文字
+    // 用來顯示訊息的UI文字
     private bool isTimerActive = false;
     public GameObject dialogBox;
 
@@ -24,8 +24,6 @@ public class TimerManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             remainingTime -= 1f;
         }
-
-
         dialogBox.SetActive(true); // 確保文字是可見的
     }
 }
