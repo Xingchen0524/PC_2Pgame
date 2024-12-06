@@ -48,6 +48,21 @@ MonoBehaviour:
   - ClearLine
   - SyncCompleteLine
   - SyncDrawing
+  - FinalizeLineForOtherPlayers
+  - UpdateLineForOtherPlayers
+  - ResetPosition
+  - SyncPosition
+  - PlayWinAnimation
+  - ResetPlayerPosition
+  - UpdatePlayerPosition
+  - SyncSisterPosition
+  - SyncYoungerSisterPosition
+  - MoveHorizontal
+  - MoveVertical
+  - SyncLineData
+  - SyncLineColor
+  - SyncLineDrawing
+  - SyncGameObjectsAndStatus
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

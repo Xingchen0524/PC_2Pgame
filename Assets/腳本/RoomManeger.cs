@@ -90,8 +90,8 @@ public class RoomManeger : MonoBehaviourPunCallbacks
 
         // 所有條件滿足後，播放影片並進行遊戲
         SetRoomProperty("PlayVideo", true);
-        //photonView.RPC("PlayVideoRPC", RpcTarget.All);
-        //PlayVideo();
+        photonView.RPC("PlayVideoRPC", RpcTarget.All);
+        PlayVideo();
     }
     private void SetRoomProperty(string key, object value)
     {

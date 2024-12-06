@@ -17,7 +17,7 @@ using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 public class LineManagerWithTurns : MonoBehaviourPunCallbacks
 {
     //1
-    //2
+    //2   
     //3
 
     public LineRenderer lineRenderer;
@@ -186,6 +186,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                             pointsObj.Add(hit.collider.gameObject);
                             pointsObj[0].GetComponent<LineRenderer>().positionCount = points.Count;
                             pointsObj[0].GetComponent<LineRenderer>().SetPosition(points.Count - 1, turnPoint);
+                            
                         }
                     }
 
@@ -196,6 +197,11 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                     visitedObjects.Add(hit.collider.gameObject);  // 標記這個空物件已經經過                                                                 
                     pointsObj[0].GetComponent<LineRenderer>().positionCount = points.Count;
                     pointsObj[0].GetComponent<LineRenderer>().SetPosition(points.Count - 1, hitPosition);
+
+
+                    // 同步畫線過程到所有玩家
+                    UpdateLineDrawing(hitPosition);  // 同步妹妹端畫的線條到姐姐端
+
                 }
                 else if (hit.collider == null)
                 {
@@ -302,6 +308,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                         break;
                 }
                 ResetDrawingData();
+                
             }
             else
             {
@@ -312,6 +319,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                 }
                 ResetDrawingData();
                 Debug.Log("連接失敗，重置線條");
+                
             }
             isLineDrawing = false;
             startObject = null; // 重置起始物件
@@ -369,7 +377,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                     Debug.Log("Dialog Box  Activated");
                     dialogBox2.SetActive(true);   // 開啟對話框2                    
                     dialogBox3.SetActive(false); // 關閉對話框3                    
-                                                 
+
                     ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
                     {
                         { "dialogBox2", true },
@@ -383,8 +391,125 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
 
     }
 
-    //--------------全新程式----------------------------
-    // 監聽屬性變更
+    //-----------------------------------同步畫線程式開始----------------------------------
+
+    // 當畫線時，觸發此方法
+    private void UpdateLineDrawing(Vector3 newPoint)
+    {
+        // 更新本地玩家的 LineRenderer-----------------這邊會導致我畫第二條線清除第一條線條 因此註記起來
+        //points.Add(newPoint);
+        //pointsObj[0].GetComponent<LineRenderer>().positionCount = points.Count;
+        //pointsObj[0].GetComponent<LineRenderer>().SetPosition(points.Count - 1, newPoint);
+
+        // 使用 RPC 同步畫線過程到所有玩家
+        photonView.RPC("SyncLineDrawing", RpcTarget.AllBuffered, newPoint);
+
+    }
+    // 用於同步畫線過程的 RPC
+    [PunRPC]
+    public void SyncLineDrawing(List<Vector3> syncPoints) // 注意返回類型是 void
+    {
+        // 確保同步的點數不會丟失
+        points.Clear();  // 清空當前線條的點
+        points.AddRange(syncPoints); // 添加同步的點
+
+        pointsObj[0].GetComponent<LineRenderer>().positionCount = points.Count;
+
+        // 更新所有玩家的 LineRenderer
+        for (int i = 0; i < points.Count; i++)
+        {
+            pointsObj[0].GetComponent<LineRenderer>().SetPosition(i, points[i]);
+        }
+    }
+    // 用於同步玩家的物件位置和狀態
+    private void SyncPointsObjAndStatus()
+    {
+        // 構建同步數據
+        ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable();
+
+        // 同步每個物件的名稱或狀態
+        properties["SecondCircleName"] = SecondCircleName;
+        properties["DialogBox"] = dialogBox.activeSelf; // 例如同步對話框的開啟狀態
+
+        // 同步位置或物件的集合，分開每種顏色的物件
+        List<Vector3> bluePositions = new List<Vector3>();
+        foreach (GameObject obj in BlueSavepointsObj)
+        {
+            bluePositions.Add(obj.transform.position); // 儲存位置
+        }
+        properties["BlueSavepointsPositions"] = bluePositions;
+
+        List<Vector3> lightBluePositions = new List<Vector3>();
+        foreach (GameObject obj in lightBlueSavepointsObj)
+        {
+            lightBluePositions.Add(obj.transform.position); // 儲存位置
+        }
+        properties["lightBlueSavepointsPositions"] = lightBluePositions;
+
+        List<Vector3> yellowPositions = new List<Vector3>();
+        foreach (GameObject obj in YellowSavepointsObj)
+        {
+            yellowPositions.Add(obj.transform.position); // 儲存位置
+        }
+        properties["YellowSavepointsPositions"] = yellowPositions;
+
+        List<Vector3> orangePositions = new List<Vector3>();
+        foreach (GameObject obj in OrangeSavepointsObj)
+        {
+            orangePositions.Add(obj.transform.position); // 儲存位置
+        }
+        properties["OrangeSavepointsPositions"] = orangePositions;
+
+        // 設置 CustomProperties 以便同步
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+
+        // 通過 RPC 同步物件和狀態到所有玩家
+        photonView.RPC("SyncGameObjectsAndStatus", RpcTarget.AllBuffered, bluePositions, lightBluePositions, yellowPositions, orangePositions, SecondCircleName, dialogBox.activeSelf);
+    }
+
+    // 用於同步其他玩家的物件位置和狀態
+    [PunRPC]
+    void SyncGameObjectsAndStatus(List<Vector3> bluePositions, List<Vector3> lightBluePositions, List<Vector3> yellowPositions, List<Vector3> orangePositions, string secondCircleName, bool dialogBoxActive)
+    {
+        // 更新本地物件的狀態
+        SecondCircleName = secondCircleName;
+        dialogBox.SetActive(dialogBoxActive);
+
+        // 更新各顏色 Savepoints 的位置
+        for (int i = 0; i < BlueSavepointsObj.Count; i++)
+        {
+            if (i < bluePositions.Count)
+            {
+                BlueSavepointsObj[i].transform.position = bluePositions[i];
+            }
+        }
+
+        for (int i = 0; i < lightBlueSavepointsObj.Count; i++)
+        {
+            if (i < lightBluePositions.Count)
+            {
+                lightBlueSavepointsObj[i].transform.position = lightBluePositions[i];
+            }
+        }
+
+        for (int i = 0; i < YellowSavepointsObj.Count; i++)
+        {
+            if (i < yellowPositions.Count)
+            {
+                YellowSavepointsObj[i].transform.position = yellowPositions[i];
+            }
+        }
+
+        for (int i = 0; i < OrangeSavepointsObj.Count; i++)
+        {
+            if (i < orangePositions.Count)
+            {
+                OrangeSavepointsObj[i].transform.position = orangePositions[i];
+            }
+        }
+    }
+    //-----------------------------------同步畫線程式結束----------------------------------
+
     public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
 
     {
@@ -424,16 +549,20 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
         FirstCircleName = "";
         SecondCircleName = "";
     }
-    // 設定線條顏色
-    // 設定線條顏色
+
+    // 設定線條顏色   
     private void SetLineColorBasedOnName(GameObject obj)
     {
+        ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable();
         if (obj.name == "淺藍1" || obj.name == "淺藍2")
         {
             Color lightBlue;
             ColorUtility.TryParseHtmlString("#4F64B3", out lightBlue);
             lineRenderer.startColor = lightBlue;
-            lineRenderer.endColor = lightBlue;
+            lineRenderer.endColor = lightBlue;     
+
+            // 使用 RPC 同步顏色
+            photonView.RPC("SyncLineColor", RpcTarget.AllBuffered, "#4F64B3");
         }
         else if (obj.name == "深藍1" || obj.name == "深藍2")
         {
@@ -441,6 +570,10 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             ColorUtility.TryParseHtmlString("#2F2A60", out Blue);
             lineRenderer.startColor = Blue;
             lineRenderer.endColor = Blue;
+
+            // 使用 RPC 同步顏色
+            photonView.RPC("SyncLineColor", RpcTarget.AllBuffered, "#2F2A60");
+
         }
         else if (obj.name == "黃色1" || obj.name == "黃色2")
         {
@@ -448,15 +581,35 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             ColorUtility.TryParseHtmlString("#F3D758", out yellow);
             lineRenderer.startColor = yellow;
             lineRenderer.endColor = yellow;
+           
+            // 使用 RPC 同步顏色
+            photonView.RPC("SyncLineColor", RpcTarget.AllBuffered, "#F3D758");
+
         }
         else if (obj.name == "橘色1" || obj.name == "橘色2")
         {
             Color orange;
             ColorUtility.TryParseHtmlString("#DD8E15", out orange);
             lineRenderer.startColor = orange;
-            lineRenderer.endColor = orange;
+            lineRenderer.endColor = orange;      
+
+            // 使用 RPC 同步顏色
+            photonView.RPC("SyncLineColor", RpcTarget.AllBuffered, "#DD8E15"); // 同步顏色給所有玩家
+
         }
     }
+    // 在 PhotonView 上執行同步線條繪製顏色的 RPC 方法
+    [PunRPC]
+    void SyncLineColor(string colorCode)
+    {
+        Color color;
+        if (ColorUtility.TryParseHtmlString(colorCode, out color))
+        {
+            lineRenderer.startColor = color;
+            lineRenderer.endColor = color;
+        }
+    }
+
 
     // 檢查顏色是否匹配
     private bool CheckColorMatch(GameObject obj1, GameObject obj2)

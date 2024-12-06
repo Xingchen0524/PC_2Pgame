@@ -9,6 +9,9 @@ TagManager:
   - Finished
   - Bullet
   - Sound
+  - Obstacle
+  - Goal
+  - Play
   layers:
   - Default
   - TransparentFX
