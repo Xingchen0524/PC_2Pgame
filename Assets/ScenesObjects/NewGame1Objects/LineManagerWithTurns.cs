@@ -117,7 +117,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
 
             // 檢測鼠標點擊的空物件
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, Mathf.Infinity, clickableObjectsLayer);
-            Debug.Log("Hit: " + hit.collider.gameObject.name);
+            //Debug.Log("Hit: " + hit.collider.gameObject.name);
             if (hit.collider.tag == "Circle")
             {
 
@@ -137,7 +137,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                         SecondCircleName = FirstCircleName + "1";
                     }
                     // 設定線條顏色
-                    SetLineColorBasedOnName(hit.collider.gameObject);
+                   SetLineColorBasedOnName(hit.collider.gameObject);
                     visitedObjects.Clear(); // 清除之前經過的物件
                     visitedObjects.Add(hit.collider.gameObject); // 記錄起始物件
 
@@ -201,7 +201,13 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
 
                     // 同步畫線過程到所有玩家
                     UpdateLineDrawing(hitPosition);  // 同步妹妹端畫的線條到姐姐端
-
+                    if (GetComponent<LineRenderer>().positionCount > 0)
+                    {
+                        if (GetComponent<RPCOrange>())
+                        {
+                            GetComponent<RPCOrange>().SendData();
+                        }
+                    }
                 }
                 else if (hit.collider == null)
                 {
@@ -301,10 +307,12 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                             {
                                 OrangeSavepointsObj[j].GetComponent<LineRenderer>().SetPosition(k, OrangeSavePoints[k]);
                             }
+                           
                             OrangeSavepointsObj[j].GetComponent<LineManagerWithTurns>().enabled = false;
-
+                        
 
                         }
+                       
                         break;
                 }
                 ResetDrawingData();
@@ -402,11 +410,11 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
         //pointsObj[0].GetComponent<LineRenderer>().SetPosition(points.Count - 1, newPoint);
 
         // 使用 RPC 同步畫線過程到所有玩家
-        photonView.RPC("SyncLineDrawing", RpcTarget.AllBuffered, newPoint);
+        //photonView.RPC("SyncLineDrawing", RpcTarget.AllBuffered, newPoint);
 
     }
     // 用於同步畫線過程的 RPC
-    [PunRPC]
+   /* [PunRPC]
     public void SyncLineDrawing(List<Vector3> syncPoints) // 注意返回類型是 void
     {
         // 確保同步的點數不會丟失
@@ -420,7 +428,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
         {
             pointsObj[0].GetComponent<LineRenderer>().SetPosition(i, points[i]);
         }
-    }
+    }*/
     // 用於同步玩家的物件位置和狀態
     private void SyncPointsObjAndStatus()
     {
