@@ -5,11 +5,21 @@ using UnityEngine;
 using UnityEngine.UI; // 用於顯示對話框
 using UnityEngine.Video; // 用於播放影片
 using UnityEngine.SceneManagement;
-using Photon.Pun;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using Photon.Pun;
+using Photon.Realtime;
+using ExitGames.Client.Photon;
+using UnityEngine.Tilemaps;
+using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
+
 
 public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
 {
+    //1
+    //2   
+    //3
+
     public LineRenderer lineRenderer;
     public List<Vector3> points = new List<Vector3>();
     public HashSet<GameObject> visitedObjects = new HashSet<GameObject>();  // 存儲已經經過的空物件
@@ -42,18 +52,21 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
 
     private float timer = 5f;  // 用來追蹤剩餘時間
 
+    public GameObject bg;          // 名為 "bg" 的背景物件
+    public GameObject bg2;
+
     public Volume volume;  // 預設的 Volume，包含黑白效果
 
     void Start()
     {
         // 初始化 LineRenderer
         lineRenderer = this.gameObject.AddComponent<LineRenderer>();
-        lineRenderer.startWidth = 0.2f;
-        lineRenderer.endWidth = 0.2f;
+        lineRenderer.startWidth = 0.2f;//起始寬度
+        lineRenderer.endWidth = 0.2f;//結尾寬度
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         lineRenderer.positionCount = 0;
-        lineRenderer.numCornerVertices = 90;
-        //dialogBox.SetActive(true);  // 初始顯示對話框
+        lineRenderer.numCornerVertices = 90; //轉角平滑
+        Destroy(GameObject.Find("MusicManager"));//避免背景音樂重複。
 
         //雙人畫面判定
         if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
@@ -66,8 +79,16 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
             else
             {
                 DisableBlackAndWhiteEffect();
+                DisableInput(); // 關閉姊姊的輸入功能
             }
         }
+    }
+    // 關閉輸入功能
+    void DisableInput()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        // 或可更進一步禁用 InputManager 綁定的輸入事件
     }
     //雙人畫面判定
     void EnableBlackAndWhiteEffect()
@@ -118,10 +139,6 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
                     }
                     // 設定線條顏色
                     SetLineColorBasedOnName(hit.collider.gameObject);
-
-                    //points.Clear(); // 清除之前的点
-                    //pointsObj.Clear();
-
                     visitedObjects.Clear(); // 清除之前經過的物件
                     visitedObjects.Add(hit.collider.gameObject); // 記錄起始物件
 
@@ -130,9 +147,6 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
 
                     pointsObj[0].GetComponent<LineRenderer>().positionCount = 1;
                     pointsObj[0].GetComponent<LineRenderer>().SetPosition(0, hit.collider.transform.position);
-
-                    // lineRenderer.positionCount = 1;
-                    // lineRenderer.SetPosition(0, hit.collider.transform.position);
                     isLineDrawing = true;
                 }
 
@@ -171,23 +185,39 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
                             Vector3 turnPoint = new Vector3(hitPosition.x, lastPoint.y, 0);
                             points.Add(turnPoint);
                             pointsObj.Add(hit.collider.gameObject);
-
-                            // lineRenderer.positionCount = points.Count;
-                            // lineRenderer.SetPosition(points.Count - 1, turnPoint);
                             pointsObj[0].GetComponent<LineRenderer>().positionCount = points.Count;
-                            pointsObj[0].GetComponent<LineRenderer>().SetPosition(points.Count - 1, turnPoint);
+                            pointsObj[0].GetComponent<LineRenderer>().SetPosition(points.Count - 1, turnPoint);                  
+
                         }
                     }
 
                     // 添加新的空物件位置
                     points.Add(hitPosition);
                     pointsObj.Add(hit.collider.gameObject);
-
-                    visitedObjects.Add(hit.collider.gameObject);  // 標記這個空物件已經經過
-                                                                  // lineRenderer.positionCount = points.Count;
-                                                                  //  lineRenderer.SetPosition(points.Count - 1, hitPosition);
+                    visitedObjects.Add(hit.collider.gameObject);  // 標記這個空物件已經經過                                                                                                                                 //  lineRenderer.SetPosition(points.Count - 1, hitPosition);
                     pointsObj[0].GetComponent<LineRenderer>().positionCount = points.Count;
                     pointsObj[0].GetComponent<LineRenderer>().SetPosition(points.Count - 1, hitPosition);
+
+                    // 同步畫線過程到所有玩家
+                    if (GetComponent<LineRenderer>().positionCount > 0)
+                    {
+                        if (GetComponent<RPCOrange2>())
+                        {
+                            GetComponent<RPCOrange2>().SendData();
+                        }
+                        if (GetComponent<RPCYellow2>())
+                        {
+                            GetComponent<RPCYellow2>().SendData();
+                        }
+                        if (GetComponent<RPCBlue2>())
+                        {
+                            GetComponent<RPCBlue2>().SendData();
+                        }
+                        if (GetComponent<RPClightBlue2>())
+                        {
+                            GetComponent<RPClightBlue2>().SendData();
+                        }
+                    }
                 }
                 else if (hit.collider == null)
                 {
@@ -197,8 +227,6 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
                 // 跟蹤鼠標當前位置
                 if (points.Count > 0)
                 {
-                    //lineRenderer.positionCount = points.Count + 1;
-                    //lineRenderer.SetPosition(points.Count, currentMousePosition);
                     pointsObj[0].GetComponent<LineRenderer>().positionCount = points.Count + 1;
                     pointsObj[0].GetComponent<LineRenderer>().SetPosition(points.Count, currentMousePosition);
                 }
@@ -295,10 +323,8 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
                         }
                         break;
                 }
-                pointsObj.Clear();
-                points.Clear();
-                FirstCircleName = "";
-                SecondCircleName = "";
+                ResetDrawingData();
+
             }
             else
             {
@@ -308,10 +334,7 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
                     pointsObj[i].GetComponent<LineRenderer>().positionCount = 0;
                 }
                 // lineRenderer.positionCount = 0;
-                pointsObj.Clear();
-                points.Clear();
-                FirstCircleName = "";
-                SecondCircleName = "";
+                ResetDrawingData();
                 Debug.Log("連接失敗，重置線條");
             }
 
@@ -319,7 +342,10 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
             startObject = null; // 重置起始物件
             visitedObjects.Clear();
         }
-
+        if (CheckLineOrder() && Input.GetKeyDown(KeyCode.N)) // 按下N鍵
+        {
+            SceneManager.LoadScene("NewGame1-3");// 替換為你要切換的場景名稱
+        }
         if (hasDrawnLine) // 只有在畫過線的情況下才進行檢查
         {
             if (CheckLineOrder() && YellowSavePoints.Count > 0 && OrangeSavePoints.Count > 0 && lightBlueSavePoints.Count > 0 && BlueSavePoints.Count > 0)
@@ -328,6 +354,17 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
                 dialogBox3.SetActive(false);
                 dialogBox2.SetActive(false);
                 PlayVideo(); // 如果順序正確且所有線條完成，播放影片
+
+                // 同步狀態到另一位玩家
+                ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
+                {
+                    { "PlayVideo", true },
+                    { "dialogBox", false },
+                    { "dialogBox3", false },
+                    { "dialogBox2", false }
+                };
+                PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+
             }
             else if (!CheckLineOrder() && dialogBox.activeSelf)
             {
@@ -337,6 +374,14 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
                 {
                     dialogBox3.SetActive(false);
                 }
+                // 同步狀態到另一位玩家
+                ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
+                {
+                    { "dialogBox", false },
+                    { "dialogBox3", true },
+                    { "dialogBox2", dialogBox2.activeSelf }
+                };
+                PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
 
             }
 
@@ -344,23 +389,58 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
             {
                 if (dialogBox3.activeSelf) // 確保只有當dialogBox3是活躍的時候才關閉它
                 {
-                    Debug.Log("Dialog Box  Activated");
                     dialogBox2.SetActive(true);   // 開啟對話框2                    
-                    dialogBox3.SetActive(false); // 關閉對話框3                    
+                    dialogBox3.SetActive(false); // 關閉對話框3
+                    ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
+                    {
+                        { "dialogBox2", true },
+                        { "dialogBox3", false }
+                    };
+                    PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
                 }
 
             }
         }
-        if (CheckLineOrder() && Input.GetKeyDown(KeyCode.N)) // 按下N鍵
+
+    }
+
+
+    public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+
+    {
+        // 檢查是否同步播放影片
+        if (changedProps.ContainsKey("PlayVideo"))
         {
-            SceneManager.LoadScene("NewGame1-3");// 替換為你要切換的場景名稱
+            bool shouldPlayVideo = (bool)changedProps["PlayVideo"];
+            if (shouldPlayVideo)
+            {
+                PlayVideo();
+            }
         }
 
-        //if (dialogBox3.activeSelf && !isFadingOut) // 確保只觸發一次
-        //{
-        //isFadingOut = true;  // 設定淡出狀態
-        //StartCoroutine(FadeOutAfterDelay(5f)); // 開始淡出協程
-        //}
+        // 檢查並同步 dialogBox 狀態
+        if (changedProps.ContainsKey("dialogBox"))
+        {
+            dialogBox.SetActive((bool)changedProps["dialogBox"]);
+        }
+
+        if (changedProps.ContainsKey("dialogBox3"))
+        {
+            dialogBox3.SetActive((bool)changedProps["dialogBox3"]);
+        }
+
+        if (changedProps.ContainsKey("dialogBox2"))
+        {
+            dialogBox2.SetActive((bool)changedProps["dialogBox2"]);
+        }
+    }
+    //清除邏輯
+    private void ResetDrawingData()
+    {
+        pointsObj.Clear();
+        points.Clear();
+        FirstCircleName = "";
+        SecondCircleName = "";
     }
 
     // 設定線條顏色
@@ -395,6 +475,18 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
             lineRenderer.endColor = orange;
         }
     }
+    // 在 PhotonView 上執行同步線條繪製顏色的 RPC 方法
+    [PunRPC]
+    void SyncLineColor(string colorCode)
+    {
+        Color color;
+        if (ColorUtility.TryParseHtmlString(colorCode, out color))
+        {
+            lineRenderer.startColor = color;
+            lineRenderer.endColor = color;
+        }
+    }
+
 
     // 檢查顏色是否匹配
     private bool CheckColorMatch(GameObject obj1, GameObject obj2)
@@ -479,6 +571,9 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
         dialogBox2.SetActive(false);
         dialogBox4.SetActive(true);
         vp.loopPointReached -= OnVideoFinished; // 取消註冊事件
+        bg.SetActive(false);
+        bg2.SetActive(true);
+
     }
 
 

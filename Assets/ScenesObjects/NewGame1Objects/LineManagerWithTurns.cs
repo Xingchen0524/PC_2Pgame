@@ -109,6 +109,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
 
     void Update()
     {
+
         // 鼠標按下，選擇起始物件
         if (Input.GetMouseButtonDown(0))
         {
@@ -137,7 +138,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                         SecondCircleName = FirstCircleName + "1";
                     }
                     // 設定線條顏色
-                   SetLineColorBasedOnName(hit.collider.gameObject);
+                    SetLineColorBasedOnName(hit.collider.gameObject);
                     visitedObjects.Clear(); // 清除之前經過的物件
                     visitedObjects.Add(hit.collider.gameObject); // 記錄起始物件
 
@@ -185,22 +186,19 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                             points.Add(turnPoint);
                             pointsObj.Add(hit.collider.gameObject);
                             pointsObj[0].GetComponent<LineRenderer>().positionCount = points.Count;
-                            pointsObj[0].GetComponent<LineRenderer>().SetPosition(points.Count - 1, turnPoint);
-                            
+                            pointsObj[0].GetComponent<LineRenderer>().SetPosition(points.Count - 1, turnPoint);                           
                         }
                     }
 
                     // 添加新的空物件位置
                     points.Add(hitPosition);
                     pointsObj.Add(hit.collider.gameObject);
-
                     visitedObjects.Add(hit.collider.gameObject);  // 標記這個空物件已經經過                                                                 
                     pointsObj[0].GetComponent<LineRenderer>().positionCount = points.Count;
                     pointsObj[0].GetComponent<LineRenderer>().SetPosition(points.Count - 1, hitPosition);
 
 
                     // 同步畫線過程到所有玩家
-                  //  UpdateLineDrawing(hitPosition);  // 同步妹妹端畫的線條到姐姐端
                     if (GetComponent<LineRenderer>().positionCount > 0)
                     {
                         if (GetComponent<RPCOrange>())
@@ -210,6 +208,14 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                         if (GetComponent<RPCYellow>())
                         {
                             GetComponent<RPCYellow>().SendData();
+                        }
+                        if (GetComponent<RPCBlue>())
+                        {
+                            GetComponent<RPCBlue>().SendData();
+                        }
+                        if (GetComponent<RPClightBlue>())
+                        {
+                            GetComponent<RPClightBlue>().SendData();
                         }
                     }
                 }
@@ -337,11 +343,11 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             startObject = null; // 重置起始物件
             visitedObjects.Clear();
         }
-
         if (CheckLineOrder() && Input.GetKeyDown(KeyCode.N)) // 按下N鍵
         {
             SceneManager.LoadScene("NewGame1-2");// 替換為你要切換的場景名稱
         }
+
 
         if (hasDrawnLine) // 只有在畫過線的情況下才進行檢查
         {
@@ -398,11 +404,12 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                     PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
                 }
             }
+
         }
 
 
     }
-
+    
     //-----------------------------------同步畫線程式開始----------------------------------
 
     // 當畫線時，觸發此方法

@@ -233,6 +233,7 @@ public class RoomManeger : MonoBehaviourPunCallbacks
             videoPlayer.Play();
             hasPlayed = true; // 標記為已播放
             videoPlayer.loopPointReached += OnVideoFinished; // 註冊影片播放結束事件
+            Destroy(GameObject.Find("MusicManager"));//避免背景音樂重複。
         }
         else
         {
