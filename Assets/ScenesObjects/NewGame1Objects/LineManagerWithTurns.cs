@@ -200,12 +200,16 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
 
 
                     // 同步畫線過程到所有玩家
-                    UpdateLineDrawing(hitPosition);  // 同步妹妹端畫的線條到姐姐端
+                  //  UpdateLineDrawing(hitPosition);  // 同步妹妹端畫的線條到姐姐端
                     if (GetComponent<LineRenderer>().positionCount > 0)
                     {
                         if (GetComponent<RPCOrange>())
                         {
                             GetComponent<RPCOrange>().SendData();
+                        }
+                        if (GetComponent<RPCYellow>())
+                        {
+                            GetComponent<RPCYellow>().SendData();
                         }
                     }
                 }
@@ -570,7 +574,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             lineRenderer.endColor = lightBlue;     
 
             // 使用 RPC 同步顏色
-            photonView.RPC("SyncLineColor", RpcTarget.AllBuffered, "#4F64B3");
+            //photonView.RPC("SyncLineColor", RpcTarget.AllBuffered, "#4F64B3");
         }
         else if (obj.name == "深藍1" || obj.name == "深藍2")
         {
@@ -580,7 +584,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             lineRenderer.endColor = Blue;
 
             // 使用 RPC 同步顏色
-            photonView.RPC("SyncLineColor", RpcTarget.AllBuffered, "#2F2A60");
+            //photonView.RPC("SyncLineColor", RpcTarget.AllBuffered, "#2F2A60");
 
         }
         else if (obj.name == "黃色1" || obj.name == "黃色2")
@@ -591,7 +595,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             lineRenderer.endColor = yellow;
            
             // 使用 RPC 同步顏色
-            photonView.RPC("SyncLineColor", RpcTarget.AllBuffered, "#F3D758");
+           // photonView.RPC("SyncLineColor", RpcTarget.AllBuffered, "#F3D758");
 
         }
         else if (obj.name == "橘色1" || obj.name == "橘色2")
@@ -602,7 +606,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             lineRenderer.endColor = orange;      
 
             // 使用 RPC 同步顏色
-            photonView.RPC("SyncLineColor", RpcTarget.AllBuffered, "#DD8E15"); // 同步顏色給所有玩家
+            //photonView.RPC("SyncLineColor", RpcTarget.AllBuffered, "#DD8E15"); // 同步顏色給所有玩家
 
         }
     }

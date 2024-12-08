@@ -966,7 +966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LineManagerWithTurnsObj: {fileID: 188560671}
   PositionCount: 0
-  Points: []
+  lineRenderer: {fileID: 0}
 --- !u!114 &188560673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8728,6 +8728,8 @@ GameObject:
   - component: {fileID: 1919143930}
   - component: {fileID: 1919143929}
   - component: {fileID: 1919143932}
+  - component: {fileID: 1919143934}
+  - component: {fileID: 1919143933}
   m_Layer: 3
   m_Name: "\u9EC3\u82722"
   m_TagString: Circle
@@ -8888,6 +8890,43 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1799546433}
   volume: {fileID: 0}
+--- !u!114 &1919143933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919143928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6117dba164ffce41a7f95f7992752ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LineManagerWithTurnsObj: {fileID: 1919143932}
+  PositionCount: 0
+  lineRenderer: {fileID: 0}
+--- !u!114 &1919143934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919143928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1947537691
 GameObject:
   m_ObjectHideFlags: 0

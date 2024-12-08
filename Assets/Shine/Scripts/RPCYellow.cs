@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 
-public class RPCOrange : MonoBehaviourPun
+public class RPCYellow : MonoBehaviourPun
 {
     public LineManagerWithTurns LineManagerWithTurnsObj;
 
@@ -22,10 +22,10 @@ public class RPCOrange : MonoBehaviourPun
         if (lineRenderer == null)
         {
             lineRenderer = GetComponent<LineRenderer>();
-            Color orange;
-            ColorUtility.TryParseHtmlString("#DD8E15", out orange);
-            GetComponent<LineRenderer>().startColor = orange;
-            GetComponent<LineRenderer>().endColor = orange;
+            Color yellow;
+            ColorUtility.TryParseHtmlString("#F3D758", out yellow);
+            lineRenderer.startColor = yellow;
+            lineRenderer.endColor = yellow;
         }
         lineRenderer.positionCount = PositionCount;
         for (int k = 0; k < PositionCount; k++)
