@@ -15,6 +15,18 @@ public class RPClightBlue : MonoBehaviourPun
     void Start()
     {
     }
+    [PunRPC]
+    public void ClearLineDraw()
+    {
+
+        if (lineRenderer == null)
+        {
+            lineRenderer = GetComponent<LineRenderer>();
+
+        }
+        lineRenderer.positionCount = 0;
+
+    }
     // 定義一個 RPC 方法，傳送數值
     [PunRPC]
     public void SyncLineDrawing(int PositionCount, Vector3[] pointsArray)
@@ -23,11 +35,12 @@ public class RPClightBlue : MonoBehaviourPun
         if (lineRenderer == null)
         {
             lineRenderer = GetComponent<LineRenderer>();
-            Color lightBlue;
-            ColorUtility.TryParseHtmlString("#4F64B3", out lightBlue);
-            lineRenderer.startColor = lightBlue;
-            lineRenderer.endColor = lightBlue;
+          
         }
+        Color lightBlue;
+        ColorUtility.TryParseHtmlString("#4F64B3", out lightBlue);
+        lineRenderer.startColor = lightBlue;
+        lineRenderer.endColor = lightBlue;
         lineRenderer.positionCount = PositionCount;
         for (int k = 0; k < PositionCount; k++)
         {
@@ -38,7 +51,11 @@ public class RPClightBlue : MonoBehaviourPun
     {
 
     }
+    public void SendClear()
+    {
+        photonView.RPC("ClearLineDraw", RpcTarget.All);
 
+    }
     public void SendData()
     {
         if (lineRenderer == null)

@@ -68,6 +68,7 @@ MonoBehaviour:
   - SendOrangePositionCount
   - SendOrangePoint
   - SendOrangeData
+  - ClearLineDraw
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

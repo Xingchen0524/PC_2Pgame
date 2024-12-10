@@ -22,22 +22,40 @@ public class RPCYellow : MonoBehaviourPun
         if (lineRenderer == null)
         {
             lineRenderer = GetComponent<LineRenderer>();
-            Color yellow;
-            ColorUtility.TryParseHtmlString("#F3D758", out yellow);
-            lineRenderer.startColor = yellow;
-            lineRenderer.endColor = yellow;
+       
         }
+        Color yellow;
+        ColorUtility.TryParseHtmlString("#F3D758", out yellow);
+        lineRenderer.startColor = yellow;
+        lineRenderer.endColor = yellow;
         lineRenderer.positionCount = PositionCount;
         for (int k = 0; k < PositionCount; k++)
         {
             lineRenderer.SetPosition(k, pointsArray[k]);
         }
     }
+    [PunRPC]
+    public void ClearLineDraw()
+    {
+
+        if (lineRenderer == null)
+        {
+            lineRenderer = GetComponent<LineRenderer>();
+
+        }
+        lineRenderer.positionCount = 0;
+
+
+    }
     void Update()
     {
        
     }
+    public void SendClear()
+    {
+        photonView.RPC("ClearLineDraw", RpcTarget.All);
 
+    }
     public void SendData()
     {
         if (lineRenderer == null)

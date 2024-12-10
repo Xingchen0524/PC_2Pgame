@@ -336,6 +336,25 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                     pointsObj[i].GetComponent<LineRenderer>().positionCount = 0;
                 }
                 ResetDrawingData();
+                // 同步畫線過程到所有玩家
+                
+                    if (GetComponent<RPCOrange>())
+                    {
+                        GetComponent<RPCOrange>().SendClear();
+                    }
+                    if (GetComponent<RPCYellow>())
+                    {
+                        GetComponent<RPCYellow>().SendClear();
+                    }
+                    if (GetComponent<RPCBlue>())
+                    {
+                        GetComponent<RPCBlue>().SendClear();
+                    }
+                    if (GetComponent<RPClightBlue>())
+                    {
+                        GetComponent<RPClightBlue>().SendClear();
+                    }
+                
                 Debug.Log("連接失敗，重置線條");
                 
             }

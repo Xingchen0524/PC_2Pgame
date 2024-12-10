@@ -22,20 +22,38 @@ public class RPCOrange : MonoBehaviourPun
         if (lineRenderer == null)
         {
             lineRenderer = GetComponent<LineRenderer>();
-            Color orange;
-            ColorUtility.TryParseHtmlString("#DD8E15", out orange);
-            lineRenderer.startColor = orange;
-            lineRenderer.endColor = orange;
+          
         }
+        Color orange;
+        ColorUtility.TryParseHtmlString("#DD8E15", out orange);
+        lineRenderer.startColor = orange;
+        lineRenderer.endColor = orange;
         lineRenderer.positionCount = PositionCount;
         for (int k = 0; k < PositionCount; k++)
         {
             lineRenderer.SetPosition(k, pointsArray[k]);
         }
     }
+
+    [PunRPC]
+    public void ClearLineDraw()
+    {
+
+        if (lineRenderer == null)
+        {
+            lineRenderer = GetComponent<LineRenderer>();
+            
+        }
+        lineRenderer.positionCount = 0;
+       
+    }
     void Update()
     {
        
+    }
+    public void SendClear() {
+        photonView.RPC("ClearLineDraw", RpcTarget.All);
+
     }
 
     public void SendData()
