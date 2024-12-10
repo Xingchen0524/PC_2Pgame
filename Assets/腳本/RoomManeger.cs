@@ -44,6 +44,31 @@ public class RoomManeger : MonoBehaviourPunCallbacks
         // 初始化提示訊息
         textNotSelected.text = "請選擇角色！";
     }
+    void Update()
+    {
+        // 檢查是否按下 N 鍵來切斷動畫並轉場
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            // 停止影片播放
+            if (videoPlayer.isPlaying)
+            {
+                videoPlayer.Stop();
+            }
+
+            // 發送訊息給其他玩家，告訴他們需要切換場景
+            ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
+        {
+            { "PlayVideo", false }  // 停止播放影片的標誌
+        };
+            PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+
+            // 同步場景切換到所有玩家
+            PhotonNetwork.RaiseEvent(0, null, new Photon.Realtime.RaiseEventOptions { Receivers = Photon.Realtime.ReceiverGroup.All }, new ExitGames.Client.Photon.SendOptions { Reliability = true });
+
+            // 直接切換場景
+            SceneManager.LoadScene("NewGame1");
+        }
+    }
 
     public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
     {
@@ -187,7 +212,12 @@ public class RoomManeger : MonoBehaviourPunCallbacks
 
     private void CheckRoomMessage()
     {
-        if (!AllPlayersHaveRoles())
+        // 檢查玩家數量是否為 2
+        if (PhotonNetwork.CurrentRoom.PlayerCount != 2)
+        {
+            UpdateRoomMessage("等待另一位玩家加入！");
+        }
+        else if (!AllPlayersHaveRoles())
         {
             UpdateRoomMessage("有玩家尚未選擇角色！");
         }
@@ -197,6 +227,7 @@ public class RoomManeger : MonoBehaviourPunCallbacks
         }
         else
         {
+            // 當玩家數為 2 且所有玩家選擇角色且角色選擇正確時
             UpdateRoomMessage("角色選擇完畢，可以開始遊戲！");
         }
     }
@@ -222,6 +253,8 @@ public class RoomManeger : MonoBehaviourPunCallbacks
                 PlayVideo();
             }
         }
+
+
     }
 
     private void PlayVideo()
@@ -269,4 +302,5 @@ public class RoomManeger : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.NetworkingClient.EventReceived -= OnEventReceived;
     }
+
 }

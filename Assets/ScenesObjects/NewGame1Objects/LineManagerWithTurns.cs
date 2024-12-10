@@ -82,6 +82,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                 DisableInput(); // 關閉姊姊的輸入功能
             }
         }
+
     }
     // 關閉輸入功能
     void DisableInput()
@@ -362,7 +363,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             startObject = null; // 重置起始物件
             visitedObjects.Clear();
         }
-        if (CheckLineOrder() && Input.GetKeyDown(KeyCode.N)) // 按下N鍵
+        if (hasPlayed && Input.GetKeyDown(KeyCode.N)) // 按下N鍵
         {
             SceneManager.LoadScene("NewGame1-2");// 替換為你要切換的場景名稱
         }
@@ -434,31 +435,10 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
     // 當畫線時，觸發此方法
     private void UpdateLineDrawing(Vector3 newPoint)
     {
-        // 更新本地玩家的 LineRenderer-----------------這邊會導致我畫第二條線清除第一條線條 因此註記起來
-        //points.Add(newPoint);
-        //pointsObj[0].GetComponent<LineRenderer>().positionCount = points.Count;
-        //pointsObj[0].GetComponent<LineRenderer>().SetPosition(points.Count - 1, newPoint);
-
-        // 使用 RPC 同步畫線過程到所有玩家
-        //photonView.RPC("SyncLineDrawing", RpcTarget.AllBuffered, newPoint);
+        
 
     }
-    // 用於同步畫線過程的 RPC
-   /* [PunRPC]
-    public void SyncLineDrawing(List<Vector3> syncPoints) // 注意返回類型是 void
-    {
-        // 確保同步的點數不會丟失
-        points.Clear();  // 清空當前線條的點
-        points.AddRange(syncPoints); // 添加同步的點
-
-        pointsObj[0].GetComponent<LineRenderer>().positionCount = points.Count;
-
-        // 更新所有玩家的 LineRenderer
-        for (int i = 0; i < points.Count; i++)
-        {
-            pointsObj[0].GetComponent<LineRenderer>().SetPosition(i, points[i]);
-        }
-    }*/
+   
     // 用於同步玩家的物件位置和狀態
     private void SyncPointsObjAndStatus()
     {

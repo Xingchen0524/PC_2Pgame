@@ -66,7 +66,6 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         lineRenderer.positionCount = 0;
         lineRenderer.numCornerVertices = 90; //轉角平滑
-        Destroy(GameObject.Find("MusicManager"));//避免背景音樂重複。
 
         //雙人畫面判定
         if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
@@ -335,6 +334,22 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
                 }
                 // lineRenderer.positionCount = 0;
                 ResetDrawingData();
+                if (GetComponent<RPCOrange2>())
+                {
+                    GetComponent<RPCOrange2>().SendClear();
+                }
+                if (GetComponent<RPCYellow2>())
+                {
+                    GetComponent<RPCYellow2>().SendClear();
+                }
+                if (GetComponent<RPCBlue2>())
+                {
+                    GetComponent<RPCBlue2>().SendClear();
+                }
+                if (GetComponent<RPClightBlue2>())
+                {
+                    GetComponent<RPClightBlue2>().SendClear();
+                }
                 Debug.Log("連接失敗，重置線條");
             }
 
@@ -342,7 +357,7 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
             startObject = null; // 重置起始物件
             visitedObjects.Clear();
         }
-        if (CheckLineOrder() && Input.GetKeyDown(KeyCode.N)) // 按下N鍵
+        if (hasPlayed && Input.GetKeyDown(KeyCode.N)) // 按下N鍵
         {
             SceneManager.LoadScene("NewGame1-3");// 替換為你要切換的場景名稱
         }

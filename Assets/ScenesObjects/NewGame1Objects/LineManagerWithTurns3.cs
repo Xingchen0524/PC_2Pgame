@@ -113,6 +113,17 @@ public class LineManagerWithTurns3 : MonoBehaviourPunCallbacks
 
     void Update()
     {
+        // 控制滑鼠的顯示與鎖定
+        if (dialogBox2.activeSelf)  // 只有當 dialogBox2 顯示時，才能使用滑鼠
+        {
+            Cursor.lockState = CursorLockMode.None;  // 取消鎖定滑鼠
+            Cursor.visible = true;  // 顯示滑鼠
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;  // 鎖定滑鼠
+            Cursor.visible = false;  // 隱藏滑鼠
+        }
 
         // 鼠標按下，選擇起始物件
         if (Input.GetMouseButtonDown(0))
@@ -340,6 +351,24 @@ public class LineManagerWithTurns3 : MonoBehaviourPunCallbacks
                     pointsObj[i].GetComponent<LineRenderer>().positionCount = 0;
                 }
                 ResetDrawingData();
+
+                if (GetComponent<RPCOrange3>())
+                {
+                    GetComponent<RPCOrange3>().SendClear();
+                }
+                if (GetComponent<RPCYellow3>())
+                {
+                    GetComponent<RPCYellow3>().SendClear();
+                }
+                if (GetComponent<RPCBlue3>())
+                {
+                    GetComponent<RPCBlue3>().SendClear();
+                }
+                if (GetComponent<RPClightBlue3>())
+                {
+                    GetComponent<RPClightBlue3>().SendClear();
+                }
+
                 Debug.Log("連接失敗，重置線條");
             }
 
@@ -362,7 +391,7 @@ public class LineManagerWithTurns3 : MonoBehaviourPunCallbacks
                 };
             PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
         }
-        if (Input.GetKeyDown(KeyCode.N)) // 按下N鍵
+        if (hasPlayed && Input.GetKeyDown(KeyCode.N)) // 按下N鍵
         {
 
             PlayVideo2(); // 播放影片
@@ -601,6 +630,10 @@ public class LineManagerWithTurns3 : MonoBehaviourPunCallbacks
         vp.loopPointReached -= OnVideoFinished; // 取消註冊事件
         ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
                     {
+
+                        { "dialogBox", false },
+                        { "dialogBox4", false },
+                        { "dialogBox2", false },
                         { "dialogBox3", true },
                     };
         PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
@@ -634,14 +667,6 @@ public class LineManagerWithTurns3 : MonoBehaviourPunCallbacks
         StartCoroutine(WaitAndExit(55f));  // 這裡設置等待60秒，您可以根據需求更改時間
 
 
-
-
-
-        //SetRoomProperty("PlayVideo", false);
-        // 發送事件，告訴所有玩家場景即將切換
-        //PhotonNetwork.RaiseEvent(0, null, new Photon.Realtime.RaiseEventOptions { Receivers = Photon.Realtime.ReceiverGroup.All }, new ExitGames.Client.Photon.SendOptions { Reliability = true });
-        // 延遲一小段時間後再進行場景切換，以確保所有玩家都收到切換信號
-        //StartCoroutine(DelayedSceneChange());
     }
     private IEnumerator WaitAndExit(float delay)
     {

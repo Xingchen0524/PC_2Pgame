@@ -14,6 +14,7 @@ public class RPCYellow : MonoBehaviourPun
     void Start()
     {
     }
+
     // 定義一個 RPC 方法，傳送數值
     [PunRPC]
     public void SyncLineDrawing(int PositionCount, Vector3[] pointsArray )
