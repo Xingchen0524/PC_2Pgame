@@ -15,15 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/RoomScene.unity
     guid: 3dd67e0076d938045b7d4dbdf8722cd6
   - enabled: 1
+    path: Assets/Scenes/NewGame2-1.unity
+    guid: 22d3c7957c8ed854e86bd85105bc5742
+  - enabled: 1
     path: Assets/Scenes/NewGame1.unity
     guid: b3a63b8c6ba4e144cb27e58ab05d478f
   - enabled: 1
     path: Assets/Scenes/NewGame1-2.unity
     guid: 30b5661593ad3e246907b6d793b9a115
-  - enabled: 1
-    path: Assets/Scenes/NewGame1-3.unity
-    guid: 5c93039871ab27448b3dadc41faf6e3c
-  - enabled: 1
-    path: Assets/Scenes/NewGame2-1.unity
-    guid: 22d3c7957c8ed854e86bd85105bc5742
   m_configObjects: {}

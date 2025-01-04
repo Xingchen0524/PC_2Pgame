@@ -18,9 +18,23 @@ public class Restart : MonoBehaviourPunCallbacks
             };
             Debug.Log("設定屬性: " + SceneManager.GetActiveScene().name);
             PhotonNetwork.CurrentRoom.SetCustomProperties(properties); // 設定房間屬性
+
+            //雙人畫面判定
+            if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
+            {
+                string role = (string)PhotonNetwork.LocalPlayer.CustomProperties["Role"];
+                if (role == "妹妹")
+                {
+                    EnableInput();
+                }                
+            }
         }
     }
-
+    void EnableInput()
+    {
+        Cursor.lockState = CursorLockMode.None; // 解鎖鼠標
+        Cursor.visible = true; // 顯示鼠標
+    }
     public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable changedProps)
     {
         // 檢查是否有更新 "ReloadScene"

@@ -43,6 +43,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
     public GameObject dialogBox2;
     public GameObject dialogBox3;
     public GameObject dialogBox4;
+    public GameObject dialogBoxmistake;
     public VideoPlayer videoPlayer; // 用於播放影片
     public CanvasGroup dialogCanvasGroup; // 用於控制對話框的漸隱效果
     private bool isDialogActive = false; // 判斷對話框是否正在顯示
@@ -75,6 +76,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             if (role == "妹妹")
             {
                 EnableBlackAndWhiteEffect();
+                //EnableInput();
             }
             else
             {
@@ -90,6 +92,11 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         // 或可更進一步禁用 InputManager 綁定的輸入事件
+    }
+    void EnableInput()
+    {
+        Cursor.lockState = CursorLockMode.None; // 解鎖鼠標
+        Cursor.visible = true; // 顯示鼠標
     }
     //雙人畫面判定
     void EnableBlackAndWhiteEffect()
@@ -392,7 +399,8 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             {
                 dialogBox.SetActive(false);
                 dialogBox3.SetActive(true); // 如果順序錯誤，顯示對話框
-                Debug.Log("Dialog Box 3 Activated");
+                DisableInput();
+
                 if (dialogBox2.activeSelf)
                 {
                     dialogBox3.SetActive(false);
@@ -402,6 +410,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                 {
                     { "dialogBox", false },
                     { "dialogBox3", true },
+                    //{ "dialogBoxmistake", true },
                     { "dialogBox2", dialogBox2.activeSelf }
                 };
                 PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
@@ -429,104 +438,6 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
 
 
     }
-    
-    //-----------------------------------同步畫線程式開始----------------------------------
-
-    // 當畫線時，觸發此方法
-    private void UpdateLineDrawing(Vector3 newPoint)
-    {
-        
-
-    }
-   
-    // 用於同步玩家的物件位置和狀態
-    private void SyncPointsObjAndStatus()
-    {
-        // 構建同步數據
-        ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable();
-
-        // 同步每個物件的名稱或狀態
-        properties["SecondCircleName"] = SecondCircleName;
-        properties["DialogBox"] = dialogBox.activeSelf; // 例如同步對話框的開啟狀態
-
-        // 同步位置或物件的集合，分開每種顏色的物件
-        List<Vector3> bluePositions = new List<Vector3>();
-        foreach (GameObject obj in BlueSavepointsObj)
-        {
-            bluePositions.Add(obj.transform.position); // 儲存位置
-        }
-        properties["BlueSavepointsPositions"] = bluePositions;
-
-        List<Vector3> lightBluePositions = new List<Vector3>();
-        foreach (GameObject obj in lightBlueSavepointsObj)
-        {
-            lightBluePositions.Add(obj.transform.position); // 儲存位置
-        }
-        properties["lightBlueSavepointsPositions"] = lightBluePositions;
-
-        List<Vector3> yellowPositions = new List<Vector3>();
-        foreach (GameObject obj in YellowSavepointsObj)
-        {
-            yellowPositions.Add(obj.transform.position); // 儲存位置
-        }
-        properties["YellowSavepointsPositions"] = yellowPositions;
-
-        List<Vector3> orangePositions = new List<Vector3>();
-        foreach (GameObject obj in OrangeSavepointsObj)
-        {
-            orangePositions.Add(obj.transform.position); // 儲存位置
-        }
-        properties["OrangeSavepointsPositions"] = orangePositions;
-
-        // 設置 CustomProperties 以便同步
-        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
-
-        // 通過 RPC 同步物件和狀態到所有玩家
-        photonView.RPC("SyncGameObjectsAndStatus", RpcTarget.AllBuffered, bluePositions, lightBluePositions, yellowPositions, orangePositions, SecondCircleName, dialogBox.activeSelf);
-    }
-
-    // 用於同步其他玩家的物件位置和狀態
-    [PunRPC]
-    void SyncGameObjectsAndStatus(List<Vector3> bluePositions, List<Vector3> lightBluePositions, List<Vector3> yellowPositions, List<Vector3> orangePositions, string secondCircleName, bool dialogBoxActive)
-    {
-        // 更新本地物件的狀態
-        SecondCircleName = secondCircleName;
-        dialogBox.SetActive(dialogBoxActive);
-
-        // 更新各顏色 Savepoints 的位置
-        for (int i = 0; i < BlueSavepointsObj.Count; i++)
-        {
-            if (i < bluePositions.Count)
-            {
-                BlueSavepointsObj[i].transform.position = bluePositions[i];
-            }
-        }
-
-        for (int i = 0; i < lightBlueSavepointsObj.Count; i++)
-        {
-            if (i < lightBluePositions.Count)
-            {
-                lightBlueSavepointsObj[i].transform.position = lightBluePositions[i];
-            }
-        }
-
-        for (int i = 0; i < YellowSavepointsObj.Count; i++)
-        {
-            if (i < yellowPositions.Count)
-            {
-                YellowSavepointsObj[i].transform.position = yellowPositions[i];
-            }
-        }
-
-        for (int i = 0; i < OrangeSavepointsObj.Count; i++)
-        {
-            if (i < orangePositions.Count)
-            {
-                OrangeSavepointsObj[i].transform.position = orangePositions[i];
-            }
-        }
-    }
-    //-----------------------------------同步畫線程式結束----------------------------------
 
     public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
 
