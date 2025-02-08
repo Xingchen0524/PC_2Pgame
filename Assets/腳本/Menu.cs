@@ -15,8 +15,8 @@ public class Menu : MonoBehaviour
     [Header("設定")]
     public GameObject SettingPage;
     // Start is called before the first frame update
-    [Header("控制音量的Slider")]
-    public Slider ControlVolumSlider;
+    //[Header("控制音量的Slider")]
+    //public Slider ControlVolumSlider;
     [Header("調整遊戲解析度")]
     public Dropdown GameSizeDropdown;
     [Header("Server")]
@@ -30,10 +30,13 @@ public class Menu : MonoBehaviour
     //public GameObject GameBS;
     //[Header("GameLS")]
     // public GameObject GameLS;
-
+    [Header("Setting設定PrefabUI")]
+    public GameObject SettingPrefab;
     void Start()
     {
-        AudioListener.volume = ControlVolumSlider.value;
+        // AudioListener.volume = ControlVolumSlider.value;
+        if(!GameObject.Find("Canvas_設定(Clone)"))
+        SettingPage = Instantiate(SettingPrefab) as GameObject;
     }
     // Update is called once per frame
     void Update()
@@ -56,19 +59,19 @@ public class Menu : MonoBehaviour
     public void SetSetting(bool Set)
     {
         //控制首頁頁面關閉
-        MenuPage.SetActive(Set);
+        //MenuPage.SetActive(Set);
         //控制設定頁面關閉
-        SettingPage.SetActive(!Set);
+       SettingPage.transform.GetChild(0).gameObject.SetActive(!Set);
     }
     
-    public void SetMusicVolum()
+   /* public void SetMusicVolum()
     {
         Debug.Log(ControlVolumSlider.value);
         //整體聲音的音量=聲音控制Slider的數值(值介於0-1之間)
         AudioListener.volume = ControlVolumSlider.value;
         //將聲音的音量储存在SaveData腳本中的SaveVolume變數內
         SaveData.SaveVolume = AudioListener.volume;
-    }
+    }*/
     public void SetRole(bool Set)
     {
         //控制首頁頁面關閉
