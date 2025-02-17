@@ -45,25 +45,53 @@ public class Game2Controller1 : MonoBehaviourPun
 
     void Update()
     {
-        // 取得輸入
-        movement.x = Input.GetAxis("Horizontal"); // A/D 或 ←/→
-        movement.y = Input.GetAxis("Vertical");   // W/S 或 ↑/↓
+        Vector2 movement = Vector2.zero; // 每幀重置
+
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
+        {
+            string role = (string)PhotonNetwork.LocalPlayer.CustomProperties["Role"];
+            if (role == "妹妹")
+            {
+                movement.x = Input.GetAxis("Horizontal"); // A/D 或 ←/→
+                                                          // Debug.Log("Update() 妹妹執行中");
+
+            }
+            else
+            {
+                movement.y = Input.GetAxis("Vertical");   // W/S 或 ↑/↓
+                                                          // Debug.Log("Update() 姐姐執行中");
+
+            }
+        }
+        if (movement.x != 0 || movement.y != 0)
+            photonView.RPC("MovePlayer", RpcTarget.All, movement.x, movement.y);
 
         // 計算新的位置
-        Vector2 newPosition = rb.position + movement * speed * Time.deltaTime;
+        // Vector2 newPosition = rb.position + movement * speed * Time.deltaTime;
+        //rb.MovePosition(newPosition);
 
-        // 檢查是否超出盤子範圍
-        if (IsWithinPlate(newPosition))
-        {
-            rb.MovePosition(newPosition);
-        }
-        else
-        {
-            Debug.Log("移動被限制，玩家圖片將超出盤子範圍！");
-            transform.position = startPosition;
-        }
+        /*
+          // 檢查是否超出盤子範圍
+          if (IsWithinPlate(move))
+          {
+              rb.MovePosition(move);
+          }
+          else
+          {
+              Debug.Log("移動被限制，玩家圖片將超出盤子範圍！");
+              transform.position = startPosition;
+          }
+         */
     }
 
+    [PunRPC]
+    void MovePlayer(float moveX, float moveY)
+    {
+        Vector2 move = new Vector2(moveX, moveY) * speed * Time.deltaTime;
+        rb.MovePosition(rb.position + move);
+
+        
+    }
     private bool IsWithinPlate(Vector2 position)
     {
         if (plateCollider == null || playerCollider == null)
