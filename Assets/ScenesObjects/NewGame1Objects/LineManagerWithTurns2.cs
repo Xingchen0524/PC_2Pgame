@@ -75,7 +75,6 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
             if (role == "妹妹")
             {
                 EnableBlackAndWhiteEffect();
-                //EnableInput();
             }
             else
             {
@@ -116,6 +115,8 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
 
     void Update()
     {
+
+        
 
         // 鼠標按下，選擇起始物件
         if (Input.GetMouseButtonDown(0))

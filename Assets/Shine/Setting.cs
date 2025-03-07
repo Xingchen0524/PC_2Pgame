@@ -47,8 +47,8 @@ public class Setting : MonoBehaviour
     {
         //關閉遊戲
         Application.Quit();
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
-#endif
+    #endif
     }
 }

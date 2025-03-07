@@ -39,7 +39,10 @@ public class RoomManeger : MonoBehaviourPunCallbacks
         }
 
         // 只有房主可以按下開始遊戲按鈕
-        buttonStartGame.interactable = PhotonNetwork.IsMasterClient;
+        //buttonStartGame.interactable = PhotonNetwork.IsMasterClient;
+
+        // 讓開始按鈕預設為不能點選
+        buttonStartGame.interactable = false;
 
         // 初始化提示訊息
         textNotSelected.text = "請選擇角色！";
@@ -66,13 +69,14 @@ public class RoomManeger : MonoBehaviourPunCallbacks
             PhotonNetwork.RaiseEvent(0, null, new Photon.Realtime.RaiseEventOptions { Receivers = Photon.Realtime.ReceiverGroup.All }, new ExitGames.Client.Photon.SendOptions { Reliability = true });
 
             // 直接切換場景
-            SceneManager.LoadScene("NewGame1");
+            SceneManager.LoadScene("NewGame2-1");
         }
     }
 
     public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
     {
-        buttonStartGame.interactable = PhotonNetwork.IsMasterClient;
+        //buttonStartGame.interactable = PhotonNetwork.IsMasterClient;
+        CheckStartButton();
     }
 
     public void UpdatePlayerlist()
@@ -90,11 +94,13 @@ public class RoomManeger : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         UpdatePlayerlist();
+        CheckStartButton();
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         UpdatePlayerlist();
+        CheckStartButton();
     }
 
     public void OnClickStartGame()
@@ -161,6 +167,7 @@ public class RoomManeger : MonoBehaviourPunCallbacks
         if (changedProps.ContainsKey("Role"))
         {
             UpdatePlayerlist();
+            CheckStartButton();
         }
 
         // 檢查所有玩家的角色選擇狀態，更新提示文字
@@ -231,6 +238,15 @@ public class RoomManeger : MonoBehaviourPunCallbacks
             UpdateRoomMessage("角色選擇完畢，可以開始遊戲！");
         }
     }
+    private void CheckStartButton()
+    {
+        bool canStart = PhotonNetwork.IsMasterClient &&
+                        PhotonNetwork.CurrentRoom.PlayerCount == 2 &&
+                        AllPlayersHaveRoles() &&
+                        !PlayersSelectedSameRole(out _);
+
+        buttonStartGame.interactable = canStart;
+    }
 
     private void UpdateRoomMessage(string message)
     {
@@ -289,14 +305,14 @@ public class RoomManeger : MonoBehaviourPunCallbacks
     {
         if (photonEvent.Code == 0) // 當收到場景切換的事件
         {
-            SceneManager.LoadScene("NewGame1");
+            SceneManager.LoadScene("NewGame2-1");
         }
     }
     private IEnumerator DelayedSceneChange()
     {
         // 稍微延遲一下，確保所有玩家收到事件
         yield return new WaitForSeconds(0.1f); // 你可以調整延遲時間
-        SceneManager.LoadScene("NewGame1");
+        SceneManager.LoadScene("NewGame2-1");
     }
     void OnDestroy()
     {

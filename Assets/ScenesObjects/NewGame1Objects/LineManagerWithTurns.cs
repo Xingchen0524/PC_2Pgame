@@ -44,7 +44,9 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
     public GameObject dialogBox3;
     public GameObject dialogBox4;
     public GameObject dialogBoxmistake;
+
     public VideoPlayer videoPlayer; // 用於播放影片
+
     public CanvasGroup dialogCanvasGroup; // 用於控制對話框的漸隱效果
     private bool isDialogActive = false; // 判斷對話框是否正在顯示
     private bool hasPlayed = false; // 用來追蹤影片是否已經播放過
