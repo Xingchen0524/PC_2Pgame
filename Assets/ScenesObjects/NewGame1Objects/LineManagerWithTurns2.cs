@@ -592,7 +592,7 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
     }
 
 
-    // 撥放影片
+    // 播放影片
     private void PlayVideo()
     {
         if (!hasPlayed) // 如果影片尚未播放過
