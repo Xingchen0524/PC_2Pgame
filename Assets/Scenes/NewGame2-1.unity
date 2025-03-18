@@ -381,7 +381,6 @@ GameObject:
   - component: {fileID: 180454324}
   - component: {fileID: 180454327}
   - component: {fileID: 180454326}
-  - component: {fileID: 180454325}
   m_Layer: 5
   m_Name: Sister (1)
   m_TagString: Untagged
@@ -411,47 +410,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &180454325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 180454323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfca747e56cc0cc46b85021453b70c19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lineRenderer: {fileID: 0}
-  points: []
-  isLineDrawing: 0
-  clickableObjectsLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  lastObjectUnderMouse: {fileID: 0}
-  startObject: {fileID: 0}
-  FirstCircleName: 
-  SecondCircleName: 
-  pointsObj: []
-  BlueSavepointsObj: []
-  YellowSavepointsObj: []
-  lightBlueSavepointsObj: []
-  OrangeSavepointsObj: []
-  BlueSavePoints: []
-  YellowSavePoints: []
-  lightBlueSavePoints: []
-  OrangeSavePoints: []
-  dialogBox: {fileID: 622531728}
-  dialogBox2: {fileID: 180454323}
-  dialogBox3: {fileID: 362212323}
-  dialogBox4: {fileID: 180454323}
-  dialogBoxmistake: {fileID: 0}
-  videoPlayer: {fileID: 0}
-  dialogCanvasGroup: {fileID: 0}
-  bg: {fileID: 0}
-  bg2: {fileID: 0}
-  volume: {fileID: 0}
 --- !u!114 &180454326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1020,7 +978,6 @@ GameObject:
   - component: {fileID: 362212327}
   - component: {fileID: 362212326}
   - component: {fileID: 362212325}
-  - component: {fileID: 362212324}
   m_Layer: 5
   m_Name: JJ (1)
   m_TagString: Untagged
@@ -1028,47 +985,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &362212324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362212323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfca747e56cc0cc46b85021453b70c19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lineRenderer: {fileID: 0}
-  points: []
-  isLineDrawing: 0
-  clickableObjectsLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  lastObjectUnderMouse: {fileID: 0}
-  startObject: {fileID: 0}
-  FirstCircleName: 
-  SecondCircleName: 
-  pointsObj: []
-  BlueSavepointsObj: []
-  YellowSavepointsObj: []
-  lightBlueSavepointsObj: []
-  OrangeSavepointsObj: []
-  BlueSavePoints: []
-  YellowSavePoints: []
-  lightBlueSavePoints: []
-  OrangeSavePoints: []
-  dialogBox: {fileID: 622531728}
-  dialogBox2: {fileID: 613885373}
-  dialogBox3: {fileID: 362212323}
-  dialogBox4: {fileID: 180454323}
-  dialogBoxmistake: {fileID: 0}
-  videoPlayer: {fileID: 0}
-  dialogCanvasGroup: {fileID: 0}
-  bg: {fileID: 0}
-  bg2: {fileID: 0}
-  volume: {fileID: 0}
 --- !u!114 &362212325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1958,7 +1874,6 @@ GameObject:
   - component: {fileID: 613885377}
   - component: {fileID: 613885376}
   - component: {fileID: 613885375}
-  - component: {fileID: 613885374}
   m_Layer: 5
   m_Name: Sister
   m_TagString: Untagged
@@ -1966,47 +1881,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &613885374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613885373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfca747e56cc0cc46b85021453b70c19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lineRenderer: {fileID: 0}
-  points: []
-  isLineDrawing: 0
-  clickableObjectsLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  lastObjectUnderMouse: {fileID: 0}
-  startObject: {fileID: 0}
-  FirstCircleName: 
-  SecondCircleName: 
-  pointsObj: []
-  BlueSavepointsObj: []
-  YellowSavepointsObj: []
-  lightBlueSavepointsObj: []
-  OrangeSavepointsObj: []
-  BlueSavePoints: []
-  YellowSavePoints: []
-  lightBlueSavePoints: []
-  OrangeSavePoints: []
-  dialogBox: {fileID: 622531728}
-  dialogBox2: {fileID: 613885373}
-  dialogBox3: {fileID: 362212323}
-  dialogBox4: {fileID: 180454323}
-  dialogBoxmistake: {fileID: 0}
-  videoPlayer: {fileID: 0}
-  dialogCanvasGroup: {fileID: 0}
-  bg: {fileID: 0}
-  bg2: {fileID: 0}
-  volume: {fileID: 0}
 --- !u!114 &613885375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2064,7 +1938,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1.8200002}
+  m_AnchoredPosition: {x: 0, y: 9.38}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &622531728
@@ -2078,7 +1952,6 @@ GameObject:
   - component: {fileID: 622531732}
   - component: {fileID: 622531731}
   - component: {fileID: 622531730}
-  - component: {fileID: 622531729}
   m_Layer: 5
   m_Name: JJ
   m_TagString: Untagged
@@ -2086,47 +1959,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &622531729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 622531728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfca747e56cc0cc46b85021453b70c19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lineRenderer: {fileID: 0}
-  points: []
-  isLineDrawing: 0
-  clickableObjectsLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  lastObjectUnderMouse: {fileID: 0}
-  startObject: {fileID: 0}
-  FirstCircleName: 
-  SecondCircleName: 
-  pointsObj: []
-  BlueSavepointsObj: []
-  YellowSavepointsObj: []
-  lightBlueSavepointsObj: []
-  OrangeSavepointsObj: []
-  BlueSavePoints: []
-  YellowSavePoints: []
-  lightBlueSavePoints: []
-  OrangeSavePoints: []
-  dialogBox: {fileID: 622531728}
-  dialogBox2: {fileID: 613885373}
-  dialogBox3: {fileID: 362212323}
-  dialogBox4: {fileID: 180454323}
-  dialogBoxmistake: {fileID: 0}
-  videoPlayer: {fileID: 0}
-  dialogCanvasGroup: {fileID: 0}
-  bg: {fileID: 0}
-  bg2: {fileID: 0}
-  volume: {fileID: 0}
 --- !u!114 &622531730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2570,7 +2402,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "-\u5B8C\u6210\u9023\u9023\u770B-"
+  m_text: "-\u79FB\u52D5\u5230\u745E\u58EB\u6372\u4E0A-"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8bed5cd898cfd364eaf1a01da7113602, type: 2}
   m_sharedMaterial: {fileID: 1839599441477074661, guid: 8bed5cd898cfd364eaf1a01da7113602, type: 2}
@@ -2679,7 +2511,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -3.3}
+  m_AnchoredPosition: {x: 0, y: -5.02}
   m_SizeDelta: {x: 380.68, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1076601077

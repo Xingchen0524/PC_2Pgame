@@ -16,7 +16,6 @@ public class StartManeger : MonoBehaviourPunCallbacks
     {
         print("連線成功");
         SceneManager.LoadScene("LobbyPun");
-        print("真假");
     }
 }
 

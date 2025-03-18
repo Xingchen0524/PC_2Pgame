@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NewGame4-1.unity
     guid: d68517bfbc4f2a44db3b216741f3c51b
+  - enabled: 1
+    path: Assets/Scenes/NewGame3.unity
+    guid: 781e9d6140f86bb4aae5fd4f5b9d8ffc
   m_configObjects: {}

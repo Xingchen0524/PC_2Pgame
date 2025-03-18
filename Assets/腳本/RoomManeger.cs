@@ -69,7 +69,7 @@ public class RoomManeger : MonoBehaviourPunCallbacks
             PhotonNetwork.RaiseEvent(0, null, new Photon.Realtime.RaiseEventOptions { Receivers = Photon.Realtime.ReceiverGroup.All }, new ExitGames.Client.Photon.SendOptions { Reliability = true });
 
             // 直接切換場景
-            SceneManager.LoadScene("NewGame4-1");
+            SceneManager.LoadScene("NewGame3");
         }
     }
 
@@ -305,14 +305,14 @@ public class RoomManeger : MonoBehaviourPunCallbacks
     {
         if (photonEvent.Code == 0) // 當收到場景切換的事件
         {
-            SceneManager.LoadScene("NewGame4-1");
+            SceneManager.LoadScene("NewGame3");
         }
     }
     private IEnumerator DelayedSceneChange()
     {
         // 稍微延遲一下，確保所有玩家收到事件
         yield return new WaitForSeconds(0.1f); // 你可以調整延遲時間
-        SceneManager.LoadScene("NewGame4-1");
+        SceneManager.LoadScene("NewGame3");
     }
     void OnDestroy()
     {
