@@ -17,10 +17,20 @@ public class Game3Manager : MonoBehaviourPunCallbacks
     private bool isCountingDown = false;
     private bool gameStarted = false;
 
-    public GameObject LineQTE1, LineQTE2, LineQTE3; // QTE 物件
+    public GameObject LineQTE1, LineQTE2, LineQTE3, LineQTE4, LineQTE5, LineQTE6, LineQTE7, LineQTE8, LineQTE9, LineQTE10, LineQTE11, LineQTE12, LineQTE13, LineQTE14, LineQTE15, LineQTE16; // QTE 物件
 
+    private void Start()
+    {
+        Debug.Log("場景重載，變數初始化！");
+        isSisterReady = false;
+        isYoungerSisterReady = false;
+        isCountingDown = false;
+        gameStarted = false;
+
+    }
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.Return))
         {
             if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
@@ -69,11 +79,6 @@ public class Game3Manager : MonoBehaviourPunCallbacks
                 }
             }
         }
-
-        Debug.Log(isSisterReady);
-        Debug.Log(isYoungerSisterReady);
-        Debug.Log(!isCountingDown);
-
         // 檢查兩人是否都準備好了
         if (isSisterReady && isYoungerSisterReady && !isCountingDown)
         {
@@ -81,6 +86,8 @@ public class Game3Manager : MonoBehaviourPunCallbacks
             StartCoroutine(StartCountdown());
             isCountingDown = true;
         }
+
+       
     }
 
     bool AllPlayersReady()
@@ -128,6 +135,7 @@ public class Game3Manager : MonoBehaviourPunCallbacks
             dialogBox2.SetActive((bool)changedProps["dialogBox2"]);
         }
 
+
         // 檢查是否所有玩家都準備好了
         if (isSisterReady && isYoungerSisterReady && !isCountingDown)
         {
@@ -141,6 +149,8 @@ public class Game3Manager : MonoBehaviourPunCallbacks
             StartCoroutine(StartCountdown());
             isCountingDown = true;
         }
+
+        
     }
 
     IEnumerator StartCountdown()
@@ -160,6 +170,15 @@ public class Game3Manager : MonoBehaviourPunCallbacks
 
         Debug.Log("倒數結束，開始遊戲");
         StartGame();
+        dialogBox1.SetActive(false);
+        dialogBox2.SetActive(false);
+        ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
+                    {
+                        { "dialogBox1", false },
+                        { "dialogBox2", false },
+                        {"ImageGo",true}
+                    };
+        PhotonNetwork.CurrentRoom.SetCustomProperties(properties);
     }
 
     IEnumerator QTEManager()
@@ -167,17 +186,85 @@ public class Game3Manager : MonoBehaviourPunCallbacks
         float elapsedTime = 0f;
         Debug.Log($"QTE 計時開始: {elapsedTime} 秒");
 
-        yield return new WaitForSeconds(3); // 3 秒後顯示第一個 QTE
-        elapsedTime += 3;
+        yield return new WaitForSeconds(4); // 3 秒後顯示第一個 QTE
+        elapsedTime += 4;
         Debug.Log($"[{elapsedTime}s] 顯示第一個 QTE");
         LineQTE1.SetActive(true);
-
+        /*
         yield return new WaitForSeconds(4); // 7 秒時顯示第二個 QTE
         elapsedTime += 4;
         Debug.Log($"[{elapsedTime}s] 顯示第二個 QTE");
         LineQTE2.SetActive(true);
 
         yield return new WaitForSeconds(4); // 11 秒時顯示第三個 QTE
+        elapsedTime += 4;
+        Debug.Log($"[{elapsedTime}s] 顯示第三個 QTE");
         LineQTE3.SetActive(true);
+
+        yield return new WaitForSeconds(4);
+        elapsedTime += 4;
+        Debug.Log($"[{elapsedTime}s] 顯示第四個 QTE");
+        LineQTE4.SetActive(true);
+
+        yield return new WaitForSeconds(4);
+        elapsedTime += 4;
+        Debug.Log($"[{elapsedTime}s] 顯示第五個 QTE");
+        LineQTE5.SetActive(true);
+
+        yield return new WaitForSeconds(4);
+        elapsedTime += 4;
+        Debug.Log($"[{elapsedTime}s] 顯示第六個 QTE");
+        LineQTE6.SetActive(true);
+
+        yield return new WaitForSeconds(4);
+        elapsedTime += 4;
+        Debug.Log($"[{elapsedTime}s] 顯示第七個 QTE");
+        LineQTE7.SetActive(true);
+
+        yield return new WaitForSeconds(4);
+        elapsedTime += 4;
+        Debug.Log($"[{elapsedTime}s] 顯示第八個 QTE");
+        LineQTE8.SetActive(true);
+
+        yield return new WaitForSeconds(4);
+        elapsedTime += 4;
+        Debug.Log($"[{elapsedTime}s] 顯示第九個 QTE");
+        LineQTE9.SetActive(true);
+
+        yield return new WaitForSeconds(4);
+        elapsedTime += 4;
+        Debug.Log($"[{elapsedTime}s] 顯示第十個 QTE");
+        LineQTE10.SetActive(true);
+
+        yield return new WaitForSeconds(4);
+        elapsedTime += 4;
+        Debug.Log($"[{elapsedTime}s] 顯示第十一個 QTE");
+        LineQTE11.SetActive(true);
+
+        yield return new WaitForSeconds(4);
+        elapsedTime += 4;
+        Debug.Log($"[{elapsedTime}s] 顯示第十二個 QTE");
+        LineQTE12.SetActive(true);
+
+        yield return new WaitForSeconds(4);
+        elapsedTime += 4;
+        Debug.Log($"[{elapsedTime}s] 顯示第十三個 QTE");
+        LineQTE13.SetActive(true);
+
+        yield return new WaitForSeconds(4);
+        elapsedTime += 4;
+        Debug.Log($"[{elapsedTime}s] 顯示第十四個 QTE");
+        LineQTE14.SetActive(true);
+
+        yield return new WaitForSeconds(4);
+        elapsedTime += 4;
+        Debug.Log($"[{elapsedTime}s] 顯示第十五個 QTE");
+        LineQTE15.SetActive(true);
+
+        yield return new WaitForSeconds(4);
+        elapsedTime += 4;
+        Debug.Log($"[{elapsedTime}s] 顯示第十六個 QTE");
+        LineQTE16.SetActive(true);
+        */
     }
 }

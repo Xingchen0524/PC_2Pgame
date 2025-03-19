@@ -8,27 +8,15 @@ public class ImageSwitcher : MonoBehaviourPunCallbacks
     public GameObject dialogBox;
     public GameObject dialogBox2;
     public GameObject dialogBox3;
+    public GameObject dialogBox4;
+    public GameObject dialogBox5;
+    public GameObject dialogBox6;
     private int currentIndex = 1; // 預設 dialogBox2（索引1）
+    private bool canShowDialogs = false; // 新增變數，收到ImageGo後才顯示對話框
 
     void Start()
     {
-        dialogBox.SetActive(false);
-        dialogBox2.SetActive(true);
-        dialogBox3.SetActive(false);
-        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
-        {
-            string role = (string)PhotonNetwork.LocalPlayer.CustomProperties["Role"];
-            if (role == "姐姐")
-            {
-                UpdateBackground();
-            }
-            else
-            {
-                Debug.Log("妹妹端開始同步背景...");
-                SyncWithMaster(); // 妹妹同步
-            }
-        }
-
+        HideAllDialogs(); // 遊戲開始時不顯示任何對話框
     }
 
     void Update()
@@ -55,25 +43,6 @@ public class ImageSwitcher : MonoBehaviourPunCallbacks
         ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable();
         properties["bgIndex"] = currentIndex;
 
-        if (currentIndex == 0)
-        {
-            properties["dialogBox"] = true;
-            properties["dialogBox2"] = false;
-            properties["dialogBox3"] = false;
-        }
-        else if (currentIndex == 1)
-        {
-            properties["dialogBox"] = false;
-            properties["dialogBox2"] = true;
-            properties["dialogBox3"] = false;
-        }
-        else if (currentIndex == 2)
-        {
-            properties["dialogBox"] = false;
-            properties["dialogBox2"] = false;
-            properties["dialogBox3"] = true;
-        }
-
         bool success = PhotonNetwork.CurrentRoom.SetCustomProperties(properties);
         Debug.Log($"設定房間屬性 bgIndex = {currentIndex}，更新成功: {success}");
     }
@@ -86,19 +55,13 @@ public class ImageSwitcher : MonoBehaviourPunCallbacks
             Debug.Log($"房間屬性更新，新的 bgIndex = {currentIndex}");
             UpdateBackground();
         }
+        if (propertiesThatChanged.ContainsKey("ImageGo"))
+        {
+            canShowDialogs = (bool)propertiesThatChanged["ImageGo"];
+            UpdateBackground();
+            Debug.Log("收到 ImageGo 指令，開始顯示對話框。");
+        }
 
-        if (propertiesThatChanged.ContainsKey("dialogBox"))
-        {
-            dialogBox.SetActive((bool)propertiesThatChanged["dialogBox"]);
-        }
-        if (propertiesThatChanged.ContainsKey("dialogBox2"))
-        {
-            dialogBox2.SetActive((bool)propertiesThatChanged["dialogBox2"]);
-        }
-        if (propertiesThatChanged.ContainsKey("dialogBox3"))
-        {
-            dialogBox3.SetActive((bool)propertiesThatChanged["dialogBox3"]);
-        }
     }
 
     void SyncWithMaster()
@@ -112,42 +75,47 @@ public class ImageSwitcher : MonoBehaviourPunCallbacks
         {
             Debug.LogWarning("妹妹端無法同步 bgIndex，可能 Master 還沒設置");
         }
-
-        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("dialogBox", out object box1))
-        {
-            dialogBox.SetActive((bool)box1);
-        }
-        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("dialogBox2", out object box2))
-        {
-            dialogBox2.SetActive((bool)box2);
-        }
-        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("dialogBox3", out object box3))
-        {
-            dialogBox3.SetActive((bool)box3);
-        }
-
-        UpdateBackground();
     }
 
     void UpdateBackground()
     {
+        if (!canShowDialogs) return; // 只有收到 ImageGo 指令後才會顯示對話框
+
+        HideAllDialogs();
+
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
+        {
+            string role = (string)PhotonNetwork.LocalPlayer.CustomProperties["Role"];
+            if (role == "妹妹")
+            {
+                if (currentIndex == 0) dialogBox.SetActive(true);
+                else if (currentIndex == 1) dialogBox2.SetActive(true);
+                else if (currentIndex == 2) dialogBox3.SetActive(true);
+            }
+            else if (role == "姐姐")
+            {
+                if (currentIndex == 0) dialogBox4.SetActive(true);
+                else if (currentIndex == 1) dialogBox5.SetActive(true);
+                else if (currentIndex == 2) dialogBox6.SetActive(true);
+            }
+        }
+        Debug.Log($"目前顯示背景索引: {currentIndex} (在 {PhotonNetwork.LocalPlayer.NickName} 端)");
+    }
+
+    void HideAllDialogs()
+    {
         dialogBox.SetActive(false);
         dialogBox2.SetActive(false);
         dialogBox3.SetActive(false);
+        dialogBox4.SetActive(false);
+        dialogBox5.SetActive(false);
+        dialogBox6.SetActive(false);
+    }
 
-        if (currentIndex == 0)
-        {
-            dialogBox.SetActive(true);
-        }
-        else if (currentIndex == 1)
-        {
-            dialogBox2.SetActive(true);
-        }
-        else if (currentIndex == 2)
-        {
-            dialogBox3.SetActive(true);
-        }
-
-        Debug.Log($"目前顯示背景索引: {currentIndex} (在 {PhotonNetwork.LocalPlayer.NickName} 端)");
+    public void OnReceiveImageGo()
+    {
+        canShowDialogs = true;
+        UpdateBackground();
+        Debug.Log("收到 ImageGo 指令，開始顯示對話框。");
     }
 }
