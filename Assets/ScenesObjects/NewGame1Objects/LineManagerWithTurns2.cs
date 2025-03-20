@@ -671,7 +671,7 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
     {
         if (photonEvent.Code == 0) // 當收到場景切換的事件
         {
-            SceneManager.LoadScene("NewGame1");
+            SceneManager.LoadScene("NewGame2-1");
         }
     }
     private IEnumerator DelayedSceneChange()

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using System.Collections;
 
 public class PuzzleGame1: MonoBehaviourPunCallbacks
 {
@@ -18,6 +19,8 @@ public class PuzzleGame1: MonoBehaviourPunCallbacks
 
     private int currentStage = 1; // 當前關卡（1~4）
     private bool isCompleted1 = false, isCompleted2 = false; // 記錄兩名玩家是否完成拼圖
+
+
 
     void Start()
     {
@@ -294,6 +297,7 @@ public class PuzzleGame1: MonoBehaviourPunCallbacks
             dialogBox4.SetActive((bool)changedProps["dialogBox4"]);
         }
 
+
     }
 
 
@@ -318,6 +322,10 @@ public class PuzzleGame1: MonoBehaviourPunCallbacks
     {
         // 播放影片的程式邏輯
         Debug.Log("播放影片中...");
+        
     }
+
+
+
 }
 

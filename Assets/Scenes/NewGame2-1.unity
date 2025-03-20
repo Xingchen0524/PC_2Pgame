@@ -476,7 +476,7 @@ VideoPlayer:
   m_VideoClip: {fileID: 32900000, guid: 08d52ec9d9e1df0488bdbe1494ddaf01, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 0}
+  m_TargetCamera: {fileID: 1312786837}
   m_TargetTexture: {fileID: 0}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
@@ -3652,6 +3652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13da18ba3ed321468d8f6b6943453ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  videoPlayer: {fileID: 223149897}
 --- !u!1 &1636407259
 GameObject:
   m_ObjectHideFlags: 0

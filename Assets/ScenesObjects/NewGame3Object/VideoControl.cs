@@ -3,6 +3,8 @@ using Photon.Pun;
 using ExitGames.Client.Photon;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
 
 public class VideoControl : MonoBehaviourPunCallbacks
 {
@@ -33,8 +35,6 @@ public class VideoControl : MonoBehaviourPunCallbacks
                 PlayVideo();
             }
         }
-
-
     }
 
     // 撥放影片
@@ -54,6 +54,18 @@ public class VideoControl : MonoBehaviourPunCallbacks
         vp.Stop(); // 停止影片播放
         vp.loopPointReached -= OnVideoFinished; // 取消註冊事件
 
+        // 發送事件，告訴所有玩家場景即將切換
+        PhotonNetwork.RaiseEvent(0, null, new Photon.Realtime.RaiseEventOptions { Receivers = Photon.Realtime.ReceiverGroup.All }, new ExitGames.Client.Photon.SendOptions { Reliability = true });
+
+        // 延遲一小段時間後再進行場景切換，以確保所有玩家都收到切換信號
+        StartCoroutine(DelayedSceneChange());
+    }
+
+    private IEnumerator DelayedSceneChange()
+    {
+        // 稍微延遲一下，確保所有玩家收到事件
+        yield return new WaitForSeconds(0.1f); // 你可以調整延遲時間
+        SceneManager.LoadScene("NewGame4-1");
     }
 
 

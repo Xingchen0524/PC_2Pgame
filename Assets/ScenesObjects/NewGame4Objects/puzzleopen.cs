@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
+using UnityEngine.UI;
 
 public class puzzleopen : MonoBehaviourPunCallbacks
 {
@@ -67,6 +68,14 @@ public class puzzleopen : MonoBehaviourPunCallbacks
                 PlayVideo();
             }
         }
+        if (changedProps.ContainsKey("ScreenBlack"))
+        {
+            bool shouldBeBlack = (bool)changedProps["ScreenBlack"];
+            if (shouldBeBlack)
+            {
+                StartCoroutine(FadeToBlackAndQuit());
+            }
+        }
     }
         // 播放影片
         private void PlayVideo()
@@ -80,12 +89,56 @@ public class puzzleopen : MonoBehaviourPunCallbacks
             No3.SetActive(false);
             No4.SetActive(false);
             videoPlayer.loopPointReached += OnVideoFinished; // 註冊影片播放結束事件
+            StartCoroutine(WaitForVideoEnd());
         }
     }
+    IEnumerator WaitForVideoEnd()
+    {
+        yield return new WaitForSeconds(10f); // 假設影片長度為 10 秒，根據實際情況修改
+
+        // 通知所有玩家畫面變黑
+        ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
+    {
+        { "ScreenBlack", true }
+    };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+    }
+    IEnumerator FadeToBlackAndQuit()
+    {
+        GameObject blackScreen = new GameObject("BlackScreen");
+        blackScreen.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+        Image blackImage = blackScreen.AddComponent<Image>();
+        blackImage.color = new Color(0, 0, 0, 0); // 初始透明
+
+        // 過渡動畫讓畫面變黑
+        float duration = 2f;
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            blackImage.color = new Color(0, 0, 0, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        blackImage.color = Color.black;
+
+        yield return new WaitForSeconds(2f); // 等待 2 秒
+
+        Application.Quit(); // 關閉遊戲 (適用於 PC)
+    }
+
     private void OnVideoFinished(VideoPlayer vp)
     {
         vp.Stop(); // 停止影片播放
 
+        // 通知所有玩家畫面變黑
+        ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
+        {
+            { "ScreenBlack", true }
+        };
+
+        /*
+
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
 
         // 發送事件，告訴所有玩家場景即將切換
         PhotonNetwork.RaiseEvent(0, null, new Photon.Realtime.RaiseEventOptions { Receivers = Photon.Realtime.ReceiverGroup.All }, new ExitGames.Client.Photon.SendOptions { Reliability = true });
@@ -93,13 +146,18 @@ public class puzzleopen : MonoBehaviourPunCallbacks
         // 延遲一小段時間後再進行場景切換，以確保所有玩家都收到切換信號
         StartCoroutine(DelayedSceneChange());
 
-    }
+        */
 
+    }
+    /*
+        
     private IEnumerator DelayedSceneChange()
     {
         // 稍微延遲一下，確保所有玩家收到事件
         yield return new WaitForSeconds(0.1f); // 你可以調整延遲時間
         SceneManager.LoadScene("NewGame2-1");
     }
+
+    */
 
 }
