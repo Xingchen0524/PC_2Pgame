@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class Game3Manager : MonoBehaviourPunCallbacks
 {
     public GameObject dialogBox1, dialogBox2; // 妹妹 & 姐姐的對話框
+    public GameObject dialogBox3, dialogBox4, dialogBox5;
     public TextMeshProUGUI CountdownText; // 倒數顯示
 
     private bool isSisterReady = false;
@@ -134,6 +135,19 @@ public class Game3Manager : MonoBehaviourPunCallbacks
         {
             dialogBox2.SetActive((bool)changedProps["dialogBox2"]);
         }
+        // 更新 dialogBox 狀態
+        if (changedProps.ContainsKey("dialogBox3"))
+        {
+            dialogBox3.SetActive((bool)changedProps["dialogBox3"]);
+        }
+        if (changedProps.ContainsKey("dialogBox4"))
+        {
+            dialogBox4.SetActive((bool)changedProps["dialogBox4"]);
+        }
+        if (changedProps.ContainsKey("dialogBox5"))
+        {
+            dialogBox5.SetActive((bool)changedProps["dialogBox5"]);
+        }
 
 
         // 檢查是否所有玩家都準備好了
@@ -172,10 +186,16 @@ public class Game3Manager : MonoBehaviourPunCallbacks
         StartGame();
         dialogBox1.SetActive(false);
         dialogBox2.SetActive(false);
+        dialogBox3.SetActive(false);
+        dialogBox4.SetActive(true);
+        dialogBox5.SetActive(false);
         ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
                     {
                         { "dialogBox1", false },
                         { "dialogBox2", false },
+                        { "dialogBox3", false },
+                        { "dialogBox4", true },
+                        { "dialogBox5", false },
                         {"ImageGo",true}
                     };
         PhotonNetwork.CurrentRoom.SetCustomProperties(properties);

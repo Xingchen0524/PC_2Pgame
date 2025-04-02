@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 
-public class GoalChecker : MonoBehaviourPunCallbacks
+public class GoalChecker2 : MonoBehaviourPunCallbacks
 {
     public VideoPlayer videoPlayer; // 拖曳 VideoPlayer 物件到 Inspector
     private bool hasPlayed = false; // 用來追蹤影片是否已經播放過
@@ -17,10 +17,10 @@ public class GoalChecker : MonoBehaviourPunCallbacks
         {
             string currentScene = SceneManager.GetActiveScene().name;
 
-            if (currentScene == "NewGame2-1")
+            if (currentScene == "NewGame2-2")
             {
                 PlayVideo(); // 播放影片
-                Debug.Log("偵測到2-1，播放影片！");
+                Debug.Log("偵測到2-2，播放影片！");
                 ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
                 {
                     { "PlayVideo2", true },
@@ -74,7 +74,7 @@ public class GoalChecker : MonoBehaviourPunCallbacks
     {
         // 稍微延遲一下，確保所有玩家收到事件
         yield return new WaitForSeconds(0.1f); // 你可以調整延遲時間
-        SceneManager.LoadScene("NewGame2-2");
+        SceneManager.LoadScene("NewGame2-3");
     }
 
 }

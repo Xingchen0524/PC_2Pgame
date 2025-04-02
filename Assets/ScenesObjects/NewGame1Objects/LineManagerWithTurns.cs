@@ -83,7 +83,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             else
             {
                 DisableBlackAndWhiteEffect();
-                DisableInput(); // 關閉姊姊的輸入功能
+                //DisableInput(); // 關閉姊姊的輸入功能
             }
         }
 
@@ -119,6 +119,15 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
 
     void Update()
     {
+        // 只允許角色為「妹妹」的玩家處理輸入
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
+        {
+            string role = PhotonNetwork.LocalPlayer.CustomProperties["Role"].ToString();
+            if (role != "妹妹")
+            {
+                return;
+            }
+        }
 
         // 鼠標按下，選擇起始物件
         if (Input.GetMouseButtonDown(0))

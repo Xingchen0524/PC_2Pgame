@@ -23,7 +23,6 @@ public class LineQTE : MonoBehaviourPunCallbacks
 
     public float Test;
 
-    public GameObject dialogBox1; // 失敗時顯示
     public GameObject[] LineQTEs; // 16 個 QTE 物件
     private int currentQTEIndex = 0; // 當前判定的 QTE
 
@@ -33,7 +32,7 @@ public class LineQTE : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        currentQTEIndex = 0; // **確保場景開始時數值重置**
+        //currentQTEIndex = 0; // **確保場景開始時數值重置**
 
         // 確認是否為「妹妹」，只有妹妹能操作
         if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
@@ -43,70 +42,56 @@ public class LineQTE : MonoBehaviourPunCallbacks
             {
                 isControllable = true;
             }
-
-            // 嘗試從房間變數讀取當前 QTE 進度，確保同步
-            if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("CurrentQTE"))
-            {
-                currentQTEIndex = (int)PhotonNetwork.CurrentRoom.CustomProperties["CurrentQTE"];
-                ActivateQTE(currentQTEIndex);
-            }
         }
     }
 
 
     void Update()
     {
-
-
-        //Debug.Log(MoveLine.localPosition.x);
         if (!isControllable) return;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            AnimatorState = !AnimatorState;
-            Debug.Log($"AnimatorState 變更為: {AnimatorState}");
+            ProcessQTE();
         }
+    }
 
-        if (AnimatorState)
+    void ProcessQTE()
+    {
+        // 停止動畫
+        Line.speed = 0;
+        Test = MoveLine.localPosition.x;
+
+        Debug.Log($"currentQTEIndex: {currentQTEIndex}, LineQTEs.Length: {LineQTEs.Length}");
+        if (currentQTEIndex < LineQTEs.Length)
         {
-
-            Line.speed = 0;
-            Test = MoveLine.localPosition.x;
-
-            Debug.Log($"currentQTEIndex: {currentQTEIndex}, LineQTEs.Length: {LineQTEs.Length}");
-            if (currentQTEIndex < LineQTEs.Length)
+            if (MoveLine.localPosition.x < MaxNum_A && MoveLine.localPosition.x > MinNum_A)
             {
+                Debug.Log($"QTE {currentQTEIndex + 1} 成功！");
+                SetQTEStatus(currentQTEIndex, true);
 
-                if (MoveLine.localPosition.x < MaxNum_A && MoveLine.localPosition.x > MinNum_A)
+                // 當達到第16個QTE時，播放影片
+                if (currentQTEIndex == 16)
                 {
-
-                    Debug.Log($"QTE {currentQTEIndex + 1} 成功！");
-                    SetQTEStatus(currentQTEIndex, true);
-                    // **如果成功的是 QTE 16，則播放影片**
-                    if (currentQTEIndex == 16)
-                    {
-                        Debug.Log("PlayVideo傳值");
-                        ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
-                        {
-                            { "PlayVideo", true }
-                        };
-                        PhotonNetwork.CurrentRoom.SetCustomProperties(properties);
-                    }
-                }
-                else
+                    Debug.Log("PlayVideo傳值");
+                    ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
                 {
-                    Debug.Log("失敗");
-                    SetQTEStatus(currentQTEIndex, false);
+                    { "PlayVideo", true }
+                };
+                    PhotonNetwork.CurrentRoom.SetCustomProperties(properties);
                 }
-
-
             }
             else
             {
-                Line.speed = 1;
+                Debug.Log("失敗");
+                SetQTEStatus(currentQTEIndex, false);
             }
         }
-
+        else
+        {
+            // 若超過所有 QTE，則繼續播放線的動畫
+            Line.speed = 1;
+        }
     }
 
     void SetQTEStatus(int qteIndex, bool isSuccess)
@@ -133,14 +118,27 @@ public class LineQTE : MonoBehaviourPunCallbacks
             }
             else
             {
+                Debug.Log("失敗");
+                // 當失敗時觸發紅色背景效果
+                FailureScreenEffect failureEffect = FindObjectOfType<FailureScreenEffect>();
+                if (failureEffect != null)
+                {
+                    failureEffect.TriggerFailureEffect();
+                }
+                else
+                {
+                    Debug.LogWarning("找不到 FailureScreenEffect 腳本，請確認是否有加入該元件");
+                }
+
                 // **重置 QTE 進度**
                 currentQTEIndex = 0;
                 // **確保失敗狀態也立即同步**
                 ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
-            {
-                { "QTEFailed", true },
-                { "CurrentQTE", currentQTEIndex } // 確保 QTE 重新開始
-            };
+                {
+                    { "FailureEffect", true },
+                    { "QTEFailed", true },
+                    { "CurrentQTE", currentQTEIndex } // 確保 QTE 重新開始
+                };
                 PhotonNetwork.CurrentRoom.SetCustomProperties(properties);
 
                 // **手動觸發 OnRoomPropertiesUpdate 確保失敗立即生效**
@@ -154,7 +152,6 @@ public class LineQTE : MonoBehaviourPunCallbacks
     public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
     {
         
-
         // **同步 QTE 進度**
         if (propertiesThatChanged.ContainsKey("CurrentQTE"))
         {
@@ -168,16 +165,36 @@ public class LineQTE : MonoBehaviourPunCallbacks
             bool isFailed = (bool)propertiesThatChanged["QTEFailed"];
             if (isFailed)
             {
-                dialogBox1.SetActive(true);
                 DisableQTE();
                 currentQTEIndex = 0;
                 //Time.timeScale = 0; // 暫停遊戲
             }
         }
 
+        // 檢查是否有觸發失敗效果
+        if (propertiesThatChanged.ContainsKey("FailureEffect"))
+        {
+            bool failureTriggered = (bool)propertiesThatChanged["FailureEffect"];
+            if (failureTriggered)
+            {
+                // 找到 FailureScreenEffect 腳本並執行 TriggerEffect()
+                FailureScreenEffect effect = FindObjectOfType<FailureScreenEffect>();
+                if (effect != null)
+                {
+                    effect.TriggerFailureEffect();
+                }
+                // 重置屬性，避免重複觸發（可選）
+                ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
+                {
+                    { "FailureEffect", false }
+                };
+                PhotonNetwork.CurrentRoom.SetCustomProperties(properties);
+            }
+        }
+    
 
-        
-    }
+
+}
     void ActivateQTE(int index)
     {
         for (int i = 0; i < LineQTEs.Length; i++)
