@@ -38,8 +38,7 @@ public class RoomManeger : MonoBehaviourPunCallbacks
             UpdatePlayerlist();
         }
 
-        // 只有房主可以按下開始遊戲按鈕
-        //buttonStartGame.interactable = PhotonNetwork.IsMasterClient;
+
 
         // 讓開始按鈕預設為不能點選
         buttonStartGame.interactable = false;
@@ -50,7 +49,7 @@ public class RoomManeger : MonoBehaviourPunCallbacks
     void Update()
     {
         // 檢查是否按下 N 鍵來切斷動畫並轉場
-        if (Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             // 停止影片播放
             if (videoPlayer.isPlaying)
@@ -60,9 +59,9 @@ public class RoomManeger : MonoBehaviourPunCallbacks
 
             // 發送訊息給其他玩家，告訴他們需要切換場景
             ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
-        {
-            { "PlayVideo", false }  // 停止播放影片的標誌
-        };
+            {
+                { "PlayVideo", false }  // 停止播放影片的標誌
+            };
             PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
 
             // 同步場景切換到所有玩家
@@ -75,7 +74,6 @@ public class RoomManeger : MonoBehaviourPunCallbacks
 
     public override void OnMasterClientSwitched(Photon.Realtime.Player newMasterClient)
     {
-        //buttonStartGame.interactable = PhotonNetwork.IsMasterClient;
         CheckStartButton();
     }
 

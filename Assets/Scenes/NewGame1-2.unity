@@ -297,6 +297,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!114 &11918180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,6 +577,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!114 &78063351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -763,6 +765,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &183303378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,6 +1013,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &283776611
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,6 +1186,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &287558555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,6 +1359,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &331563779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,6 +1630,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &401116535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,6 +1751,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &414360921
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,6 +1924,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &420630311
 GameObject:
   m_ObjectHideFlags: 0
@@ -2239,6 +2248,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &422909201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2405,6 +2415,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &462343625
 GameObject:
   m_ObjectHideFlags: 0
@@ -2728,6 +2739,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &541886473
 GameObject:
   m_ObjectHideFlags: 0
@@ -2900,6 +2912,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &555191938
 GameObject:
   m_ObjectHideFlags: 0
@@ -3075,6 +3088,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!114 &555191943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3533,6 +3547,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &626420548
 GameObject:
   m_ObjectHideFlags: 0
@@ -3636,6 +3651,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!328 &642833336
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -3859,6 +3875,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &735170197
 GameObject:
   m_ObjectHideFlags: 0
@@ -4031,6 +4048,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &736630699
 GameObject:
   m_ObjectHideFlags: 0
@@ -4206,6 +4224,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!114 &736630704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4415,6 +4434,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &886942254
 GameObject:
   m_ObjectHideFlags: 0
@@ -4686,6 +4706,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &953133887
 GameObject:
   m_ObjectHideFlags: 0
@@ -4904,6 +4925,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &1075033208
 GameObject:
   m_ObjectHideFlags: 0
@@ -5427,6 +5449,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &1130428215
 GameObject:
   m_ObjectHideFlags: 0
@@ -5796,6 +5819,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &1196731539
 GameObject:
   m_ObjectHideFlags: 0
@@ -6217,6 +6241,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &1320066778
 GameObject:
   m_ObjectHideFlags: 0
@@ -6681,6 +6706,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &1394510349
 GameObject:
   m_ObjectHideFlags: 0
@@ -6791,6 +6817,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &1447378681
 GameObject:
   m_ObjectHideFlags: 0
@@ -6963,6 +6990,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &1462694140
 GameObject:
   m_ObjectHideFlags: 0
@@ -7120,6 +7148,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!114 &1463975852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7431,6 +7460,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!114 &1545766917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7640,6 +7670,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &1624628077
 GameObject:
   m_ObjectHideFlags: 0
@@ -7812,6 +7843,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &1656926193
 GameObject:
   m_ObjectHideFlags: 0
@@ -7987,6 +8019,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!114 &1656926198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8228,6 +8261,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &1801851354
 GameObject:
   m_ObjectHideFlags: 0
@@ -8702,6 +8736,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &1841312323
 GameObject:
   m_ObjectHideFlags: 0
@@ -8874,6 +8909,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1 &1914687107
 GameObject:
   m_ObjectHideFlags: 0
@@ -9050,6 +9086,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!114 &1914687112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9275,6 +9312,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!114 &1919143933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9896,6 +9934,7 @@ MonoBehaviour:
   bg: {fileID: 1337240992}
   bg2: {fileID: 1978139715}
   volume: {fileID: 457908873}
+  video: {fileID: 1394510349}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

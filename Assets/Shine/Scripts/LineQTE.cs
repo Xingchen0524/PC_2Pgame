@@ -32,7 +32,6 @@ public class LineQTE : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        //currentQTEIndex = 0; // **確保場景開始時數值重置**
 
         // 確認是否為「妹妹」，只有妹妹能操作
         if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
@@ -75,9 +74,9 @@ public class LineQTE : MonoBehaviourPunCallbacks
                 {
                     Debug.Log("PlayVideo傳值");
                     ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
-                {
-                    { "PlayVideo", true }
-                };
+                    {
+                        { "PlayVideo", true }
+                    };
                     PhotonNetwork.CurrentRoom.SetCustomProperties(properties);
                 }
             }

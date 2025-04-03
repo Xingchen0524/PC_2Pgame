@@ -53,15 +53,21 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
     private bool hasDrawnLine = false;
     private bool isFadingOut = false;
 
-    private float timer = 5f;  // 用來追蹤剩餘時間
-
     public GameObject bg;          // 名為 "bg" 的背景物件
     public GameObject bg2;
-
+    private float timer = 5f;  // 用來追蹤剩餘時間
     public Volume volume;  // 預設的 Volume，包含黑白效果
 
     void Start()
     {
+        PhotonHashtable resetProperties = new PhotonHashtable
+        {
+            { "PlayVideo", false },
+        };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(resetProperties);
+
+
+
         // 初始化 LineRenderer
         lineRenderer = this.gameObject.AddComponent<LineRenderer>();
         lineRenderer.startWidth = 0.2f;//起始寬度
@@ -71,6 +77,8 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
         lineRenderer.numCornerVertices = 90; //轉角平滑
         Destroy(GameObject.Find("MusicManager"));//避免背景音樂重複。
 
+
+
         //雙人畫面判定
         if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
         {
@@ -78,12 +86,12 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             if (role == "妹妹")
             {
                 EnableBlackAndWhiteEffect();
-                //EnableInput();
+
             }
             else
             {
                 DisableBlackAndWhiteEffect();
-                //DisableInput(); // 關閉姊姊的輸入功能
+
             }
         }
 
@@ -99,6 +107,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
     {
         Cursor.lockState = CursorLockMode.None; // 解鎖鼠標
         Cursor.visible = true; // 顯示鼠標
+                               // 可以根據需求開啟其他的輸入操作
     }
     //雙人畫面判定
     void EnableBlackAndWhiteEffect()
@@ -119,6 +128,19 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
 
     void Update()
     {
+        if (hasPlayed && Input.GetKeyDown(KeyCode.N)) // 按下N鍵
+        {
+
+            SceneManager.LoadScene("NewGame1-2");// 替換為你要切換的場景名稱
+
+            // 發送事件，告訴所有玩家場景即將切換
+            PhotonNetwork.RaiseEvent(0, null, new Photon.Realtime.RaiseEventOptions { Receivers = Photon.Realtime.ReceiverGroup.All }, new ExitGames.Client.Photon.SendOptions { Reliability = true });
+
+            // 延遲一小段時間後再進行場景切換，以確保所有玩家都收到切換信號
+            StartCoroutine(DelayedSceneChange());
+
+        }
+
         // 只允許角色為「妹妹」的玩家處理輸入
         if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
         {
@@ -381,10 +403,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             startObject = null; // 重置起始物件
             visitedObjects.Clear();
         }
-        if (hasPlayed && Input.GetKeyDown(KeyCode.N)) // 按下N鍵
-        {
-            SceneManager.LoadScene("NewGame1-2");// 替換為你要切換的場景名稱
-        }
+        
 
 
         if (hasDrawnLine) // 只有在畫過線的情況下才進行檢查
@@ -411,7 +430,6 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                 dialogBox.SetActive(false);
                 dialogBox3.SetActive(true); // 如果順序錯誤，顯示對話框
                 DisableInput();
-
                 if (dialogBox2.activeSelf)
                 {
                     dialogBox3.SetActive(false);
@@ -421,7 +439,6 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                 {
                     { "dialogBox", false },
                     { "dialogBox3", true },
-                    //{ "dialogBoxmistake", true },
                     { "dialogBox2", dialogBox2.activeSelf }
                 };
                 PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
@@ -435,7 +452,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
                     Debug.Log("Dialog Box  Activated");
                     dialogBox2.SetActive(true);   // 開啟對話框2                    
                     dialogBox3.SetActive(false); // 關閉對話框3                    
-
+                    EnableInput();
                     ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
                     {
                         { "dialogBox2", true },
@@ -453,11 +470,17 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
     public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
 
     {
+
+        // 如果更新的是本機玩家的屬性，則不做處理，避免重複觸發
+        if (targetPlayer == PhotonNetwork.LocalPlayer)
+            return;
+
         // 檢查是否同步播放影片
         if (changedProps.ContainsKey("PlayVideo"))
         {
             bool shouldPlayVideo = (bool)changedProps["PlayVideo"];
-            if (shouldPlayVideo)
+            // 只在尚未播放過影片時才呼叫 PlayVideo()
+            if (shouldPlayVideo && !hasPlayed)
             {
                 PlayVideo();
             }
@@ -478,6 +501,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
         {
             dialogBox2.SetActive((bool)changedProps["dialogBox2"]);
         }
+
     }
 
     //------------------------線條相關開始-------------------------------------------------
@@ -500,9 +524,6 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             ColorUtility.TryParseHtmlString("#4F64B3", out lightBlue);
             lineRenderer.startColor = lightBlue;
             lineRenderer.endColor = lightBlue;     
-
-            // 使用 RPC 同步顏色
-            //photonView.RPC("SyncLineColor", RpcTarget.AllBuffered, "#4F64B3");
         }
         else if (obj.name == "深藍1" || obj.name == "深藍2")
         {
@@ -510,21 +531,13 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             ColorUtility.TryParseHtmlString("#2F2A60", out Blue);
             lineRenderer.startColor = Blue;
             lineRenderer.endColor = Blue;
-
-            // 使用 RPC 同步顏色
-            //photonView.RPC("SyncLineColor", RpcTarget.AllBuffered, "#2F2A60");
-
         }
         else if (obj.name == "黃色1" || obj.name == "黃色2")
         {
             Color yellow;
             ColorUtility.TryParseHtmlString("#F3D758", out yellow);
             lineRenderer.startColor = yellow;
-            lineRenderer.endColor = yellow;
-           
-            // 使用 RPC 同步顏色
-           // photonView.RPC("SyncLineColor", RpcTarget.AllBuffered, "#F3D758");
-
+            lineRenderer.endColor = yellow;    
         }
         else if (obj.name == "橘色1" || obj.name == "橘色2")
         {
@@ -532,10 +545,6 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             ColorUtility.TryParseHtmlString("#DD8E15", out orange);
             lineRenderer.startColor = orange;
             lineRenderer.endColor = orange;      
-
-            // 使用 RPC 同步顏色
-            //photonView.RPC("SyncLineColor", RpcTarget.AllBuffered, "#DD8E15"); // 同步顏色給所有玩家
-
         }
     }
     // 在 PhotonView 上執行同步線條繪製顏色的 RPC 方法
@@ -631,6 +640,13 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
         // 影片播放結束後的處理
         vp.Stop(); // 停止影片播放
 
+        // 重設「PlayVideo」屬性為 false，避免再次觸發播放
+        PhotonHashtable resetProperties = new PhotonHashtable
+        {
+             { "PlayVideo", false }
+        };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(resetProperties);
+
         dialogBox.SetActive(false);
         dialogBox3.SetActive(false);
         dialogBox2.SetActive(false);
@@ -641,5 +657,11 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
 
     }
 
+    private IEnumerator DelayedSceneChange()
+    {
+        // 稍微延遲一下，確保所有玩家收到事件
+        yield return new WaitForSeconds(0.1f); // 你可以調整延遲時間
+        SceneManager.LoadScene("NewGame1-2");
+    }
 
 }
