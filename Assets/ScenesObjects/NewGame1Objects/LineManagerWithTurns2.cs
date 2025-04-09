@@ -60,16 +60,10 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
 
     public GameObject video;
 
+    public GameObject NewScenes;
+
     void Start()
     {
-        PhotonHashtable resetProperties = new PhotonHashtable
-        {
-            { "PlayVideo", false },
-        };
-        PhotonNetwork.LocalPlayer.SetCustomProperties(resetProperties);
-        hasPlayed = false;
-        hasPlayed2 = false;
-
         // 初始化 LineRenderer
         lineRenderer = this.gameObject.AddComponent<LineRenderer>();
         lineRenderer.startWidth = 0.2f;//起始寬度
@@ -92,6 +86,8 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
                 
             }
         }
+
+
     }
     // 關閉輸入功能
     void DisableInput()
@@ -125,6 +121,7 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
 
     void Update()
     {
+        
         // 檢查是否按下 N 鍵來切斷動畫並轉場
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -136,22 +133,29 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
 
             // 發送訊息給其他玩家，告訴他們需要切換場景
             ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
-        {
-            { "PlayVideo2", false }  // 停止播放影片的標誌
-        };
+            {
+                { "PlayVideo2", false }  // 停止播放影片的標誌
+            };
             PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
 
             // 同步場景切換到所有玩家
             PhotonNetwork.RaiseEvent(0, null, new Photon.Realtime.RaiseEventOptions { Receivers = Photon.Realtime.ReceiverGroup.All }, new ExitGames.Client.Photon.SendOptions { Reliability = true });
 
-            // 直接切換場景
-            SceneManager.LoadScene("NewGame2-1");
+            // 切換場景
+            StartCoroutine(DelayedSceneChange());
         }
 
 
 
+
+        if (Input.GetKeyDown(KeyCode.N)) // 按下N鍵
+        {
+            Debug.Log("嘗試按下N 鍵");
+        }
+
         if (hasPlayed && Input.GetKeyDown(KeyCode.N)) // 按下N鍵
         {
+            Debug.Log("N 鍵按下且 hasPlayed 為 true，嘗試切換場景");
             PlayVideo2(); // 播放影片
 
             ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
@@ -162,26 +166,17 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
         }
 
 
-        // 只允許角色為「妹妹」的玩家處理輸入
-        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
-        {
-            string role = PhotonNetwork.LocalPlayer.CustomProperties["Role"].ToString();
-            if (role != "妹妹")
-            {
-                return;
-            }
-        }
-
 
         // 鼠標按下，選擇起始物件
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("Update 執行中, hasPlayed = " + hasPlayed);
+
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0;
 
             // 檢測鼠標點擊的空物件
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, Mathf.Infinity, clickableObjectsLayer);
-            //Debug.Log("Hit: " + hit.collider.gameObject.name);
             if (hit.collider.tag == "Circle")
             {
 
@@ -224,6 +219,8 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
         // 鼠標按住時，線條跟隨鼠標
         if (isLineDrawing)
         {
+
+
             Vector3 currentMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             currentMousePosition.z = 0;
 
@@ -487,9 +484,6 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
     public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
 
     {
-        // 如果更新的是本機玩家的屬性，則不做處理，避免重複觸發
-        if (targetPlayer == PhotonNetwork.LocalPlayer)
-            return;
 
         // 檢查是否同步播放影片
         if (changedProps.ContainsKey("PlayVideo"))
@@ -528,6 +522,11 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
         if (changedProps.ContainsKey("dialogBox4"))
         {
             dialogBox4.SetActive((bool)changedProps["dialogBox4"]);
+        }
+
+        if (changedProps.ContainsKey("NewScenes"))
+        {
+            NewScenes.SetActive((bool)changedProps["NewScenes"]);
         }
     }
     //清除邏輯
@@ -650,9 +649,12 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
         {
             videoPlayer.Play();
             hasPlayed = true; // 標記為已播放
+            Debug.Log("影片開始播放，hasPlayed 設為 true");
+            Debug.Log("Update 執行中, hasPlayed = " + hasPlayed);
             dialogBox.SetActive(false);
             dialogBox3.SetActive(false);
             dialogBox2.SetActive(false);
+            //NewScenes.SetActive(true);
             videoPlayer.loopPointReached += OnVideoFinished; // 註冊影片播放結束事件
         }
     }
@@ -661,7 +663,8 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
     {
         // 影片播放結束後的處理
         vp.Stop(); // 停止影片播放
-
+        //NewScenes.SetActive(true);
+        hasPlayed = true; // 標記為已播放
         dialogBox.SetActive(false);
         dialogBox3.SetActive(false);
         dialogBox2.SetActive(false);
@@ -677,6 +680,7 @@ public class LineManagerWithTurns2 : MonoBehaviourPunCallbacks
                         { "dialogBox3", false },
                         { "dialogBox2", false },
                         { "dialogBox4", true },
+                        { "hasPlayed", true },
                     };
         PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
     }

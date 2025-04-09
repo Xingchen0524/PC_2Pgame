@@ -73,6 +73,18 @@ public class LineQTE : MonoBehaviourPunCallbacks
                 if (currentQTEIndex == 16)
                 {
                     Debug.Log("PlayVideo傳值");
+
+                    // 先停止背景音樂
+                    GameObject musicManager = GameObject.FindGameObjectWithTag("Sound");
+                    if (musicManager != null)
+                    {
+                        AudioSource audioSource = musicManager.GetComponent<AudioSource>();
+                        if (audioSource != null)
+                        {
+                            audioSource.Stop();
+                        }
+                    }
+
                     ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
                     {
                         { "PlayVideo", true }

@@ -14,6 +14,7 @@ TagManager:
   - Play
   - Boundary
   - Plate
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

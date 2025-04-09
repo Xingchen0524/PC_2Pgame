@@ -23,10 +23,13 @@ public class Game2Controller1 : MonoBehaviourPunCallbacks
     
 
     void Start()
-    {        
+    {
 
+        // 嘗試從當前場景中找到標記為 SpawnPoint 的物件
+        GameObject spawnPoint = GameObject.FindWithTag("SpawnPoint");
+        startPosition = spawnPoint.transform.position;
         // 記錄起始位置
-        startPosition = transform.position;
+        //startPosition = transform.position;
 
         // 獲取 Rigidbody2D
         rb = GetComponent<Rigidbody2D>();

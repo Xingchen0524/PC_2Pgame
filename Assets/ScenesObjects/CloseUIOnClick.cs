@@ -9,6 +9,7 @@ public class CloseUIOnClick : MonoBehaviour
     // 或者你可以指定另一個物件
     public GameObject uiObjectToClose;
     public GameObject uiObjectToClose2;
+    public GameObject uiObjectToClose3;
 
     // 此方法可在 UI 按鈕 OnClick 事件中呼叫
     public void OnClickClose()
@@ -25,6 +26,10 @@ public class CloseUIOnClick : MonoBehaviour
         if (uiObjectToClose2 != null)
         {
             uiObjectToClose2.SetActive(false);
+        }
+        if (uiObjectToClose3 != null)
+        {
+            uiObjectToClose3.SetActive(true);
         }
         else
         {

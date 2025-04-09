@@ -23,7 +23,7 @@ public class GoalChecker2 : MonoBehaviourPunCallbacks
                 Debug.Log("偵測到2-2，播放影片！");
                 ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
                 {
-                    { "PlayVideo2", true },
+                    { "PlayVideo", true },
                 };
                 PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
             }

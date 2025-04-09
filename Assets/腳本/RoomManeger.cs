@@ -26,6 +26,8 @@ public class RoomManeger : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
+
         PhotonNetwork.NetworkingClient.EventReceived += OnEventReceived;
         // 設定房間名稱並更新玩家列表
         if (PhotonNetwork.CurrentRoom == null)
@@ -48,7 +50,7 @@ public class RoomManeger : MonoBehaviourPunCallbacks
     }
     void Update()
     {
-        // 檢查是否按下 N 鍵來切斷動畫並轉場
+        // 檢查是否按下 Z 鍵來切斷動畫並轉場
         if (Input.GetKeyDown(KeyCode.Z))
         {
             // 停止影片播放

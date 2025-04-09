@@ -94,7 +94,7 @@ public class puzzleopen : MonoBehaviourPunCallbacks
     }
     IEnumerator WaitForVideoEnd()
     {
-        yield return new WaitForSeconds(10f); // 假設影片長度為 10 秒，根據實際情況修改
+        yield return new WaitForSeconds(30f); // 假設影片長度為 30 秒，根據實際情況修改
 
         // 通知所有玩家畫面變黑
         ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
@@ -136,28 +136,9 @@ public class puzzleopen : MonoBehaviourPunCallbacks
             { "ScreenBlack", true }
         };
 
-        /*
 
-        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
-
-        // 發送事件，告訴所有玩家場景即將切換
-        PhotonNetwork.RaiseEvent(0, null, new Photon.Realtime.RaiseEventOptions { Receivers = Photon.Realtime.ReceiverGroup.All }, new ExitGames.Client.Photon.SendOptions { Reliability = true });
-
-        // 延遲一小段時間後再進行場景切換，以確保所有玩家都收到切換信號
-        StartCoroutine(DelayedSceneChange());
-
-        */
 
     }
-    /*
-        
-    private IEnumerator DelayedSceneChange()
-    {
-        // 稍微延遲一下，確保所有玩家收到事件
-        yield return new WaitForSeconds(0.1f); // 你可以調整延遲時間
-        SceneManager.LoadScene("NewGame2-1");
-    }
 
-    */
 
 }

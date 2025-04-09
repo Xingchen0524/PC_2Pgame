@@ -13,6 +13,7 @@ public class PuzzleGame2 : MonoBehaviourPunCallbacks
     public GameObject dialogBox3;
     public GameObject dialogBox4;
     public GameObject dialogBox5;
+    public GameObject blackend;
     public GameObject No1, No2, No3, No4;
     private int selectedSlotIndex = 0;  // 當前選擇的拼圖片格索引
     private int selectedPieceIndex = 0; // 當前選擇的圖片索引
@@ -295,6 +296,7 @@ public class PuzzleGame2 : MonoBehaviourPunCallbacks
             No1.SetActive(false);
             No2.SetActive(true);
             dialogBox5.SetActive(true);
+            blackend.SetActive(true);
         }
 
     }
