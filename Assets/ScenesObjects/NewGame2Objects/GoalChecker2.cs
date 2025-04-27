@@ -11,6 +11,20 @@ public class GoalChecker2 : MonoBehaviourPunCallbacks
     public VideoPlayer videoPlayer; // 拖曳 VideoPlayer 物件到 Inspector
     private bool hasPlayed = false; // 用來追蹤影片是否已經播放過
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M)) // 按下N鍵
+        {
+            Debug.Log("M 鍵按下切換場景");
+
+            // 發送事件，告訴所有玩家場景即將切換
+            PhotonNetwork.RaiseEvent(0, null, new Photon.Realtime.RaiseEventOptions { Receivers = Photon.Realtime.ReceiverGroup.All }, new ExitGames.Client.Photon.SendOptions { Reliability = true });
+
+            // 延遲一小段時間後再進行場景切換，以確保所有玩家都收到切換信號
+            StartCoroutine(DelayedSceneChange());
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

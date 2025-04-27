@@ -94,7 +94,7 @@ public class puzzleopen : MonoBehaviourPunCallbacks
     }
     IEnumerator WaitForVideoEnd()
     {
-        yield return new WaitForSeconds(30f); // 假設影片長度為 30 秒，根據實際情況修改
+        yield return new WaitForSeconds(32f); // 假設影片長度為 30 秒，根據實際情況修改
 
         // 通知所有玩家畫面變黑
         ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable

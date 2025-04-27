@@ -134,17 +134,7 @@ public class LineManagerWithTurns : MonoBehaviourPunCallbacks
             // 延遲一小段時間後再進行場景切換，以確保所有玩家都收到切換信號
             StartCoroutine(DelayedSceneChange());
         }
-        /*
-        // 只允許角色為「妹妹」的玩家處理輸入
-        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role"))
-        {
-            string role = PhotonNetwork.LocalPlayer.CustomProperties["Role"].ToString();
-            if (role != "妹妹")
-            {
-                return;
-            }
-        }
-        */
+
         // 鼠標按下，選擇起始物件
         if (Input.GetMouseButtonDown(0))
         {
